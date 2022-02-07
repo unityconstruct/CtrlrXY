@@ -18,6 +18,7 @@ ToDo
 * Allow earlier "Undo" after a modulator has been deleted
 * Export instance process must be improved (dialog alerts, overwriting existing file...)
 * VST Parameter Index must start at 0 not 1 in Hosts (now VST Index 0 in Ctrlr is Param 1 in Cubase)
+* Re-generating UID must update resource path automatically
 
 
 Changelog
