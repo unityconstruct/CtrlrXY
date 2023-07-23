@@ -95,9 +95,9 @@ Since Steinberg has discontinued the VST2 API we no longer distribute a VST2. If
 The first thing is to be sure to check the path to the VST2 sdk (only available from Steinberg's VST3 directory sdk) in Projucer before calling any script builds.
 
 ## VST3 Support
-Currently VST3 instances of CTRLR panels are not working properly because CTRLR is not able to generate different VST3 compliant plugin identifiers and exported will always be named after CTRLR | Instigator.
-The current method to export properly identified VST3 plugins is to build a different stock CTRLR VST3 plugin with JUCE Projucer and Xcode. 
-This alternative version of CTRLR VST3 will have the matching panel/plugin identifiers predefined in the project settings. (Plugin Name, Manufacturer Name, Plugin ID, Manufacturer ID etc). 
+Currently VST3 instances of CTRLR panels are not working properly because CTRLR is not able to generate different VST3 compliant plugin identifiers and exported will always be named after CTRLR | Instigator. The only way to get the correct identifiers for a panel project is to force them at the core during the building step of the VST3 in Xcode/VS/IDE.
+To export properly identified VST3 plugins it is then required to build a different stock CTRLR VST3 plugin with JUCE Projucer and Xcode/VS/IDE. 
+However, this alternative version of CTRLR VST3 will have the desired panel/plugin identifiers predefined in the Projucer settings. (Plugin Name, Manufacturer Name, Plugin ID, Manufacturer ID etc). 
 This intermediate VST3 plugin will then be able to export a final VST3 version of the panel with the proper identifiers. 
 
 ## AU Support
