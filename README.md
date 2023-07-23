@@ -10,6 +10,7 @@ ToDo
 ----
 * Scalable UI upgrade (requires container callback on resize)
 * VST Host must get the panel name while exported as VST3 plugin (currently always named as Ctrlr | Instigator)
+* Update to the latest version of JUCE 7
 * Implementation of the entire JUCE ValueTree Class
 * Implementation of the entire JUCE LookAndFeel class with all color schemes
 * Implementation of the entire JUCE ColourSelector class with built-in color picker popup for every color properties
@@ -94,7 +95,10 @@ Since Steinberg has discontinued the VST2 API we no longer distribute a VST2. If
 The first thing is to be sure to check the path to the VST2 sdk (only available from Steinberg's VST3 directory sdk) in Projucer before calling any script builds.
 
 ## VST3 Support
-Tutorial coming soon
+Currently VST3 instances of CTRLR panels are not working properly because CTRLR is not able to generate different VST3 compliant plugin identifiers and exported will always be named after CTRLR | Instigator.
+The current method to export properly identified VST3 plugins is to build a different stock CTRLR VST3 plugin with JUCE Projucer and Xcode. 
+This alternative version of CTRLR VST3 will have the matching panel/plugin identifiers predefined in the project settings. (Plugin Name, Manufacturer Name, Plugin ID, Manufacturer ID etc). 
+This intermediate VST3 plugin will then be able to export a final VST3 version of the panel with the proper identifiers. 
 
 ## AU Support
 Tutorial coming soon
