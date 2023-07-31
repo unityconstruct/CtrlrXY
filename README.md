@@ -14,6 +14,7 @@ ToDo
 * Implementation of the entire JUCE ValueTree Class
 * Implementation of the entire JUCE LookAndFeel class with all color schemes
 * Implementation of the entire JUCE ColourSelector class with built-in color picker popup for every color properties
+* Implementation of all the customComponent mouse events to callback (mouseEnter, mouseExit...) on other types of components such as uiSliders, Buttons etc
 * File path needs to be updated on save while the panel ID is changed (Save vs. Save as...)
 * Modulators located within a tabs must have their properties updated while the tab properties are changed 
 * Allow earlier "Undo" after a modulator has been deleted
