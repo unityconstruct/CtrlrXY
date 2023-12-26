@@ -25,6 +25,10 @@ ToDo
 
 Changelog
 ---------
+
+#### Version 5.6.25
+* mouseUp callback added for Generic Component (All types of sliders)
+* 
 #### Version 0.0.0
 * Current version is forked from Ctrlr 5.6.23
 * Requires unified versioning pattern
