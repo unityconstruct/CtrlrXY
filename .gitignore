@@ -6,3 +6,4 @@ Builds/*/*/*
 
 CMakeFiles
 CMakeCache.txt
+.DS_store
