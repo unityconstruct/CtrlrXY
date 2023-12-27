@@ -195,6 +195,8 @@
   <id name="componentLuaMouseUp"                text="Called when a mouse is up on this component" type="LuaMethod" />
   <id name="componentLuaMouseDrag"                text="Called when a mouse is dragged (down + left click) over this component" type="LuaMethod" />
   <id name="componentLuaMouseDoubleClick"         text="Called when a double-click event occurs on this component" type="LuaMethod" />
+  <id name="componentLuaMouseEnter"                text="Called when a mouse enters this component" type="LuaMethod" />
+  <id name="componentLuaMouseExit"                text="Called when a mouse leaves this component" type="LuaMethod" />
   <id name="componentInternalFunction"            text="Internal function this component should execute" type="VarNumeric" defaults="@internalFunctions" />
 
   <!-- Slider -->

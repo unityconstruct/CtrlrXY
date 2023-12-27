@@ -28,6 +28,15 @@
     end
   </luaMethod>
 
+  <luaMethod name="componentLuaMouseUp">
+    --
+    -- Called when a mouse is up on this component
+    --
+
+    __method_name = function(--[[ CtrlrComponent --]] comp, --[[ MouseEvent --]] event)
+    end
+  </luaMethod>
+  
   <luaMethod name="componentLuaMouseDrag">
     --
     -- Called when a mouse is dragged (down + left click) over this component
@@ -40,6 +49,24 @@
   <luaMethod name="componentLuaMouseDoubleClick">
     --
     -- Called when a double-click event occurs on this component
+    --
+
+    __method_name = function(--[[ CtrlrComponent --]] comp, --[[ MouseEvent --]] event)
+    end
+  </luaMethod>
+  
+  <luaMethod name="componentLuaMouseEnter">
+    --
+    -- Called when a mouse enter this component
+    --
+
+    __method_name = function(--[[ CtrlrComponent --]] comp, --[[ MouseEvent --]] event)
+    end
+  </luaMethod>
+  
+    <luaMethod name="componentLuaMouseExit">
+    --
+    -- Called when a mouse leaves this component
     --
 
     __method_name = function(--[[ CtrlrComponent --]] comp, --[[ MouseEvent --]] event)
@@ -249,7 +276,16 @@
     __method_name = function(--[[ CtrlrPanelCanvas --]] canvas, --[[ Graphics --]] g)
     end
   </luaMethod>
+  
+   <luaMethod name="luaPanelEditorResized">
+    --
+    -- Called when the panelEditor is resized
+    --
 
+    __method_name = function(--[[ CtrlrPanelEditor --]] panel)
+    end
+  </luaMethod> 
+  
   <luaMethod name="luaPanelResized">
     --
     -- Called when the panel is resized

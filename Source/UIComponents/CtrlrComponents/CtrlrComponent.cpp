@@ -97,11 +97,14 @@ CtrlrComponent::CtrlrComponent(CtrlrModulator &_owner)
 	setProperty (Ids::componentEffectOffsetY, 0);
 	setProperty (Ids::componentExcludedFromLabelDisplay, false);
 	setProperty (Ids::componentValueDecimalPlaces, 0);
+	
 	setProperty (Ids::componentLuaMouseMoved, COMBO_ITEM_NONE);
 	setProperty (Ids::componentLuaMouseDown, COMBO_ITEM_NONE);
     setProperty (Ids::componentLuaMouseUp, COMBO_ITEM_NONE);
 	setProperty (Ids::componentLuaMouseDrag, COMBO_ITEM_NONE);
 	setProperty (Ids::componentLuaMouseDoubleClick, COMBO_ITEM_NONE);
+	setProperty (Ids::componentLuaMouseEnter, COMBO_ITEM_NONE);
+	setProperty (Ids::componentLuaMouseExit, COMBO_ITEM_NONE);
 }
 
 CtrlrComponent::~CtrlrComponent()
@@ -205,6 +208,28 @@ void CtrlrComponent::mouseUp(const MouseEvent &e)
             owner.getOwnerPanel().getCtrlrLuaManager().getMethodManager().call (mouseUpCbk, this, e);
         }
     }
+}
+
+void CtrlrComponent::mouseEnter (const MouseEvent &e)
+{
+	if (mouseEnterCbk && !mouseEnterCbk.wasObjectDeleted())
+	{
+		if (mouseEnterCbk->isValid())
+		{
+			owner.getOwnerPanel().getCtrlrLuaManager().getMethodManager().call (mouseEnterCbk, this, e);
+		}
+	}
+}
+
+void CtrlrComponent::mouseExit (const MouseEvent &e)
+{
+	if (mouseExitCbk && !mouseExitCbk.wasObjectDeleted())
+	{
+		if (mouseExitCbk->isValid())
+		{
+			owner.getOwnerPanel().getCtrlrLuaManager().getMethodManager().call (mouseExitCbk, this, e);
+		}
+	}
 }
 
 int CtrlrComponent::snapDim(int dim)
@@ -463,6 +488,20 @@ void CtrlrComponent::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasCh
 			return;
 
 		mouseDoubleClickCbk = owner.getOwnerPanel().getCtrlrLuaManager().getMethodManager().getMethod(getProperty(property));
+	}	
+	else if (property == Ids::componentLuaMouseEnter)
+	{
+		if (isInvalidMethodName (getProperty(property)))
+			return;
+
+		mouseEnterCbk = owner.getOwnerPanel().getCtrlrLuaManager().getMethodManager().getMethod(getProperty(property));
+	}
+	else if (property == Ids::componentLuaMouseExit)
+	{
+		if (isInvalidMethodName (getProperty(property)))
+			return;
+
+		mouseExitCbk = owner.getOwnerPanel().getCtrlrLuaManager().getMethodManager().getMethod(getProperty(property));
 	}	
 	
 	if (restoreStateInProgress == false)
@@ -745,6 +784,8 @@ void CtrlrComponent::wrapForLua (lua_State *L)
 			.def("isMouseButtonDown", &Component::isMouseButtonDown)
 			.def("isMouseOver", &Component::isMouseOver)
 			.def("isMouseOverOrDragging", &Component::isMouseOverOrDragging)
+			.def("mouseEnter", &Component::mouseEnter)
+			.def("mouseExit", &Component::mouseExit)			
 			.def("keyPressed", &Component::keyPressed)
 			.def("getBounds", &Component::getBounds)
 			.def("getRect", &CtrlrComponent::getBounds)

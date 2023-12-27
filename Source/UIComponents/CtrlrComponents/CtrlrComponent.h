@@ -95,6 +95,8 @@ class CtrlrComponent :	public Component,
         virtual void mouseDown(const MouseEvent &e);
         virtual void mouseMove (const MouseEvent &e);
 		virtual void mouseDrag (const MouseEvent &e);
+        virtual void mouseEnter (const MouseEvent &e);
+		virtual void mouseExit (const MouseEvent &e);		
 		void setGroupped (const bool addToGroup);
 		const String getComponentTab();
 		void setComponentTab (const String &newTab);
@@ -130,7 +132,7 @@ class CtrlrComponent :	public Component,
 		friend class WeakReference<CtrlrComponent>;
 		ScopedPointer <GlowEffect> glowEffect;
 		ScopedPointer <DropShadowEffect> shadowEffect;
-		WeakReference <CtrlrLuaMethod> mouseMoveCbk, mouseDownCbk, mouseUpCbk, mouseDragCbk, mouseDoubleClickCbk;
+		WeakReference <CtrlrLuaMethod> mouseMoveCbk, mouseDownCbk, mouseUpCbk, mouseDragCbk, mouseDoubleClickCbk, mouseEnterCbk, mouseExitCbk;
 
 };
 #endif

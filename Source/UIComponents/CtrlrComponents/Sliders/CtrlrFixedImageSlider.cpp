@@ -113,6 +113,33 @@ void CtrlrFixedImageSlider::mouseUp (const MouseEvent& e)
     //[/UserCode_mouseUp]
 }
 
+void CtrlrFixedImageSlider::mouseEnter (const MouseEvent& e)
+{
+    //[UserCode_mouseEnter] -- Add your code here...
+    if (mouseEnterCbk && !mouseEnterCbk.wasObjectDeleted())
+	{
+		if (mouseEnterCbk->isValid())
+		{
+			owner.getOwnerPanel().getCtrlrLuaManager().getMethodManager().call (mouseEnterCbk, this, e);
+		}
+	}
+    //[/UserCode_mouseEnter]
+}
+
+void CtrlrFixedImageSlider::mouseExit (const MouseEvent& e)
+{
+    //[UserCode_mouseExit] -- Add your code here...
+    if (mouseExitCbk && !mouseExitCbk.wasObjectDeleted())
+	{
+		if (mouseExitCbk->isValid())
+		{
+			owner.getOwnerPanel().getCtrlrLuaManager().getMethodManager().call (mouseExitCbk, this, e);
+		}
+	}
+    //[/UserCode_mouseExit]
+}
+
+
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 double CtrlrFixedImageSlider::getComponentMaxValue()
 {
