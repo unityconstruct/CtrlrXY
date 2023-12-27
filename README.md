@@ -14,7 +14,6 @@ ToDo
 * Implementation of the entire JUCE ValueTree Class
 * Implementation of the entire JUCE LookAndFeel class with all color schemes
 * Implementation of the entire JUCE ColourSelector class with built-in color picker popup for every color properties
-* Implementation of all the customComponent mouse events to callback (mouseEnter, mouseExit...) on other types of components such as uiSliders, Buttons etc
 * File path needs to be updated on save while the panel ID is changed (Save vs. Save as...)
 * Modulators located within a tabs must have their properties updated while the tab properties are changed 
 * Allow earlier "Undo" after a modulator has been deleted
@@ -27,7 +26,10 @@ Changelog
 ---------
 
 #### Version 5.6.25
-* mouseUp callback added for Generic Component (All types of sliders)
+* mouseUp, mouseEnter, mouseExit callbacks added in the Generic Component section for all types of sliders
+
+#### Version 5.6.24
+* ctrlrEditor window showing scrollbars over canvas in Cubase has been fixed
 
 #### Version 0.0.0
 * Current version is forked from Ctrlr 5.6.23
