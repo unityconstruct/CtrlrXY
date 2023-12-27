@@ -57,7 +57,7 @@
   
   <luaMethod name="componentLuaMouseEnter">
     --
-    -- Called when a mouse enter this component
+    -- Called when a mouse enters this component
     --
 
     __method_name = function(--[[ CtrlrComponent --]] comp, --[[ MouseEvent --]] event)
