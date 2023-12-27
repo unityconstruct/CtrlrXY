@@ -26,7 +26,7 @@ Changelog
 ---------
 
 #### Version 5.6.25
-* mouseUp, mouseEnter, mouseExit callbacks added in the Generic Component section for all types of sliders
+* mouseUp, mouseEnter, mouseExit callbacks added in for Generic Components (buttons, sliders etc)
 
 #### Version 5.6.24
 * ctrlrEditor window showing scrollbars over canvas in Cubase has been fixed
@@ -34,7 +34,6 @@ Changelog
 #### Version 0.0.0
 * Current version is forked from Ctrlr 5.6.23
 * Requires unified versioning pattern
-
 
 
 
