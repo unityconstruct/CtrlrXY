@@ -240,7 +240,7 @@
   <id name="uiSliderMouseWheelInterval" 	text="Interval for mouse wheel" type="Numeric" min="0" max="65536" int="0.0001" />
   <id name="uiSliderPopupBubble" 			text="Display popup bubble when dragging" type="Bool"/>
   <id name="uiSliderDecimalPlaces" 			text="Modifies the best number of decimal places to use when displaying this slider's value" type="Numeric" min="0" max="16" />
-  <id name="uiSliderSetNotificationOnlyOnRelease" text="Send Value only on release" type="Bool"/>
+  <id name="uiSliderSetNotificationOnlyOnRelease" text="Send Value only on release" type="Bool" defaults="enabled/Disabled"/>
 
   <!-- Fixed slider -->
   <id name="uiFixedSliderContent" text="Slider contents" type="MultiLine"/>
@@ -681,7 +681,7 @@
   <id name="resourceImageOrientation" 	text="Image frame orientation" 	type="VarNumeric" defaults="Horizontal=0,Vertical=1"/>
 
   <!-- Instance settings (when panel is exported as an instance) -->
-  <id name="ctrlrInstanceIsResiazble"         text="Exported instance will be resizable" type="Bool" defaults="Resiazble/Not Resizable" />
+  <id name="ctrlrInstanceIsResiazble"         text="Exported instance will be resizable" type="Bool" defaults="Resizable/Not Resizable" />
 
   <!-- Global Ctrlr settings -->
   <id name="ctrlrMaxExportedVstParameters"    text="Max exported VST params" type="Numeric" min="0" max="999999" int="1" />
