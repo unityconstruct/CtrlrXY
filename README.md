@@ -25,6 +25,9 @@ ToDo
 Changelog
 ---------
 
+#### Version 5.6.26
+*  setChangeNotificationOnlyOnRelease added in the component section for all types of sliders. When enable, it sends the value only when the mouse button is released.
+
 #### Version 5.6.25
 * mouseUp, mouseEnter, mouseExit callbacks added in for Generic Components (buttons, sliders etc)
 

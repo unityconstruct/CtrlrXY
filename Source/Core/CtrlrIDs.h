@@ -298,8 +298,10 @@ namespace Ids
 	DECLARE_ID (uiSliderDoubleClickEnabled);
 	DECLARE_ID (uiSliderDoubleClickValue);
 	DECLARE_ID (uiSliderDecimalPlaces);
+	DECLARE_ID (uiSliderSetNotificationOnlyOnRelease);
+	
 	DECLARE_ID (uiFixedSliderContent);
-
+	
 	DECLARE_ID (uiImageSliderResource);
 	DECLARE_ID (uiImageSliderResourceFrameWidth);
 	DECLARE_ID (uiImageSliderResourceFrameHeight);

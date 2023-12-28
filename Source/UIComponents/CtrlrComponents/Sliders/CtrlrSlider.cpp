@@ -26,6 +26,7 @@ CtrlrSlider::CtrlrSlider (CtrlrModulator &owner)
 	setProperty (Ids::uiSliderMin, 0);
 	setProperty (Ids::uiSliderMax, 127);
 	setProperty (Ids::uiSliderInterval, 1);
+	setProperty (Ids::uiSliderSetNotificationOnlyOnRelease, false);
 	setProperty (Ids::uiSliderDoubleClickEnabled, true);
 	setProperty (Ids::uiSliderDoubleClickValue, 0);
 	setProperty (Ids::uiSliderValuePosition, (int)Slider::TextBoxBelow);
@@ -101,33 +102,6 @@ void CtrlrSlider::mouseUp (const MouseEvent& e)
 	{
 		ctrlrSlider.setValue ((double)getProperty(Ids::uiSliderSpringValue), sendNotificationSync);
 	}
-}
-
-
-void CtrlrSlider::mouseEnter (const MouseEvent& e)
-{
-    //[UserCode_mouseEnter] -- Add your code here...
-    if (mouseEnterCbk && !mouseEnterCbk.wasObjectDeleted())
-	{
-		if (mouseEnterCbk->isValid())
-		{
-			owner.getOwnerPanel().getCtrlrLuaManager().getMethodManager().call (mouseEnterCbk, this, e);
-		}
-	}
-    //[/UserCode_mouseEnter]
-}
-
-void CtrlrSlider::mouseExit (const MouseEvent& e)
-{
-    //[UserCode_mouseExit] -- Add your code here...
-    if (mouseExitCbk && !mouseExitCbk.wasObjectDeleted())
-	{
-		if (mouseExitCbk->isValid())
-		{
-			owner.getOwnerPanel().getCtrlrLuaManager().getMethodManager().call (mouseExitCbk, this, e);
-		}
-	}
-    //[/UserCode_mouseExit]
 }
 
 double CtrlrSlider::getComponentValue()
@@ -231,6 +205,10 @@ void CtrlrSlider::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasChang
 			false,
 			getProperty (Ids::uiSliderValueWidth, 64),
 			getProperty (Ids::uiSliderValueHeight, 12));
+	}
+	else if (property == Ids::uiSliderSetNotificationOnlyOnRelease)
+	{
+	ctrlrSlider.setChangeNotificationOnlyOnRelease((bool)getProperty(Ids::uiSliderSetNotificationOnlyOnRelease));
 	}
 	else if (property == Ids::uiSliderIncDecButtonColour
 			|| property == Ids::uiSliderIncDecTextColour

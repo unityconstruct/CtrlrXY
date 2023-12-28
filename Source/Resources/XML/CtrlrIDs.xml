@@ -240,6 +240,7 @@
   <id name="uiSliderMouseWheelInterval" 	text="Interval for mouse wheel" type="Numeric" min="0" max="65536" int="0.0001" />
   <id name="uiSliderPopupBubble" 			text="Display popup bubble when dragging" type="Bool"/>
   <id name="uiSliderDecimalPlaces" 			text="Modifies the best number of decimal places to use when displaying this slider's value" type="Numeric" min="0" max="16" />
+  <id name="uiSliderSetNotificationOnlyOnRelease" text="Send Value only on release" type="Bool"/>
 
   <!-- Fixed slider -->
   <id name="uiFixedSliderContent" text="Slider contents" type="MultiLine"/>
@@ -249,7 +250,7 @@
   <id name="uiImageSliderResourceFrameWidth" text="Image resource frame width" type="Text"/>
   <id name="uiImageSliderResourceFrameHeight" text="Image resource frame height" type="Text"/>
   <id name="uiImageResource" text="Image resource" type="VarText"/>
-
+    
   <!-- Combo box -->
   <id name="uiComboArrowColour" text="Arrow colour" type="Colour"/>
   <id name="uiComboOutlineColour" text="Outline colour" type="Colour"/>

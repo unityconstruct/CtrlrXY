@@ -30,6 +30,7 @@ CtrlrFixedImageSlider::CtrlrFixedImageSlider (CtrlrModulator &owner)
 	setProperty (Ids::uiSliderMin, 0);
 	setProperty (Ids::uiSliderMax, 1);
 	setProperty (Ids::uiSliderInterval, 1);
+	setProperty (Ids::uiSliderSetNotificationOnlyOnRelease, false);
 	setProperty (Ids::uiSliderDoubleClickEnabled, true);
 	setProperty (Ids::uiSliderDoubleClickValue, 0);
 	setProperty (Ids::uiSliderValueHeight, 12);
@@ -112,33 +113,6 @@ void CtrlrFixedImageSlider::mouseUp (const MouseEvent& e)
 	}
     //[/UserCode_mouseUp]
 }
-
-void CtrlrFixedImageSlider::mouseEnter (const MouseEvent& e)
-{
-    //[UserCode_mouseEnter] -- Add your code here...
-    if (mouseEnterCbk && !mouseEnterCbk.wasObjectDeleted())
-	{
-		if (mouseEnterCbk->isValid())
-		{
-			owner.getOwnerPanel().getCtrlrLuaManager().getMethodManager().call (mouseEnterCbk, this, e);
-		}
-	}
-    //[/UserCode_mouseEnter]
-}
-
-void CtrlrFixedImageSlider::mouseExit (const MouseEvent& e)
-{
-    //[UserCode_mouseExit] -- Add your code here...
-    if (mouseExitCbk && !mouseExitCbk.wasObjectDeleted())
-	{
-		if (mouseExitCbk->isValid())
-		{
-			owner.getOwnerPanel().getCtrlrLuaManager().getMethodManager().call (mouseExitCbk, this, e);
-		}
-	}
-    //[/UserCode_mouseExit]
-}
-
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 double CtrlrFixedImageSlider::getComponentMaxValue()
@@ -243,7 +217,10 @@ void CtrlrFixedImageSlider::valueTreePropertyChanged (ValueTree &treeWhoseProper
 			getProperty (Ids::uiSliderValueWidth, 64),
 			getProperty (Ids::uiSliderValueHeight, 12));
 	}
-
+	else if (property == Ids::uiSliderSetNotificationOnlyOnRelease)
+	{
+	ctrlrSlider->setChangeNotificationOnlyOnRelease((bool)getProperty(Ids::uiSliderSetNotificationOnlyOnRelease));
+	}
 	else if (property == Ids::uiSliderIncDecButtonColour
 		|| property == Ids::uiSliderIncDecTextColour
 		|| property == Ids::uiSliderValueFont
