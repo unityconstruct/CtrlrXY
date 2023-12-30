@@ -9,6 +9,7 @@ Let's keep the Ctrlr github alive and keep up with what we were all doing there.
 ToDo
 ----
 * Scalable UI upgrade (requires container callback on resize)
+* Add property to change ViewPort background (ctrlrPanelViewPortBackgroundColour) color from panelEditor
 * VST Host must get the panel name while exported as VST3 plugin (currently always named as Ctrlr | Instigator)
 * Update to the latest version of JUCE 7
 * Implementation of the entire JUCE ValueTree Class
