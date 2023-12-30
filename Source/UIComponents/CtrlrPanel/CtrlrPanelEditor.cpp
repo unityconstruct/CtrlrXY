@@ -51,7 +51,7 @@ CtrlrPanelEditor::CtrlrPanelEditor(CtrlrPanel &_owner, CtrlrManager &_ctrlrManag
 	editorComponents[0] = ctrlrPanelViewport;
 
 	setProperty(Ids::uiPanelSnapSize, 8);
-    setProperty(Ids::uiPanelViewPortBackgroundColour, "transparentblack");  // ViewPort background color
+	setProperty(Ids::uiPanelViewPortBackgroundColour, "transparentblack");  // ViewPort background color
 	setProperty(Ids::uiPanelBackgroundColour, "0xffffffff");
 	setProperty(Ids::uiPanelBackgroundColour1, "0xffffffff");
 	setProperty(Ids::uiPanelBackgroundColour2, "0xffffffff");
@@ -281,7 +281,7 @@ void CtrlrPanelEditor::valueTreePropertyChanged(ValueTree &treeWhosePropertyHasC
 		{
 			editModeChanged();
 		}
-        else if (property == Ids::uiPanelSnapSize)
+		else if (property == Ids::uiPanelSnapSize)
 		{
 			repaint();
 		}
@@ -313,7 +313,7 @@ void CtrlrPanelEditor::valueTreePropertyChanged(ValueTree &treeWhosePropertyHasC
 		else if (property == Ids::uiPanelZoom)
 		{
 			getPanelViewport()->setZoom(getProperty(property),
-            getCanvas()->getBounds().getCentre().getX(),
+			getCanvas()->getBounds().getCentre().getX(),
 			getCanvas()->getBounds().getCentre().getY());
 		}
 		else if (property == Ids::uiPanelMenuBarVisible)
@@ -334,8 +334,8 @@ void CtrlrPanelEditor::valueTreePropertyChanged(ValueTree &treeWhosePropertyHasC
 			getCanvas()->setLookAndFeel(lookAndFeel.get());
 		}
 		else if (property == Ids::uiPanelBackgroundGradientType
-                 || property == Ids::uiPanelViewPortBackgroundColour
-                 || property == Ids::uiPanelBackgroundColour1
+		         || property == Ids::uiPanelViewPortBackgroundColour
+		         || property == Ids::uiPanelBackgroundColour1
 		         || property == Ids::uiPanelBackgroundColour2
 		         || property == Ids::uiPanelBackgroundColour
 				)
