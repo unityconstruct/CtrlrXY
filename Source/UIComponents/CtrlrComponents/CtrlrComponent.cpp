@@ -100,7 +100,7 @@ CtrlrComponent::CtrlrComponent(CtrlrModulator &_owner)
 	
 	setProperty (Ids::componentLuaMouseMoved, COMBO_ITEM_NONE);
 	setProperty (Ids::componentLuaMouseDown, COMBO_ITEM_NONE);
-    setProperty (Ids::componentLuaMouseUp, COMBO_ITEM_NONE);
+	setProperty (Ids::componentLuaMouseUp, COMBO_ITEM_NONE);
 	setProperty (Ids::componentLuaMouseDrag, COMBO_ITEM_NONE);
 	setProperty (Ids::componentLuaMouseDoubleClick, COMBO_ITEM_NONE);
 	setProperty (Ids::componentLuaMouseEnter, COMBO_ITEM_NONE);
@@ -161,6 +161,7 @@ void CtrlrComponent::resized()
 										(int)getProperty(Ids::componentLabelWidth)  ? (int)getProperty(Ids::componentLabelWidth) : w,
 										(int)getProperty(Ids::componentLabelHeight) ? (int)getProperty(Ids::componentLabelHeight) : h);
 		}
+		
 	}
 
 	const Rectangle<int> bounds = getBounds ();
@@ -371,7 +372,8 @@ void CtrlrComponent::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasCh
 		||	property == Ids::componentLabelVisible
 		||	property == Ids::componentLabelAlwaysOnTop
 		||  property == Ids::componentSentBack
-		||  property == Ids::componentLabelJustification)
+		||  property == Ids::componentLabelJustification
+		)
 	{
 		componentNameLabel.setSize (getWidth(), getProperty(Ids::componentLabelHeight));
 		componentNameLabel.setVisible (getProperty(Ids::componentLabelVisible));
@@ -502,7 +504,7 @@ void CtrlrComponent::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasCh
 			return;
 
 		mouseExitCbk = owner.getOwnerPanel().getCtrlrLuaManager().getMethodManager().getMethod(getProperty(property));
-	}	
+	}
 	
 	if (restoreStateInProgress == false)
 	{
@@ -785,7 +787,7 @@ void CtrlrComponent::wrapForLua (lua_State *L)
 			.def("isMouseOver", &Component::isMouseOver)
 			.def("isMouseOverOrDragging", &Component::isMouseOverOrDragging)
 			.def("mouseEnter", &Component::mouseEnter)
-			.def("mouseExit", &Component::mouseExit)			
+			.def("mouseExit", &Component::mouseExit)		
 			.def("keyPressed", &Component::keyPressed)
 			.def("getBounds", &Component::getBounds)
 			.def("getRect", &CtrlrComponent::getBounds)
