@@ -3,6 +3,7 @@
 #include "CtrlrPanel/CtrlrPanel.h"
 #include "CtrlrPanelEditor.h"
 #include "CtrlrManager/CtrlrManager.h"
+#include "CtrlrUtilitiesGUI.h"
 
 /**
  */
@@ -19,6 +20,7 @@ CtrlrPanelViewport::CtrlrPanelViewport (CtrlrPanelEditor &_owner)
 	viewport->setViewedComponent (magnifier);
 
     setSize (512, 512);
+
 }
 
 CtrlrPanelViewport::~CtrlrPanelViewport()
@@ -30,7 +32,7 @@ CtrlrPanelViewport::~CtrlrPanelViewport()
 
 void CtrlrPanelViewport::paint (Graphics& g)
 {
-	g.fillAll (Colours::transparentBlack);
+        g.fillAll(VAR2COLOUR(getOwner().getProperty(Ids::uiPanelViewPortBackgroundColour)));
 }
 
 void CtrlrPanelViewport::resized()
@@ -169,4 +171,44 @@ CtrlrPanelCanvas *CtrlrPanelViewport::getCurrentCanvas()
 void CtrlrPanelViewport::lookAndFeelChanged()
 {
 	resized();
+}
+
+void CtrlrPanelViewport::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasChanged, const Identifier &property)
+{
+    if (property == Ids::uiPanelViewPortBackgroundColour)
+    {
+        repaint();
+    }
+}
+
+CtrlrPanel &CtrlrPanelViewport::getPanel()
+{
+    return (owner.getOwner());
+}
+
+void CtrlrPanelViewport::setProperty (const Identifier& name, const var &newValue, const bool isUndoable)
+{
+    if (isUndoable)
+    {
+        owner.setProperty (name, newValue, isUndoable);
+    }
+    else
+    {
+        owner.setProperty (name, newValue, false);
+    }
+}
+
+const var &CtrlrPanelViewport::getProperty (const Identifier& name) const
+{
+    return (owner.getProperty (name));
+}
+
+const var CtrlrPanelViewport::getProperty (const Identifier& name, const var &defaultReturnValue) const
+{
+    return (owner.getProperty (name, defaultReturnValue));
+}
+
+ValueTree &CtrlrPanelViewport::getViewPortTree()
+{
+    return (owner.getPanelEditorTree());
 }

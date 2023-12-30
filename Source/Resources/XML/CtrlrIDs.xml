@@ -26,6 +26,9 @@
   <id name="modulatorCustomNameGroup"           text="A custom group name"      type="Text" />
   <id name="modulatorCustomName"                text="A custom modulator name"  type="Text" section="Modulator" />
 
+  <!--  ViewPort properties -->
+  <id name="uiPanelViewPortBackgroundColour"	text="Panel ViewPort Background colour" type="Colour"/>
+  
   <!-- Panel editor properties -->
   <id name="uiPanelImageAlpha" 				text="Background image opacity" type="Numeric" max="255"/>
   <id name="uiPanelLookAndFeel"             text="LookAndFeel scheme for panel" type="VarText" defaults="@lookandfeel" />

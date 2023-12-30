@@ -1,5 +1,8 @@
 #include "stdafx.h"
+#include "CtrlrLuaManager.h" // added adterwards to check if useful
 #include "CtrlrManager/CtrlrManager.h"
+#include "CtrlrMacros.h"
+#include "CtrlrUtilities.h"
 #include "CtrlrLog.h"
 #include "CtrlrPanelEditor.h"
 #include "CtrlrProcessor.h"
@@ -9,6 +12,11 @@
 #include "CtrlrPanel/CtrlrPanel.h"
 #include "CtrlrComponents/CtrlrCombo.h"
 #include "CtrlrPanel/CtrlrPanelResource.h"
+#include "CtrlrPanel/CtrlrPanelCanvas.h"
+#include "JuceClasses/LMemoryBlock.h"
+#include "CtrlrMIDI/CtrlrMIDISettingsDialog.h"
+#include "CtrlrComponents/CtrlrComponent.h"
+
 
 CtrlrPanelEditor::CtrlrPanelEditor(CtrlrPanel &_owner, CtrlrManager &_ctrlrManager, const String &panelName)
 		: Component(L"Ctrlr Panel Editor"),
@@ -43,6 +51,7 @@ CtrlrPanelEditor::CtrlrPanelEditor(CtrlrPanel &_owner, CtrlrManager &_ctrlrManag
 	editorComponents[0] = ctrlrPanelViewport;
 
 	setProperty(Ids::uiPanelSnapSize, 8);
+	setProperty(Ids::uiPanelViewPortBackgroundColour, "transparentblack");  // ViewPort background color
 	setProperty(Ids::uiPanelBackgroundColour, "0xffffffff");
 	setProperty(Ids::uiPanelBackgroundColour1, "0xffffffff");
 	setProperty(Ids::uiPanelBackgroundColour2, "0xffffffff");
@@ -57,6 +66,8 @@ CtrlrPanelEditor::CtrlrPanelEditor(CtrlrPanel &_owner, CtrlrManager &_ctrlrManag
 	setProperty(Ids::uiPanelMidiControllerMenuHideOnExport, false);
 	setProperty(Ids::uiPanelMidiThruMenuHideOnExport, false);
 	setProperty(Ids::uiPanelMidiChannelMenuHideOnExport, false);
+	setProperty(Ids::uiPanelViewPortSize, 800);
+	setProperty(Ids::uiPanelPropertiesSize, 300);
 	setProperty(Ids::uiPanelWidth, 400);
 	setProperty(Ids::uiPanelHeight, 400);
 	setProperty(Ids::name, panelName);
@@ -65,6 +76,7 @@ CtrlrPanelEditor::CtrlrPanelEditor(CtrlrPanel &_owner, CtrlrManager &_ctrlrManag
 	setProperty(Ids::uiPanelSnapActive, true);
 	setProperty(Ids::uiPanelPropertiesOnRight, false);
 	setProperty(Ids::luaPanelPaintBackground, COMBO_ITEM_NONE);
+	setProperty(Ids::luaPanelEditorResized, COMBO_ITEM_NONE); // Added for callback on window resize
 	setProperty(Ids::luaPanelResized, COMBO_ITEM_NONE);
 	setProperty(Ids::luaPanelFileDragDropHandler, COMBO_ITEM_NONE);
 	setProperty(Ids::luaPanelFileDragEnterHandler, COMBO_ITEM_NONE);
@@ -109,7 +121,7 @@ void CtrlrPanelEditor::resized()
 	ctrlrPanelViewport->setBounds(0, 0, getWidth() - 308, getHeight());
 	ctrlrPanelProperties->setBounds(getWidth() - 300, 32, 300, getHeight() - 32);
 	spacerComponent->setBounds(getWidth(), 32, 8, getHeight() - 32);
-
+    
 	layoutItems();
 
 	if (!getRestoreState())
@@ -146,6 +158,8 @@ void CtrlrPanelEditor::layoutItems()
 
 void CtrlrPanelEditor::saveLayout()
 {
+	setProperty(Ids::uiPanelWidth, getWidth()); // Set W property on save
+    setProperty(Ids::uiPanelHeight, getHeight()); // Set H property on save
 	setProperty(Ids::uiPanelViewPortSize, layoutManager.getItemCurrentAbsoluteSize(0));
 	setProperty(Ids::uiPanelPropertiesSize, layoutManager.getItemCurrentAbsoluteSize(2));
 }
@@ -261,7 +275,7 @@ CtrlrComponent *CtrlrPanelEditor::getSelected(const Identifier &type)
 
 void CtrlrPanelEditor::valueTreePropertyChanged(ValueTree &treeWhosePropertyHasChanged, const Identifier &property)
 {
-	if (treeWhosePropertyHasChanged.hasType(Ids::uiPanelEditor))
+    if (treeWhosePropertyHasChanged.hasType(Ids::uiPanelEditor))
 	{
 		if (property == Ids::uiPanelEditMode)
 		{
@@ -298,8 +312,9 @@ void CtrlrPanelEditor::valueTreePropertyChanged(ValueTree &treeWhosePropertyHasC
 		}
 		else if (property == Ids::uiPanelZoom)
 		{
-			getPanelViewport()->setZoom(getProperty(property), getCanvas()->getBounds().getCentre().getX(),
-			                            getCanvas()->getBounds().getCentre().getY());
+			getPanelViewport()->setZoom(getProperty(property),
+			getCanvas()->getBounds().getCentre().getX(),
+			getCanvas()->getBounds().getCentre().getY());
 		}
 		else if (property == Ids::uiPanelMenuBarVisible)
 		{
@@ -319,6 +334,7 @@ void CtrlrPanelEditor::valueTreePropertyChanged(ValueTree &treeWhosePropertyHasC
 			getCanvas()->setLookAndFeel(lookAndFeel.get());
 		}
 		else if (property == Ids::uiPanelBackgroundGradientType
+		         || property == Ids::uiPanelViewPortBackgroundColour
 		         || property == Ids::uiPanelBackgroundColour1
 		         || property == Ids::uiPanelBackgroundColour2
 		         || property == Ids::uiPanelBackgroundColour
