@@ -3,6 +3,9 @@
 
 #include "CtrlrPanelCanvas.h"
 #include "CtrlrViewport.h"
+#include "CtrlrMacros.h"
+#include "CtrlrWindowManagers/CtrlrChildWindowContent.h"
+#include "luabind/object_fwd.hpp"
 
 class CtrlrPanelEditor;
 class CtrlrPanelViewport;
@@ -128,6 +131,12 @@ public:
 		void resized();
 		bool keyStateChanged (bool isKeyDown);
 		void lookAndFeelChanged();
+        CtrlrPanel &getPanel();
+        void valueTreePropertyChanged (ValueTree &treeWhosePropertyHasChanged, const Identifier &property);
+        void setProperty (const Identifier& name, const var &newValue, const bool isUndoable=false);
+        const var &getProperty (const Identifier& name) const;
+        const var getProperty (const Identifier& name, const var &defaultReturnValue) const;
+        ValueTree &getViewPortTree();
 
 		JUCE_LEAK_DETECTOR(CtrlrPanelViewport)
 

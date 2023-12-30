@@ -14,6 +14,9 @@
 #include "CtrlrPanel/CtrlrPanelUndoManager.h"
 #include "CtrlrPanelFindProperty.h"
 
+
+class CtrlrLuaMethod;
+
 class CtrlrPanelEditor;
 
 class CtrlrPanelEditor  :	public Component,
@@ -45,7 +48,7 @@ class CtrlrPanelEditor  :	public Component,
 		void valueTreeChildOrderChanged (ValueTree& parentTreeWhoseChildrenHaveMoved, int, int){}
 
 		CtrlrPanel &getOwner()																			{ return (owner); }
-		void setProperty (const Identifier& name, const var &newValue, const bool isUndoable=false);
+        void setProperty (const Identifier& name, const var &newValue, const bool isUndoable=false);
 		const var &getProperty (const Identifier& name) const;
 		const var getProperty (const Identifier& name, const var &defaultReturnValue) const;
 		ValueTree &getPanelEditorTree()																	{ return (panelEditorTree); }
@@ -68,7 +71,9 @@ class CtrlrPanelEditor  :	public Component,
         void showComponentRuntimeConfig(CtrlrComponent *componentToConfigure);
 		void searchForProperty();
         static LookAndFeel* getLookAndFeelFromDescription(const String &lookAndFeelDesc);
-
+    
+        void editModeChanged(const bool isEditMode);
+    
 		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrPanelEditor)
 
 	private:
@@ -81,6 +86,7 @@ class CtrlrPanelEditor  :	public Component,
 		ValueTree panelEditorTree;
 		friend class WeakReference<CtrlrPanelEditor>;
 		WeakReference<CtrlrPanelEditor>::Master masterReference;
+		WeakReference<CtrlrLuaMethod> resizedEditorCbk;
 		CtrlrPanelProperties* ctrlrPanelProperties;
 		StretchableLayoutResizerBar* spacerComponent;
 		CtrlrPanelViewport* ctrlrPanelViewport;

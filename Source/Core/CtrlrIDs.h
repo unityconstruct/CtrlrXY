@@ -62,6 +62,8 @@ namespace Ids
 	DECLARE_ID (modulatorCustomNameGroup);
 	DECLARE_ID (modulatorCustomName);
 
+	DECLARE_ID (uiPanelViewPortBackgroundColour);
+	
 	DECLARE_ID (uiPanelImageAlpha);
 	DECLARE_ID (uiPanelLookAndFeel);
 	DECLARE_ID (uiPanelColourScheme);
