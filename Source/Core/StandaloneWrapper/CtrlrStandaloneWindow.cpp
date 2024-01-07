@@ -97,8 +97,12 @@ CtrlrStandaloneWindow::CtrlrStandaloneWindow (const String& title, const Colour&
     vpOsFrameRight = getPeer()->getFrameSize().getRight(); // OS Native Window Border Right thickness
     vpOsWindowWidth = getPeer()->getBounds().getWidth(); // OS Native Window Height incl borders
     vpOsWindowHeight = getPeer()->getBounds().getHeight(); // OS Native Window Height incl borders
+    //Native Window size is stored in the OS.
+    //If the APP has value off the target, it's because the same UID was used previously with different sizes & ratio
+    //OR width and Height require to be set from inner content + Borders
        
-    vpStandaloneAspectRatio = double(vpOsWindowWidth) / double(vpOsWindowHeight); // Requires Native Title bar Height and borders
+    //vpStandaloneAspectRatio = double(vpOsWindowWidth) / double(vpOsWindowHeight); // Requires Native Title bar Height and borders
+    vpStandaloneAspectRatio = double(panelCanvasWidth + vpOsFrameLeft + vpOsFrameRight) / double(panelCanvasHeight + vpOsFrameTop + vpOsFrameBtm);
     
     vpEnableResizableLimits = ed.getProperty(Ids::uiViewPortEnableResizeLimits);
     vpMinWidth = ed.getProperty(Ids::uiViewPortMinWidth);

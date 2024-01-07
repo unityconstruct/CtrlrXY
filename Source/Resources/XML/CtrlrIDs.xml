@@ -44,7 +44,7 @@
   <id name="uiViewPortHeight" 				text="ViewPort current height" type="Text"/>
   <id name="uiViewPortResizable"            text="ViewPort is resizable on a restricted instance" type="Bool" defaults="Resizable/Locked" />
   <id name="uiViewPortShowScrollBars"       text="ViewPort Scrollbars visibility on an exported instance" type="Bool" defaults="Visible/Hidden" />
-  <id name="uiViewPortEnableResizeLimits"   text="ViewPort resize limits enabled on a restricted instance" type="Bool" defaults="Enabled/Disabled" />
+  <id name="uiViewPortEnableResizeLimits"   text="ViewPort resize limits enabled on an exported instance" type="Bool" defaults="Enabled/Disabled" />
   <id name="uiViewPortMinWidth"             text="ViewPort minimum width" type="Text"/>
   <id name="uiViewPortMinHeight"            text="ViewPort minimum height" type="Text"/>
   <id name="uiViewPortMaxWidth"             text="ViewPort maximum width" type="Text"/>
