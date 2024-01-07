@@ -18,9 +18,12 @@ CtrlrPanelViewport::CtrlrPanelViewport (CtrlrPanelEditor &_owner)
 	magnifier = new CtrlrMagnifierComponent (canvasList[0]);
 	addAndMakeVisible (viewport = new CtrlrViewportImpl(this));
 	viewport->setViewedComponent (magnifier);
-
+    
+    ValueTree ed = owner.getOwner().getOwner().getInstanceTree().getChildWithName(Ids::uiPanelEditor);
+    vpScrollBarsShown = ed.getProperty(Ids::uiViewPortShowScrollBars, true);
+    viewport->setScrollBarsShown(vpScrollBarsShown, vpScrollBarsShown);
+    
     setSize (512, 512);
-
 }
 
 CtrlrPanelViewport::~CtrlrPanelViewport()
@@ -176,6 +179,10 @@ void CtrlrPanelViewport::lookAndFeelChanged()
 void CtrlrPanelViewport::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasChanged, const Identifier &property)
 {
     if (property == Ids::uiPanelViewPortBackgroundColour)
+    {
+        repaint();
+    }
+    if (property == Ids::uiViewPortShowScrollBars)
     {
         repaint();
     }

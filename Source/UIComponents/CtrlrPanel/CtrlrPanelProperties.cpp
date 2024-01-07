@@ -20,8 +20,8 @@ CtrlrPanelProperties::CtrlrPanelProperties (CtrlrPanelEditor &_owner)
 	CtrlrPanelComponentProperties *props = new CtrlrPanelComponentProperties (owner);
 	tabbedComponent->setOutline (0);
 	tabbedComponent->addTab ("General",		Colours::lightgrey, props, true);
-    tabbedComponent->addTab ("Resources",	Colours::lightgrey, new CtrlrPanelResourceEditor (owner), true);
-	tabbedComponent->addTab("Utility",		Colours::lightgrey, new CtrlrPanelUtilities(owner), true);
+    tabbedComponent->addTab ("Resources",	Colours::lightgrey, new CtrlrPanelResourceEditor(owner), true);
+	tabbedComponent->addTab ("Utility",		Colours::lightgrey, new CtrlrPanelUtilities(owner), true);
 
 	ctrlrPanelFindProperty.reset(new CtrlrPanelFindProperty(owner, props));
 	addAndMakeVisible(ctrlrPanelFindProperty.get());
@@ -46,6 +46,12 @@ void CtrlrPanelProperties::resized()
 {
 	ctrlrPanelFindProperty->setBounds(0,0,getWidth() - (int)owner.getOwner().getOwner().getProperty(Ids::ctrlrTabBarDepth),32);
     tabbedComponent->setBounds (0, 32, getWidth() - 0, getHeight() - 32);
+    repaint();
+}
+
+void CtrlrPanelProperties::currentTabChanged()
+{
+    tabbedComponent->setCurrentTabIndex(-1);
 }
 
 void CtrlrPanelProperties::changeListenerCallback (ChangeBroadcaster* source)

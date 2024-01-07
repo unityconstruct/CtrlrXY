@@ -25,48 +25,59 @@
   <id name="modulatorVstNameFormat"             text="A format string (just like the label property for displaying changed modulators) that will report the name to the Host" type="Text" />
   <id name="modulatorCustomNameGroup"           text="A custom group name"      type="Text" />
   <id name="modulatorCustomName"                text="A custom modulator name"  type="Text" section="Modulator" />
-
-  <!--  ViewPort properties -->
-  <id name="uiPanelViewPortBackgroundColour"	text="Panel ViewPort Background colour" type="Colour"/>
-  
+ 
   <!-- Panel editor properties -->
-  <id name="uiPanelImageAlpha" 				text="Background image opacity" type="Numeric" max="255"/>
-  <id name="uiPanelLookAndFeel"             text="LookAndFeel scheme for panel" type="VarText" defaults="@lookandfeel" />
-  <id name="uiPanelColourScheme"            text="LookAndFeel's colour scheme" type="VarText" defaults="@colourSchemes" />
-  <id name="uiPanelImageLayout" 			text="Image layout" type="VarNumeric" defaults="@imageLayout"/>
-  <id name="uiPanelImageResource" 			text="Panel background image" type="VarText"/>
-  <id name="uiPanelBackgroundColour" 		text="Background colour" type="Colour"/>
-  <id name="uiPanelBackgroundColour1" 		text="Background colour [1]" type="Colour" />
-  <id name="uiPanelBackgroundColour2" 		text="Background colour [2]" type="Colour" />
-  <id name="uiPanelBackgroundGradientType" 	text="Background gradient type" type="VarNumeric" defaults="@gradient" />
-  <id name="uiPanelSnapSize" 				text="Snap size" type="Text"/>
-  <id name="uiPanelViewPortSize" 			text="Viewport size" type="Text"/>
-  <id name="uiPanelPropertiesSize" 			text="Properties panel size" type="Text"/>
-  <id name="uiPanelEditMode" 				text="Edit Mode" type="Bool"/>
-  <id name="uiPanelLock" 					text="Panel Lock" type="Bool"/>
-  <id name="uiPanelWidth" 					text="Panel Width" type="Text"/>
-  <id name="uiPanelHeight" 					text="Panel Height" type="Text"/>
-  <id name="uiPanelDisabledOnEdit" 			text="Components are disabled when editing" type="Bool" defaults="Enabled/Disabled" />
-  <id name="uiPanelSnapActive"	 			text="Snap component position" type="Bool"/>
-  <id name="uiPanelCanvasRectangle" 		text="Canvas bounds" type="Text"/>
-  <id name="uiPanelClipboardTree" 			text="uiPanelClipboardTree" type="Text"/>
-  <id name="uiPanelPropertiesOnRight" 		text="Properties panel on the right side" type="Bool"/>
-  <id name="uiPanelInvisibleComponentAlpha" text="Alpha for invisible components in edit mode" type="Numeric" max="1" int="0.01"/>
-  <id name="uiPanelDisableCombosOnEdit" 	text="Disable combos when editing panel" type="Bool" />
-
-  <id name="uiPanelTooltipBackgroundColour" text="Tooltip background colour" 		type="Colour" />
-  <id name="uiPanelTooltipOutlineColour" 	text="Tooltip outline colour" 			type="Colour" />
-  <id name="uiPanelTooltipCornerRound" 		text="Tooltip rectangle roundness" 		type="Numeric" min="0" max="255" int="0.1" />
-  <id name="uiPanelTooltipPlacement" 		text="Tooltip placement" 				type="VarNumeric" defaults="Above=1,Below=2,Left=4,Right=8"/>
-  <id name="uiPanelTooltipFont" 			text="Tooltip font"						type="Font" />
-  <id name="uiPanelTooltipColour" 			text="Tooltip font colour"				type="Colour" />
+  <id name="uiPanelCanvasRectangle"         text="Canvas bounds" type="Text"/>
+  <id name="uiPanelEditMode"                text="Edit Mode" type="Bool"/>
+  <id name="uiPanelLock"                    text="Lock all components in place" type="Bool" defaults="unlocked/Locked"/>
+  <id name="uiPanelDisabledOnEdit"          text="Components are disabled when editing" type="Bool" defaults="Enabled/Disabled" />
   <id name="uiPanelMenuBarVisible"      text="Is menu bar visible for this panel" type="Bool" />
   <id name="uiPanelMenuBarHideOnExport" text="Hide the menu bar when exporting an instance" type="Bool" />
   <id name="uiPanelProgramsMenuHideOnExport" text="Hide the Programs menu when exporting an instance" type="Bool" />
   <id name="uiPanelMidiControllerMenuHideOnExport" text="Hide the Midi Controller menu when exporting an instance" type="Bool" />
   <id name="uiPanelMidiThruMenuHideOnExport" text="Hide the Midi Thru menu when exporting an instance" type="Bool" />
   <id name="uiPanelMidiChannelMenuHideOnExport" text="Hide the Midi Channel menu when exporting an instance" type="Bool" />
-  <id name="uiPanelZoom" text="Zoom ratio" type="Numeric" min="0.01" max="10.00" int="0.01"/>
+  
+  <id name="uiPanelViewPortSize" 			text="Editor ViewPort width" type="Text"/>
+  <id name="uiPanelPropertiesSize" 			text="Editor property pane width" type="Text"/>
+  <id name="uiViewPortWidth" 				text="ViewPort current width" type="Text"/>
+  <id name="uiViewPortHeight" 				text="ViewPort current height" type="Text"/>
+  <id name="uiViewPortResizable"            text="ViewPort is resizable on a restricted instance" type="Bool" defaults="Resizable/Locked" />
+  <id name="uiViewPortShowScrollBars"       text="ViewPort Scrollbars visibility on an exported instance" type="Bool" defaults="Visible/Hidden" />
+  <id name="uiViewPortEnableResizeLimits"   text="ViewPort resize limits enabled on a restricted instance" type="Bool" defaults="Enabled/Disabled" />
+  <id name="uiViewPortMinWidth"             text="ViewPort minimum width" type="Text"/>
+  <id name="uiViewPortMinHeight"            text="ViewPort minimum height" type="Text"/>
+  <id name="uiViewPortMaxWidth"             text="ViewPort maximum width" type="Text"/>
+  <id name="uiViewPortMaxHeight"            text="ViewPort maximum height" type="Text"/>
+  <id name="uiViewPortEnableFixedAspectRatio"   text="ViewPort enable aspect ratio" type="Bool" defaults="Enabled/Disabled" />
+  <id name="uiViewPortFixedAspectRatio"     text="ViewPort fixed aspect ratio" type="Numeric" min="0" max="10" int="0.0001"/>
+  <id name="uiPanelZoom" text="Canvas zoom ratio" type="Numeric" min="0.001" max="10.00" int="0.001"/>
+  
+  <id name="uiPanelViewPortBackgroundColour"    text="Panel ViewPort background colour" type="Colour"/>
+  <id name="uiPanelBackgroundColour"        text="Background colour" type="Colour"/>
+  <id name="uiPanelBackgroundColour1"       text="Background colour [1]" type="Colour" />
+  <id name="uiPanelBackgroundColour2"       text="Background colour [2]" type="Colour" />
+  <id name="uiPanelBackgroundGradientType"  text="Background gradient type" type="VarNumeric" defaults="@gradient" />
+  <id name="uiPanelImageLayout"             text="Image layout" type="VarNumeric" defaults="@imageLayout"/>
+  <id name="uiPanelImageResource"               text="Panel background image" type="VarText"/>
+  <id name="uiPanelImageAlpha"                  text="Background image opacity" type="Numeric" max="255"/>
+  <id name="uiPanelSnapActive"	 			text="Snap component position" type="Bool"/>
+  <id name="uiPanelSnapSize"                text="Snap size" type="Text"/>
+  <id name="uiPanelClipboardTree" 			text="uiPanelClipboardTree" type="Text"/>
+  <id name="uiPanelPropertiesOnRight" 		text="Properties panel on the right side" type="Bool"/>
+
+  <id name="uiPanelInvisibleComponentAlpha" text="Alpha for invisible components in edit mode" type="Numeric" max="1" int="0.01"/>
+  <id name="uiPanelDisableCombosOnEdit" 	text="Disable combos when editing panel" type="Bool" />
+  
+  <id name="uiPanelTooltipBackgroundColour" text="Tooltip background colour" 		type="Colour" />
+  <id name="uiPanelTooltipOutlineColour" 	text="Tooltip outline colour" 			type="Colour" />
+  <id name="uiPanelTooltipCornerRound" 		text="Tooltip rectangle roundness" 		type="Numeric" min="0" max="255" int="0.1" />
+  <id name="uiPanelTooltipPlacement" 		text="Tooltip placement" 				type="VarNumeric" defaults="Above=1,Below=2,Left=4,Right=8"/>
+  <id name="uiPanelTooltipFont" 			text="Tooltip font"						type="Font" />
+  <id name="uiPanelTooltipColour" 			text="Tooltip font colour"				type="Colour" />
+  
+  <id name="uiPanelLookAndFeel"             text="LookAndFeel scheme for panel" type="VarText" defaults="@lookandfeel" />
+  <id name="uiPanelColourScheme"            text="LookAndFeel's colour scheme" type="VarText" defaults="@colourSchemes" />
 
   <!-- Panel properties -->
 
@@ -781,7 +792,7 @@
   <id name="luaPanelOSCReceived"              text="Called when a panel receives a OSC message"           type="LuaMethod" />
   <id name="luaPanelPaintBackground"          text="Called to paint a custom panel background"            type="LuaMethod" />
   <id name="luaPanelSaved"                    text="Called before a panel is saved"                       type="LuaMethod" />
-  <id name="luaPanelEditorResized"            text="Called when the Ctrlr Window is resized"              type="LuaMethod" />
+  <id name="luaViewPortResized"               text="Called when the ViewPort is resized"                  type="LuaMethod" />
   <id name="luaPanelResized"                  text="Called when a panel canvas is resized"                type="LuaMethod" />
   <id name="luaPanelProgramChanged"           text="Called after a program change"                        type="LuaMethod" />
   <id name="luaPanelGlobalChanged"            text="Called when a global variable is changed"             type="LuaMethod" />
@@ -850,7 +861,7 @@
   <!-- Constants used in properties -->
   <constants>
     <const name="justification"     value="left=1,right=2,horizontallyCentred=4,top=8,bottom=16,verticallyCentred=32,horizontallyJustified=64,centred=36,centredLeft=33,centredRight=34,centredTop=12,centredBottom=20,topLeft=9,topRight=10,bottomLeft=17,bottomRight=18" />
-    <const name="gradient"          value="None=0,Vertical=1,Horizontal=2,Radial=3" />
+    <const name="gradient"          value="SolidColour=0,Vertical=1,Horizontal=2,Radial=3" />
     <const name="imageLayout"       value="tile=8192,xLeft=1,xRight=2,xMid=4,yTop=8,yBottom=16,yMid=32,stretchToFit=64,fillDestination=128,onlyReduceInSize=256,onlyIncreaseInSize=512,centred=36" />
     <const name="relativePosition"  value="none,top,bottom,left,right" />
     <const name="midiInputChannel"  value="All Channels=0,Channel 1=1,Channel 2=2,Channel 3=3,Channel 4=4,Channel 5=5,Channel 6=6,Channel 7=7,Channel 8=8,Channel 9=9,Channel 10=10,Channel 11=11,Channel 12=12,Channel 13=13,Channel 14=14,Channel 15=15,Channel 16=16" />

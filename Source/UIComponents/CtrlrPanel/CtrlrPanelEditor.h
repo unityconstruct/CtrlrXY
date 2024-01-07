@@ -78,14 +78,19 @@ class CtrlrPanelEditor  :	public Component,
 	private:
 		ComponentAnimator componentAnimator;
 		CtrlrPanel &owner;
+        double canvasHeight;
+        double canvasWidth;
+        double canvasAspectRatio;
 		ScopedPointer <CtrlrComponentSelection> ctrlrComponentSelection;
 		StretchableLayoutManager layoutManager;
 		bool lastEditMode, currentRestoreState;
 		CtrlrManager &ctrlrManager;
 		ValueTree panelEditorTree;
 		friend class WeakReference<CtrlrPanelEditor>;
-		WeakReference<CtrlrPanelEditor>::Master masterReference;
-		WeakReference<CtrlrLuaMethod> resizedEditorCbk;
+		WeakReference <CtrlrPanelEditor>::Master masterReference;
+		WeakReference <CtrlrLuaMethod>
+        resizedEditorCbk,
+        resizedCbk;
 		CtrlrPanelProperties* ctrlrPanelProperties;
 		StretchableLayoutResizerBar* spacerComponent;
 		CtrlrPanelViewport* ctrlrPanelViewport;

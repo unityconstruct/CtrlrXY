@@ -16,6 +16,7 @@ public:
 	void layoutChanged();
     void paint (Graphics& g);
     void resized();
+    void currentTabChanged();
     JUCE_LEAK_DETECTOR(CtrlrPanelProperties)
 
 private:

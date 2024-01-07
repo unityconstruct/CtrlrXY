@@ -147,6 +147,7 @@ public:
 		CtrlrMagnifierComponent *magnifier;
 		bool isSpaceDown;
 		double currentZoom;
+        bool vpScrollBarsShown;
 };
 
 

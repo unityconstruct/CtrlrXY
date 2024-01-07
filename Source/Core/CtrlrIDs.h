@@ -82,8 +82,17 @@ namespace Ids
 	DECLARE_ID (uiPanelZoom);
 	DECLARE_ID (uiPanelLock);
 	DECLARE_ID (uiPanelDisabledOnEdit);
-	DECLARE_ID (uiPanelWidth);
-	DECLARE_ID (uiPanelHeight);
+	DECLARE_ID (uiViewPortWidth);
+	DECLARE_ID (uiViewPortHeight);
+    DECLARE_ID (uiViewPortResizable);
+    DECLARE_ID (uiViewPortShowScrollBars);
+    DECLARE_ID (uiViewPortEnableResizeLimits);
+    DECLARE_ID (uiViewPortMinWidth);
+    DECLARE_ID (uiViewPortMinHeight);
+    DECLARE_ID (uiViewPortMaxWidth);
+    DECLARE_ID (uiViewPortMaxHeight);
+    DECLARE_ID (uiViewPortEnableFixedAspectRatio);
+    DECLARE_ID (uiViewPortFixedAspectRatio);
 	DECLARE_ID (uiPanelSnapActive);
 	DECLARE_ID (uiPanelCanvasRectangle);
 	DECLARE_ID (uiPanelClipboardTree);
@@ -809,7 +818,7 @@ namespace Ids
 	DECLARE_ID (luaPanelPaintBackground);
 	DECLARE_ID (luaPanelSaved);
 	DECLARE_ID (luaLayoutResized);
-	DECLARE_ID (luaPanelEditorResized);
+	DECLARE_ID (luaViewPortResized);
 	DECLARE_ID (luaPanelResized);
 	DECLARE_ID (luaPanelOSCReceived);
 	DECLARE_ID (luaPanelProgramChanged);

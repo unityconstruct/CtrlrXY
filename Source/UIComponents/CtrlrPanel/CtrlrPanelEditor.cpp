@@ -13,6 +13,7 @@
 #include "CtrlrComponents/CtrlrCombo.h"
 #include "CtrlrPanel/CtrlrPanelResource.h"
 #include "CtrlrPanel/CtrlrPanelCanvas.h"
+#include "CtrlrPanel/CtrlrPanelViewport.h"
 #include "JuceClasses/LMemoryBlock.h"
 #include "CtrlrMIDI/CtrlrMIDISettingsDialog.h"
 #include "CtrlrComponents/CtrlrComponent.h"
@@ -50,14 +51,8 @@ CtrlrPanelEditor::CtrlrPanelEditor(CtrlrPanel &_owner, CtrlrManager &_ctrlrManag
 
 	editorComponents[0] = ctrlrPanelViewport;
 
-	setProperty(Ids::uiPanelSnapSize, 8);
-	setProperty(Ids::uiPanelViewPortBackgroundColour, "transparentblack");  // ViewPort background color
-	setProperty(Ids::uiPanelBackgroundColour, "0xffffffff");
-	setProperty(Ids::uiPanelBackgroundColour1, "0xffffffff");
-	setProperty(Ids::uiPanelBackgroundColour2, "0xffffffff");
-	setProperty(Ids::uiPanelBackgroundGradientType, 0); // Default set to none [No background gradient]
-	setProperty(Ids::uiPanelImageResource, COMBO_ITEM_NONE);
-	setProperty(Ids::uiPanelEditMode, true);
+    setProperty(Ids::name, panelName);
+    setProperty(Ids::uiPanelEditMode, true);
 	setProperty(Ids::uiPanelLock, false);
 	setProperty(Ids::uiPanelDisabledOnEdit, false);
 	setProperty(Ids::uiPanelMenuBarVisible, true);
@@ -68,15 +63,34 @@ CtrlrPanelEditor::CtrlrPanelEditor(CtrlrPanel &_owner, CtrlrManager &_ctrlrManag
 	setProperty(Ids::uiPanelMidiChannelMenuHideOnExport, false);
 	setProperty(Ids::uiPanelViewPortSize, 800);
 	setProperty(Ids::uiPanelPropertiesSize, 300);
-	setProperty(Ids::uiPanelWidth, 400);
-	setProperty(Ids::uiPanelHeight, 400);
-	setProperty(Ids::name, panelName);
+    setProperty(Ids::uiViewPortResizable, true);
+    setProperty(Ids::uiViewPortShowScrollBars, true);
+	setProperty(Ids::uiViewPortWidth, 400);
+	setProperty(Ids::uiViewPortHeight, 400);
+    setProperty(Ids::uiViewPortEnableResizeLimits, false);
+    setProperty(Ids::uiViewPortMinWidth, 0);
+    setProperty(Ids::uiViewPortMinHeight, 0);
+    setProperty(Ids::uiViewPortMaxWidth, 0);
+    setProperty(Ids::uiViewPortMaxHeight, 0);
+    setProperty(Ids::uiViewPortEnableFixedAspectRatio, false);
+    setProperty(Ids::uiViewPortFixedAspectRatio, 1.5);
+    setProperty(Ids::uiPanelZoom, 1.0);
+    
+    setProperty(Ids::uiPanelViewPortBackgroundColour, "transparentblack");  // ViewPort background color
+    setProperty(Ids::uiPanelBackgroundColour, "0xffffffff");
+    setProperty(Ids::uiPanelBackgroundColour1, "0xffffffff");
+    setProperty(Ids::uiPanelBackgroundColour2, "0xffffffff");
+    setProperty(Ids::uiPanelBackgroundGradientType, 0); // Default set to SolidColor [No background gradient]
+    setProperty(Ids::uiPanelImageResource, COMBO_ITEM_NONE);
 	setProperty(Ids::uiPanelImageAlpha, 255);
 	setProperty(Ids::uiPanelImageLayout, 64);
 	setProperty(Ids::uiPanelSnapActive, true);
+    
+    setProperty(Ids::uiPanelSnapSize, 8);
 	setProperty(Ids::uiPanelPropertiesOnRight, false);
+    
 	setProperty(Ids::luaPanelPaintBackground, COMBO_ITEM_NONE);
-	setProperty(Ids::luaPanelEditorResized, COMBO_ITEM_NONE); // Added for callback on window resize
+	setProperty(Ids::luaViewPortResized, COMBO_ITEM_NONE);
 	setProperty(Ids::luaPanelResized, COMBO_ITEM_NONE);
 	setProperty(Ids::luaPanelFileDragDropHandler, COMBO_ITEM_NONE);
 	setProperty(Ids::luaPanelFileDragEnterHandler, COMBO_ITEM_NONE);
@@ -91,7 +105,6 @@ CtrlrPanelEditor::CtrlrPanelEditor(CtrlrPanel &_owner, CtrlrManager &_ctrlrManag
 	setProperty(Ids::uiPanelTooltipFont, Font(15.0f, Font::bold).toString());
 	setProperty(Ids::uiPanelLookAndFeel, "V3");
 	setProperty(Ids::uiPanelColourScheme, "Light");
-	setProperty(Ids::uiPanelZoom, 1.0);
 
 	ctrlrComponentSelection->addChangeListener(ctrlrPanelProperties);
 
@@ -118,9 +131,12 @@ void CtrlrPanelEditor::visibilityChanged()
 
 void CtrlrPanelEditor::resized()
 {
-	ctrlrPanelViewport->setBounds(0, 0, getWidth() - 308, getHeight());
+    ctrlrPanelViewport->setBounds(0, 0, getWidth() - 308, getHeight());
 	ctrlrPanelProperties->setBounds(getWidth() - 300, 32, 300, getHeight() - 32);
 	spacerComponent->setBounds(getWidth(), 32, 8, getHeight() - 32);
+    
+    setProperty(Ids::uiViewPortWidth, getWidth());
+    setProperty(Ids::uiViewPortHeight, getHeight());
     
 	layoutItems();
 
@@ -128,6 +144,14 @@ void CtrlrPanelEditor::resized()
 	{
 		saveLayout();
 	}
+    
+    if (resizedCbk && !resizedCbk.wasObjectDeleted())
+    {
+        if (resizedCbk->isValid())
+        {
+            owner.getCtrlrLuaManager().getMethodManager().call (resizedCbk, &owner);
+        }
+    }
 }
 
 CtrlrComponentSelection *CtrlrPanelEditor::getSelection()
@@ -158,10 +182,8 @@ void CtrlrPanelEditor::layoutItems()
 
 void CtrlrPanelEditor::saveLayout()
 {
-	setProperty(Ids::uiPanelWidth, getWidth()); // Set W property on save
-    setProperty(Ids::uiPanelHeight, getHeight()); // Set H property on save
-	setProperty(Ids::uiPanelViewPortSize, layoutManager.getItemCurrentAbsoluteSize(0));
-	setProperty(Ids::uiPanelPropertiesSize, layoutManager.getItemCurrentAbsoluteSize(2));
+    setProperty(Ids::uiPanelViewPortSize, layoutManager.getItemCurrentAbsoluteSize(0));
+    setProperty(Ids::uiPanelPropertiesSize, layoutManager.getItemCurrentAbsoluteSize(2));
 }
 
 CtrlrPanelCanvas *CtrlrPanelEditor::getCanvas()
@@ -194,9 +216,9 @@ void CtrlrPanelEditor::editModeChanged()
 	{
 		if (getSelection())
 			getSelection()->deselectAll();
-		spacerComponent->setVisible(false);
-		ctrlrPanelProperties->setVisible(false);
-		getCanvas()->getResizableBorder()->setVisible(false);
+            spacerComponent->setVisible(false);
+            ctrlrPanelProperties->setVisible(false);
+            getCanvas()->getResizableBorder()->setVisible(false);
 
 		if ((bool) getProperty(Ids::uiPanelDisableCombosOnEdit))
 			setAllCombosEnabled();
@@ -281,6 +303,13 @@ void CtrlrPanelEditor::valueTreePropertyChanged(ValueTree &treeWhosePropertyHasC
 		{
 			editModeChanged();
 		}
+        if (property == Ids::luaViewPortResized)
+        {
+            if (getProperty(property) == "")
+                return;
+
+            resizedCbk = owner.getCtrlrLuaManager().getMethodManager().getMethod(getProperty(property));
+        }
 		else if (property == Ids::uiPanelSnapSize)
 		{
 			repaint();
@@ -299,6 +328,34 @@ void CtrlrPanelEditor::valueTreePropertyChanged(ValueTree &treeWhosePropertyHasC
 				resized();
 			}
 		}
+        else if (property == Ids::uiPanelCanvasRectangle)
+        {
+            getCanvas()->setBounds(VAR2RECT(getProperty(property))); // update canvas size if values in the property field are changed
+            resized();
+            double canvasHeight = getCanvas()->getHeight();
+            double canvasWidth = getCanvas()->getWidth();
+            double canvasAspectRatio = double(canvasWidth) / double(canvasHeight);
+            setProperty(Ids::uiViewPortFixedAspectRatio, canvasAspectRatio); // update canvas aspect ratio if canvas is resized
+        }
+        else if (property == Ids::uiViewPortResizable
+        || property == Ids::uiViewPortShowScrollBars
+        || property == Ids::uiViewPortEnableFixedAspectRatio
+        || property == Ids::uiViewPortFixedAspectRatio
+        || property == Ids::uiViewPortEnableResizeLimits
+        || property == Ids::uiViewPortMinWidth
+        || property == Ids::uiViewPortMinHeight
+        || property == Ids::uiViewPortMaxWidth
+        || property == Ids::uiViewPortMaxHeight
+        )
+        {
+            resized();
+        }
+        else if (property == Ids::uiViewPortWidth
+               || property == Ids::uiViewPortHeight
+               )
+        {
+            resized();
+        }
 		else if (property == Ids::uiPanelDisableCombosOnEdit)
 		{
 			if ((bool) getProperty(property) && getMode())
@@ -335,16 +392,21 @@ void CtrlrPanelEditor::valueTreePropertyChanged(ValueTree &treeWhosePropertyHasC
 		}
 		else if (property == Ids::uiPanelBackgroundGradientType
 		         || property == Ids::uiPanelViewPortBackgroundColour
+                 || property == Ids::uiPanelBackgroundColour
 		         || property == Ids::uiPanelBackgroundColour1
 		         || property == Ids::uiPanelBackgroundColour2
-		         || property == Ids::uiPanelBackgroundColour
 				)
 		{
-			repaint();
+            resized();
 		}
+        else if (property == Ids::uiViewPortShowScrollBars)
+        {
+            ctrlrPanelViewport->repaint();
+        }
 		else if (property == Ids::uiPanelLookAndFeel)
 		{
 			setLookAndFeel(getLookAndFeelFromDescription(getProperty(Ids::uiPanelLookAndFeel)));
+            resized();
 		}
 	}
 }

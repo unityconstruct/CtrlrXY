@@ -174,7 +174,19 @@ class CtrlrEditor  : public AudioProcessorEditor,
 		bool hideMidiControllerMenu = false;
 		bool hideMidiThruMenu = false;
 		bool hideMidiChannelMenu = false;
-
+    
+        bool vpResizable;
+        double vpFixedAspectRatio;
+        bool vpEnableFixedAspectRatio;
+        bool vpEnableResizableLimits;
+        int vpMinWidth;
+        int vpMinHeight;
+        int vpMaxWidth;
+        int vpMaxHeight;
+        int panelCanvasHeight;
+        int panelCanvasWidth;
+        double vpStandaloneAspectRatio;
+        bool vpMenuBarVisible;
 };
 
 
