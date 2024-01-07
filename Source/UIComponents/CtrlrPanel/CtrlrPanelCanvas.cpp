@@ -127,7 +127,7 @@ void CtrlrPanelCanvas::resized()
 		setProperty (Ids::uiPanelCanvasRectangle, getBounds().toString());
 
 	layersResize();
-
+    
 	if (resizedCbk && !resizedCbk.wasObjectDeleted())
 	{
 		if (resizedCbk->isValid())
@@ -821,8 +821,8 @@ void CtrlrPanelCanvas::valueTreePropertyChanged (ValueTree &treeWhosePropertyHas
 
 		paintCbk = owner.getOwner().getCtrlrLuaManager().getMethodManager().getMethod(getProperty(property));
 	}
-
-	if (property == Ids::luaPanelResized)
+    
+    if (property == Ids::luaPanelResized)
 	{
 		if (getProperty(property) == "")
 			return;

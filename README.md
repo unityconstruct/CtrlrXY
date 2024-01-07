@@ -8,7 +8,7 @@ Let's keep the Ctrlr github alive and keep up with what we were all doing there.
 
 ToDo
 ----
-* Scalable UI upgrade (requires container callback on resize)
+
 * VST Host must get the panel name while exported as VST3 plugin (currently always named as Ctrlr | Instigator)
 * Update to the latest version of JUCE 7
 * Implementation of the entire JUCE ValueTree Class
@@ -20,10 +20,15 @@ ToDo
 * Export instance process must be improved (dialog alerts, overwriting existing file...)
 * VST Parameter Index must start at 0 not 1 in Hosts (now VST Index 0 in Ctrlr is Param 1 in Cubase)
 * Re-generating UID must update resource path automatically
+* Description/ID in property pane must switch properly without selecting other tabs for refresh.
 
 
 Changelog
 ---------
+
+#### Version 5.6.28
+*  Added support for scalable UI for responsive design via callback on APP/Plugin viewport resize and viewport resize parameters.
+*  Fixed menuBar not showing up issue for non-restricted exported instance.
 
 #### Version 5.6.27
 *  uiPanelViewPortBackgroundColour property added in the global properties to change the background color of the ViewPort, parent of the Panel canvas.

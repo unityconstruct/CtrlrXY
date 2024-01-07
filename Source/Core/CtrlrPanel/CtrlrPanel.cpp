@@ -2,6 +2,7 @@
 #include "CtrlrLuaManager.h"
 #include "CtrlrPanel.h"
 #include "CtrlrPanel/CtrlrPanelEditor.h"
+#include "CtrlrPanel/CtrlrPanelProperties.h"
 #include "CtrlrProcessor.h"
 #include "CtrlrMacros.h"
 #include "CtrlrUtilities.h"
@@ -80,7 +81,9 @@ CtrlrPanel::CtrlrPanel(CtrlrManager &_owner, const String &panelName, const int 
 	setProperty (Ids::panelAuthorDesc, "");
 	setProperty (Ids::panelVersionMajor, 1);
 	setProperty (Ids::panelVersionMinor, 0);
-	setProperty (Ids::panelVersionName, "Hell-O-Kitty");
+
+	setProperty (Ids::panelVersionMinor, 0);
+	setProperty (Ids::panelVersionName, "");
 	setProperty (Ids::panelVendor, "");
 	setProperty (Ids::panelDevice, "");
 	setProperty (Ids::panelMidiSnapshotAfterLoad, false);
@@ -162,7 +165,8 @@ CtrlrPanel::CtrlrPanel(CtrlrManager &_owner, const String &panelName, const int 
 	setProperty (Ids::ctrlrMenuItemFont, 					owner.getFontManager().getStringFromFont (Font (18.0f)));
 	setProperty (Ids::ctrlrMenuItemSeparatorColour,			Colour (0x44000000).toString());
 	setProperty (Ids::ctrlrMenuItemHeaderColour,			Colours::black.toString());
-
+    
+    setProperty (Ids::ctrlrMenuBarHeight, 24);
 	setProperty (Ids::ctrlrMenuBarBackgroundColour1, 		Colour(0xfff7f7f7).toString());
 	setProperty (Ids::ctrlrMenuBarBackgroundColour2, 		Colour(0xffcccccc).toString());
 	setProperty (Ids::ctrlrMenuBarTextColour, 				Colours::black.toString());
@@ -601,6 +605,11 @@ void CtrlrPanel::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasChange
 	{
 		globalMidiDelay = getProperty(property);
 	}
+    else if (property == Ids::panelPropertyDisplayIDs)
+    {
+        // ctrlrPanelEditor->getPanelProperties()->repaint(); // Crashes
+        // ctrlrPanelEditor->getPanelProperties()->currentTabChanged(); // Crashes, to force refresh GUI from tab switching
+    }
 }
 
 void CtrlrPanel::removeModulator (CtrlrModulator *modulatorToDelete)

@@ -277,9 +277,9 @@
     end
   </luaMethod>
   
-   <luaMethod name="luaPanelEditorResized">
+   <luaMethod name="luaViewPortResized">
     --
-    -- Called when the panelEditor is resized
+    -- Called when the ViewPort is resized
     --
 
     __method_name = function(--[[ CtrlrPanelEditor --]] panel)
