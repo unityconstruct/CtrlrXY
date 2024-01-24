@@ -74,6 +74,8 @@ namespace Ids
 	DECLARE_ID (uiPanelBackgroundColour2);
 	DECLARE_ID (uiPanelBackgroundGradientType);
 	DECLARE_ID (uiPanelSnapSize);
+	DECLARE_ID (uiPanelWidth);
+	DECLARE_ID (uiPanelHeight);
 	DECLARE_ID (uiPanelEditorWidth);
 	DECLARE_ID (uiPanelEditorHeight);
 	DECLARE_ID (uiPanelViewPortSize);

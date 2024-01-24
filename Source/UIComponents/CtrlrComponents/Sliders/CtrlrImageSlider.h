@@ -40,9 +40,6 @@ public:
     void resized();
     void sliderValueChanged (Slider* sliderThatWasMoved);
     void mouseUp (const MouseEvent& e);
-    void mouseEnter (const MouseEvent& e);
-    void mouseExit (const MouseEvent& e);
-
 
     //==============================================================================
     juce_UseDebuggingNewOperator

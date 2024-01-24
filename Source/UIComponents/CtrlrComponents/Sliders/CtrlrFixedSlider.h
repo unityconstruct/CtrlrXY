@@ -42,9 +42,6 @@ public:
     void paint (Graphics& g);
     void resized();
     void mouseUp (const MouseEvent& e);
-    void mouseEnter (const MouseEvent& e);
-    void mouseExit (const MouseEvent& e);
-
 
     //==============================================================================
     juce_UseDebuggingNewOperator
