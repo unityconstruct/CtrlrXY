@@ -23,71 +23,71 @@ CtrlrManager::CtrlrManager(CtrlrProcessor *_owner, CtrlrLog &_ctrlrLog)
 		nullPanel(nullptr),
 		ctrlrFontManager(nullptr)
 {
-	ctrlrManagerVst.reset(new CtrlrManagerVst(*this));
-
-	commandManager.addListener (this);
-	audioFormatManager.registerBasicFormats ();
-
-	ctrlrDocumentPanel.reset(new CtrlrDocumentPanel(*this));
-	nullPanel = new CtrlrPanel(*this);
-	nullModulator = new CtrlrModulator (*nullPanel);
+    ctrlrManagerVst.reset(new CtrlrManagerVst(*this));
+    
+    commandManager.addListener (this);
+    audioFormatManager.registerBasicFormats ();
+    
+    ctrlrDocumentPanel.reset(new CtrlrDocumentPanel(*this));
+    nullPanel = new CtrlrPanel(*this);
+    nullModulator = new CtrlrModulator (*nullPanel);
     ctrlrFontManager.reset(new CtrlrFontManager (*this));
 }
 
 CtrlrManager::~CtrlrManager()
 {
-	commandManager.removeListener (this);
-	ctrlrDocumentPanel->closeAllDocuments(false);
-	ctrlrPanels.clear();
-	managerTree.removeAllChildren(0);
-	deleteAndZero (nullModulator);
-	deleteAndZero (nullPanel);
+    commandManager.removeListener (this);
+    ctrlrDocumentPanel->closeAllDocuments(false);
+    ctrlrPanels.clear();
+    managerTree.removeAllChildren(0);
+    deleteAndZero (nullModulator);
+    deleteAndZero (nullPanel);
 }
 
 void CtrlrManager::setManagerReady()
 {
-	managerTree.addListener (this);
-	managerTree.addChild (ctrlrMidiDeviceManager.getManagerTree(), -1, 0);
-	managerTree.addChild (ctrlrWindowManager.getManagerTree(), -1, 0);
-
-	if (ctrlrEditor)
-	{
-		ctrlrEditor->activeCtrlrChanged();
-	}
+    managerTree.addListener (this);
+    managerTree.addChild (ctrlrMidiDeviceManager.getManagerTree(), -1, 0);
+    managerTree.addChild (ctrlrWindowManager.getManagerTree(), -1, 0);
+    
+    if (ctrlrEditor)
+    {
+        ctrlrEditor->activeCtrlrChanged();
+    }
 }
 
 void CtrlrManager::setDefaults()
 {
-	if (ctrlrProperties != nullptr)
-		delete (ctrlrProperties.release());
-
-	ctrlrProperties.reset(new CtrlrProperties(*this));
-
-	setProperty (Ids::ctrlrLogToFile, false);
-	setProperty (Ids::ctrlrLuaDebug, false);
-	setProperty (Ids::ctrlrVersionSeparator, "_");
-	setProperty (Ids::ctrlrVersionCompressed, false);
-	setProperty (Ids::ctrlrMidiMonInputBufferSize, 8192);
-	setProperty (Ids::ctrlrMidiMonOutputBufferSize, 8192);
-	setProperty (Ids::ctrlrLuaDisabled, false);
-	setProperty (Ids::ctrlrOverwriteResources, true);
-	setProperty (Ids::ctrlrAutoSave, true);
-	setProperty (Ids::ctrlrAutoSaveInterval, 300);
-	setProperty (Ids::ctrlrLogOptions, 32);
-	setProperty (Ids::ctrlrUseEditorWrapper, true);
-	setProperty (Ids::ctrlrPropertiesAreURLs, true);
-	setProperty (Ids::ctrlrNativeAlerts, false);
-	setProperty (Ids::ctrlrNativeFileDialogs, true);
-	setProperty (Ids::ctrlrPrivateKey, "");
-	setProperty (Ids::ctrlrFontSizeBaseValue, 14.0f);
-    setProperty (Ids::ctrlrScrollbarThickness, 18.0f);
+    if (ctrlrProperties != nullptr)
+        delete (ctrlrProperties.release());
+    
+    ctrlrProperties.reset(new CtrlrProperties(*this));
+    
+    setProperty (Ids::ctrlrLogToFile, false);
+    setProperty (Ids::ctrlrLuaDebug, false);
+    setProperty (Ids::ctrlrVersionSeparator, "_");
+    setProperty (Ids::ctrlrVersionCompressed, false);
+    setProperty (Ids::ctrlrMidiMonInputBufferSize, 8192);
+    setProperty (Ids::ctrlrMidiMonOutputBufferSize, 8192);
+    setProperty (Ids::ctrlrLuaDisabled, false);
+    setProperty (Ids::ctrlrOverwriteResources, true);
+    setProperty (Ids::ctrlrAutoSave, true);
+    setProperty (Ids::ctrlrAutoSaveInterval, 300);
+    setProperty (Ids::ctrlrLogOptions, 32);
+    setProperty (Ids::ctrlrUseEditorWrapper, true);
+    setProperty (Ids::ctrlrPropertiesAreURLs, true);
+    setProperty (Ids::ctrlrNativeAlerts, false);
+    setProperty (Ids::ctrlrNativeFileDialogs, true);
+    setProperty (Ids::ctrlrPrivateKey, "");
+    setProperty (Ids::ctrlrFontSizeBaseValue, 14.0f);
+    setProperty (Ids::ctrlrScrollbarThickness, 16.0f); // Was 18.0f
+    setProperty (Ids::ctrlrLookAndFeel, "V4");
     setProperty (Ids::ctrlrColourScheme, "Light");
-    setProperty (Ids::ctrlrLookAndFeel, "Light");
     setProperty (Ids::ctrlrMenuBarHeight, 24);
-    setProperty (Ids::ctrlrTabBarDepth, 24.0);
-	setProperty (Ids::uiLuaConsoleInputRemoveAfterRun, true);
-	setProperty (Ids::luaCtrlrSaveState, COMBO_ITEM_NONE);
-	setProperty (Ids::luaCtrlrRestoreState, COMBO_ITEM_NONE);
+    setProperty (Ids::ctrlrTabBarDepth, 24);
+    setProperty (Ids::uiLuaConsoleInputRemoveAfterRun, true);
+    setProperty (Ids::luaCtrlrSaveState, COMBO_ITEM_NONE);
+    setProperty (Ids::luaCtrlrRestoreState, COMBO_ITEM_NONE);
 }
 
 CtrlrManagerVst &CtrlrManager::getVstManager()

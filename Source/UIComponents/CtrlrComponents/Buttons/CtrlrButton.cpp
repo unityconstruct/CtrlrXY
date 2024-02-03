@@ -2,10 +2,10 @@
 #include "CtrlrButton.h"
 #include "CtrlrValueMap.h"
 #include "CtrlrIDs.h"
+#include "CtrlrPanel/CtrlrPanelEditor.h"
 #include "CtrlrModulator/CtrlrModulator.h"
 #include "CtrlrPanel/CtrlrPanel.h"
 
-//==============================================================================
 CtrlrButton::CtrlrButton (CtrlrModulator &owner)
     : CtrlrComponent(owner),
       ctrlrButton (0)
@@ -13,53 +13,65 @@ CtrlrButton::CtrlrButton (CtrlrModulator &owner)
 	valueMap = new CtrlrValueMap();
     addAndMakeVisible (ctrlrButton = new TextButton ("ctrlrButton"));
     ctrlrButton->addListener (this);
-
-    //[UserPreSize]
+    
+    setProperty (Ids::uiButtonLookAndFeel, "Default");
+    setProperty (Ids::uiButtonLookAndFeelIsCustom, false);
+    
     ctrlrButton->addMouseListener(this, true);
-	ctrlrButton->setBufferedToImage (true);
+    ctrlrButton->setBufferedToImage (true);
+    setProperty (Ids::uiButtonIsToggle, true);
 	setProperty (Ids::uiButtonTrueValue, 1);
 	setProperty (Ids::uiButtonFalseValue, 0);
-	setProperty (Ids::uiButtonIsToggle, false);;
-	setProperty (Ids::uiButtonColourOn, "0xff0000ff");
-	setProperty (Ids::uiButtonColourOff, "0xff4364ff");
-	setProperty (Ids::uiButtonTextColourOn, "0xff000000");
-	setProperty (Ids::uiButtonTextColourOff, "0xff454545");
-	setProperty (Ids::uiButtonContent, "False\nTrue");
-	setProperty (Ids::uiButtonConnectedLeft, false);
-	setProperty (Ids::uiButtonConnectedRight, false);
-	setProperty (Ids::uiButtonConnectedTop, false);
-	setProperty (Ids::uiButtonConnectedBottom, false);
+    setProperty (Ids::uiButtonContent, "False\nTrue");
+    
 	setProperty (Ids::uiButtonRepeat, false);
 	setProperty (Ids::uiButtonRepeatRate, 100);
 	setProperty (Ids::uiButtonTriggerOnMouseDown, false);
 	setProperty (Ids::componentInternalFunction, COMBO_ITEM_NONE);
-    //[/UserPreSize]
+    
+    bool LegacyMode = owner.getOwnerPanel().getEditor()->getProperty(Ids::uiPanelLegacyMode); // Legacy mode flag for version before 5.6.29
+    if (LegacyMode)
+    {
+        setLookAndFeel(new LookAndFeel_V3());
+        setProperty(Ids::uiButtonLookAndFeel, "V3");
+    }
+    
+    if ( owner.getOwnerPanel().getEditor()->getProperty(Ids::uiPanelLookAndFeel) == "V3"
+        || owner.getOwnerPanel().getEditor()->getProperty(Ids::uiPanelLookAndFeel) == "V2"
+        || owner.getOwnerPanel().getEditor()->getProperty(Ids::uiPanelLookAndFeel) == "V1" )
+    {
+        setSize (88, 32);
+        setProperty (Ids::uiButtonColourOn, "0xff0000ff");
+        setProperty (Ids::uiButtonColourOff, "0xff4364ff");
+        setProperty (Ids::uiButtonTextColourOn, "0xff000000");
+        setProperty (Ids::uiButtonTextColourOff, "0xff454545");
+    }
+    else
+    {
+        setSize (88, 64);
+        setProperty (Ids::uiButtonColourOn,  (String)findColour(TextButton::buttonOnColourId).toString());
+        setProperty (Ids::uiButtonColourOff, (String)findColour(TextButton::buttonColourId).toString());
+        setProperty (Ids::uiButtonTextColourOn, (String)findColour(TextButton::textColourOnId).toString());
+        setProperty (Ids::uiButtonTextColourOff, (String)findColour(TextButton::textColourOffId).toString());
+    }
+    
+    setProperty (Ids::uiButtonConnectedLeft, false); // Hints about which edges of the button might be connected to adjoining buttons.
+    setProperty (Ids::uiButtonConnectedRight, false);
+    setProperty (Ids::uiButtonConnectedTop, false);
+    setProperty (Ids::uiButtonConnectedBottom, false);
+    
+    setProperty (Ids::uiButtonLookAndFeelIsCustom, false); // Resets the component colourScheme if a new default colourScheme is selected from the menu
 
-    setSize (88, 32);
-
-    //[Constructor] You can add your own custom stuff here..
-    //[/Constructor]
 }
 
 CtrlrButton::~CtrlrButton()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
     deleteAndZero (ctrlrButton);
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
 //==============================================================================
 void CtrlrButton::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void CtrlrButton::resized()
@@ -197,7 +209,21 @@ void CtrlrButton::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasChang
 	{
 		buttonContentChanged();
 	}
-
+    else if (property == Ids::uiButtonLookAndFeel)
+    {
+        String LookAndFeelType = getProperty(property);
+        setLookAndFeel(CtrlrButton::getLookAndFeelFromComponentProperty(LookAndFeelType)); // Updates the current component LookAndFeel
+        
+        if (LookAndFeelType == "Default")
+        {
+            setProperty(Ids::uiButtonLookAndFeelIsCustom, false); // Resets the Customized Flag to False to allow Global L&F to apply
+        }
+        
+        if (!getProperty(Ids::uiButtonLookAndFeelIsCustom))
+        {
+            CtrlrButton::resetLookAndFeelOverrides(); // Retrieves LookAndFeel colours from selected ColourScheme
+        }
+    }
 	else if (property == Ids::uiButtonColourOff
 		|| property == Ids::uiButtonColourOn
 		|| property == Ids::uiButtonTextColourOff
@@ -207,6 +233,7 @@ void CtrlrButton::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasChang
 		ctrlrButton->setColour (TextButton::buttonOnColourId, VAR2COLOUR(getProperty(Ids::uiButtonColourOn)));
 		ctrlrButton->setColour (TextButton::textColourOffId, VAR2COLOUR(getProperty(Ids::uiButtonTextColourOff)));
 		ctrlrButton->setColour (TextButton::textColourOnId, VAR2COLOUR(getProperty(Ids::uiButtonTextColourOn)));
+        setProperty(Ids::uiButtonLookAndFeelIsCustom, true); // Locks the component custom colourScheme
 	}
 
 	else if (property == Ids::uiButtonIsToggle)
@@ -267,6 +294,58 @@ void CtrlrButton::setToggleState(const bool toggleState, const bool sendChangeMe
 {
 	ctrlrButton->setToggleState (toggleState, sendChangeMessage ? sendNotification : dontSendNotification);
 }
+
+
+LookAndFeel *CtrlrButton::getLookAndFeelFromComponentProperty(const String &lookAndFeelComponentProperty)
+{
+    if (lookAndFeelComponentProperty == "Default")
+    // Leave empty to get L&F from Global Property
+    if (lookAndFeelComponentProperty == "V4 Light")
+        return new LookAndFeel_V4(LookAndFeel_V4::getLightColourScheme());
+    if (lookAndFeelComponentProperty == "V4 Grey")
+        return new LookAndFeel_V4(LookAndFeel_V4::getGreyColourScheme());
+    if (lookAndFeelComponentProperty == "V4 Dark")
+        return new LookAndFeel_V4(LookAndFeel_V4::getDarkColourScheme());
+    if (lookAndFeelComponentProperty == "V4 Midnight")
+        return new LookAndFeel_V4(LookAndFeel_V4::getMidnightColourScheme());
+    if (lookAndFeelComponentProperty == "V3")
+        return new LookAndFeel_V3();
+    if (lookAndFeelComponentProperty == "V2")
+        return new LookAndFeel_V2();
+    if (lookAndFeelComponentProperty == "V1")
+        return new LookAndFeel_V1();
+    
+    return (nullptr);
+}
+
+void CtrlrButton::resetLookAndFeelOverrides()
+{
+    if (restoreStateInProgress == false) // To prevent the props lines position stacking up to top and keep their original position
+    {
+        setProperty (Ids::componentLabelColour, (String)findColour(Label::textColourId).toString());
+        
+        setProperty (Ids::uiButtonColourOn,  (String)findColour(TextButton::buttonOnColourId).toString());
+        setProperty (Ids::uiButtonColourOff, (String)findColour(TextButton::buttonColourId).toString());
+        setProperty (Ids::uiButtonTextColourOn, (String)findColour(TextButton::textColourOnId).toString());
+        setProperty (Ids::uiButtonTextColourOff, (String)findColour(TextButton::textColourOffId).toString());        
+        
+        setProperty (Ids::uiButtonLookAndFeelIsCustom, false); // Resets the component colourScheme if a new default colourScheme is selected from the menu
+        
+        updatePropertiesPanel(); // Refreshes property pane
+    }
+}
+
+void CtrlrButton::updatePropertiesPanel()
+{
+    CtrlrPanelProperties *props = owner.getCtrlrManagerOwner().getActivePanel()->getEditor(false)->getPropertiesPanel();
+    if (props)
+    {
+        props->refreshAll(); // Needs extra code to prevent scrolling back to top on refresh
+    }
+}
+
+
+
 //[/MiscUserCode]
 
 

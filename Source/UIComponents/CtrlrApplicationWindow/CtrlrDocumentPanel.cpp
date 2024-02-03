@@ -16,6 +16,8 @@ CtrlrDocumentPanel::CtrlrDocumentPanel (CtrlrManager &_owner)
 	*/
 	// useFullscreenWhenOneDocument (true);
     setSize (600, 400);
+    //setBackgroundColour(Component::findColour(DocumentWindow::backgroundColourId)); // Cannot catch the active window LnF
+    setBackgroundColour(Colours::lightgrey); // Sets background colour behind main window
 }
 
 CtrlrDocumentPanel::~CtrlrDocumentPanel()
@@ -36,13 +38,24 @@ void CtrlrDocumentPanel::activeDocumentChanged()
 {
 	CtrlrEditor *ed = dynamic_cast <CtrlrEditor*> (getParentComponent());
 	if (ed)
+    {
 		ed->activeCtrlrChanged();
+        setBackgroundColour(Component::findColour(DocumentWindow::backgroundColourId));
+    }
     if (getCurrentTabbedComponent()) {
         getCurrentTabbedComponent()->setTabBarDepth(owner.getProperty(Ids::ctrlrTabBarDepth));
+        getCurrentTabbedComponent()->getTabbedButtonBar().setColour(TabbedButtonBar::tabTextColourId, findColour(TabbedButtonBar::tabTextColourId)); // Not working
+        getCurrentTabbedComponent()->getTabbedButtonBar().setColour(TabbedButtonBar::frontTextColourId, findColour(TabbedButtonBar::frontTextColourId)); // Not working
     }
+    setBackgroundColour(Colours::lightgrey); // Sets background colour behind main window by default on grey to please everyone :)
 }
 
 void CtrlrDocumentPanel::setEditor (CtrlrEditor *_editorToSet)
 {
 	ctrlrEditor = _editorToSet;
+}
+
+void CtrlrDocumentPanel::lookAndFeelChanged()
+{
+    setBackgroundColour(Component::findColour(DocumentWindow::backgroundColourId));
 }

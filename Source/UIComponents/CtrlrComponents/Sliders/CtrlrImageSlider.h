@@ -33,7 +33,10 @@ public:
 	void reloadResources(Array <CtrlrPanelResource*> resourcesThatChanged);
 	void setResource();
 	static void wrapForLua(lua_State *L);
-	void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr) {}
+    void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr) {};
+    static LookAndFeel* getLookAndFeelFromComponentProperty(const String &lookAndFeelComponentProperty);
+    void resetLookAndFeelOverrides();
+    void updatePropertiesPanel();
     //[/UserMethods]
 
     void paint (Graphics& g);

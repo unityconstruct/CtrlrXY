@@ -46,7 +46,7 @@ CtrlrLabel::CtrlrLabel (CtrlrModulator &owner)
     ctrlrLabel->setFont (Font (15.0000f, Font::plain));
     ctrlrLabel->setJustificationType (Justification::centredLeft);
     ctrlrLabel->setEditable (false, false, false);
-    ctrlrLabel->setColour (TextEditor::textColourId, Colours::black);
+    ctrlrLabel->setColour (TextEditor::textColourId, findColour(Label::textColourId)); // Colours::black
     ctrlrLabel->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
 
@@ -54,18 +54,18 @@ CtrlrLabel::CtrlrLabel (CtrlrModulator &owner)
 	owner.setProperty (Ids::modulatorIsStatic, true);
 	owner.setProperty (Ids::modulatorVstExported, false);
 
-	setProperty (Ids::uiLabelBgColour, "0x00000000");
-	setProperty (Ids::uiLabelTextColour, "0xff000000");
+	setProperty (Ids::uiLabelBgColour, (String)findColour(Label::backgroundColourId).toString()); // 0x00000000
+	setProperty (Ids::uiLabelTextColour,(String)findColour(Label::textColourId).toString()); // 0xff000000
 	setProperty (Ids::uiLabelOutline, 0);
-	setProperty (Ids::uiLabelOutlineColour, "0x00000000");
+	setProperty (Ids::uiLabelOutlineColour, (String)findColour(Label::outlineColourId).toString()); // 0x00000000
 	setProperty (Ids::uiLabelJustification, "centred");
 	setProperty (Ids::uiLabelFitFont, false);
 	setProperty (Ids::uiLabelFont, FONT2STR (Font(14)));
 	setProperty (Ids::uiLabelText, "Label text");
 	setProperty (Ids::uiLabelDisplaysAllValues, false);
 	setProperty (Ids::uiLabelDisplayFormat, "%n(%N) = %v(%h)");
-	setProperty (Ids::uiLabelInputHighlightTextColour, "0xffffffff");
-	setProperty (Ids::uiLabelInputHighlightColour, "0xff0000ff");
+	setProperty (Ids::uiLabelInputHighlightTextColour, (String)findColour(Label::textWhenEditingColourId).toString()); // 0xffffffff
+	setProperty (Ids::uiLabelInputHighlightColour, (String)findColour(Label::backgroundWhenEditingColourId).toString()); // 0xff0000ff
 	setProperty (Ids::uiLabelEditOnSingleClick, false);
 	setProperty (Ids::uiLabelEditOnDoubleClick, false);
 	setProperty (Ids::uiLabelEditFocusDiscardsChanges, true);

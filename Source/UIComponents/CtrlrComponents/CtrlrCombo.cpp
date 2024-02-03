@@ -11,7 +11,8 @@
 
 //==============================================================================
 CtrlrCombo::CtrlrCombo (CtrlrModulator &owner)
-    : CtrlrComponent(owner), lf(*this),
+    : CtrlrComponent(owner),
+      lf(*this),
       ctrlrCombo (0)
 {
 	valueMap = new CtrlrValueMap();
@@ -22,37 +23,76 @@ CtrlrCombo::CtrlrCombo (CtrlrModulator &owner)
     ctrlrCombo->setTextWhenNoChoicesAvailable (L"(no choices)");
     ctrlrCombo->addListener (this);
 
-
-    //[UserPreSize]
 	ctrlrCombo->setLookAndFeel (&lf);
 	componentTree.addListener (this);
 
-	setProperty (Ids::uiComboArrowColour, "0xff0000ff");
-	setProperty (Ids::uiComboOutlineColour, "0xff0000ff");
-	setProperty (Ids::uiComboTextColour, "0xff000000");
-	setProperty (Ids::uiComboTextJustification, "centred");
-	setProperty (Ids::uiComboFont, FONT2STR (Font(14)));
-	setProperty (Ids::uiComboMenuFont, FONT2STR (Font(16)));
-	setProperty (Ids::uiComboButtonColour, "0xff0000ff");
-	setProperty (Ids::uiComboBgColour, "0xffffffff");
-	setProperty (Ids::uiComboMenuBackgroundColour, "0xfff0f0f0");
-	setProperty (Ids::uiComboMenuFontColour, "0xff000000");
-	setProperty (Ids::uiComboMenuHighlightColour, Colours::lightblue.toString());
-	setProperty (Ids::uiComboMenuFontHighlightedColour, "0xff232323");
-	setProperty (Ids::uiComboContent, "");
-	setProperty (Ids::uiComboMenuBackgroundRibbed, true);
-	setProperty (Ids::uiComboButtonGradient, false);
-	setProperty (Ids::uiComboButtonGradientColour1, Colours::blue.toString());
-	setProperty (Ids::uiComboButtonGradientColour2, Colours::darkblue.toString());
-	setProperty (Ids::uiComboButtonWidthOverride, false);
-	setProperty (Ids::uiComboButtonWidth, 16);
-	setProperty (Ids::uiComboDynamicContent, 0);
-	setProperty (Ids::uiComboSelectedId, -1);
-	setProperty (Ids::uiComboSelectedIndex, -1);
-    //[/UserPreSize]
+    setProperty (Ids::uiComboButtonWidthOverride, false);
+    setProperty (Ids::uiComboButtonWidth, 16);
+    setProperty (Ids::uiComboDynamicContent, 0);
+    setProperty (Ids::uiComboSelectedId, -1);
+    setProperty (Ids::uiComboSelectedIndex, -1);
+    
+    setProperty (Ids::uiComboContent, "");
+    
+    setProperty (Ids::uiButtonLookAndFeel, "Default");
+    setProperty (Ids::uiButtonLookAndFeelIsCustom, false);
+    
+    if ( owner.getOwnerPanel().getEditor()->getProperty(Ids::uiPanelLookAndFeel) == "V3"
+        || owner.getOwnerPanel().getEditor()->getProperty(Ids::uiPanelLookAndFeel) == "V2"
+        || owner.getOwnerPanel().getEditor()->getProperty(Ids::uiPanelLookAndFeel) == "V1" )
+    {
+        setProperty (Ids::uiComboArrowColour, "0xff0000ff"); // "0xff0000ff"
+        setProperty (Ids::uiComboOutlineColour, "0xff0000ff"); // "0xff0000ff"
+        
+        setProperty (Ids::uiComboTextJustification, "centred");
+        setProperty (Ids::uiComboFont, FONT2STR (Font(14)));
+        setProperty (Ids::uiComboTextColour, "0xff000000"); // "0xff000000"
+        
+        setProperty (Ids::uiComboMenuFont, FONT2STR (Font(16)));
+        setProperty (Ids::uiComboMenuFontColour, "0xff000000"); // "0xff000000"
+        
+        setProperty (Ids::uiComboButtonColour, "0xff0000ff"); // "0xff0000ff"
+        setProperty (Ids::uiComboBgColour, "0xffffffff"); // "0xffffffff"
+        
+        setProperty (Ids::uiComboMenuBackgroundColour, "0xfff0f0f0"); // "0xfff0f0f0"
+        
+        setProperty (Ids::uiComboMenuHighlightColour, Colours::lightblue.toString()); // Colours::lightblue.toString()
+        setProperty (Ids::uiComboMenuFontHighlightedColour, "0xff232323"); //
+        
+        setProperty (Ids::uiComboMenuBackgroundRibbed, true);
+        
+        setSize (88, 32);
+    }
+    else
+    {
+        setProperty (Ids::uiComboArrowColour, (String)findColour(ComboBox::arrowColourId).toString()); // "0xff0000ff"
+        setProperty (Ids::uiComboOutlineColour, (String)findColour(ComboBox::outlineColourId).darker(0.5f).toString()); // "0xff0000ff"
+        
+        setProperty (Ids::uiComboTextJustification, "centred");
+        setProperty (Ids::uiComboFont, FONT2STR (Font(14)));
+        setProperty (Ids::uiComboTextColour, (String)findColour(ComboBox::textColourId).toString()); // "0xff000000"
+        
+        setProperty (Ids::uiComboMenuFont, FONT2STR (Font(16)));
+        setProperty (Ids::uiComboMenuFontColour, (String)findColour(ComboBox::textColourId).toString()); // "0xff000000"
+        
+        setProperty (Ids::uiComboButtonColour, (String)findColour(ComboBox::buttonColourId).toString()); // "0xff0000ff"
+        setProperty (Ids::uiComboBgColour, (String)findColour(ComboBox::backgroundColourId).toString()); // "0xffffffff"
+        
+        setProperty (Ids::uiComboMenuBackgroundColour, (String)findColour(ComboBox::backgroundColourId).toString()); // "0xfff0f0f0"
+        
+        setProperty (Ids::uiComboMenuHighlightColour, (String)findColour(TextEditor::highlightColourId).toString()); // Colours::lightblue.toString()
+        setProperty (Ids::uiComboMenuFontHighlightedColour, (String)findColour(TextEditor::highlightedTextColourId).toString()); // "0xff232323"
+        
+        setProperty (Ids::uiComboMenuBackgroundRibbed, false);
+        
+        setSize (120, 40);
+    }
 
-    setSize (88, 32);
+    setProperty (Ids::uiComboButtonGradient, true);
+    setProperty (Ids::uiComboButtonGradientColour1, (String)findColour(TextButton::buttonColourId).toString()); // Colours::blue.toString()
+    setProperty (Ids::uiComboButtonGradientColour2, (String)findColour(TextButton::buttonColourId).darker(0.2f).toString()); // Colours::darkblue.toString()
 
+    setProperty (Ids::uiButtonLookAndFeelIsCustom, false);
 
     //[Constructor] You can add your own custom stuff here..
     //[/Constructor]
@@ -160,25 +200,45 @@ void CtrlrCombo::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasChange
 	{
 		comboContentChanged();
 	}
+    else if (property == Ids::uiButtonLookAndFeel)
+    {
+        String LookAndFeelType = getProperty(property);
+        setLookAndFeel(getLookAndFeelFromComponentProperty(LookAndFeelType)); // Updates the current component LookAndFeel
+        
+        if (LookAndFeelType == "Default")
+        {
+            setProperty(Ids::uiButtonLookAndFeelIsCustom, false); // Resets the Customized Flag to False to allow Global L&F to apply
+        }
+        
+        if (!getProperty(Ids::uiButtonLookAndFeelIsCustom))
+        {
+            resetLookAndFeelOverrides(); // Retrieves LookAndFeel colours from selected ColourScheme
+        }
+    }
 	else if (property == Ids::uiComboBgColour)
 	{
 		ctrlrCombo->setColour (ComboBox::backgroundColourId, VAR2COLOUR(getProperty(Ids::uiComboBgColour)));
+        setProperty(Ids::uiButtonLookAndFeelIsCustom, true); // Locks the component custom colourScheme
 	}
 	else if (property == Ids::uiComboButtonColour)
 	{
 		ctrlrCombo->setColour (ComboBox::buttonColourId, VAR2COLOUR(getProperty(Ids::uiComboButtonColour)));
+        setProperty(Ids::uiButtonLookAndFeelIsCustom, true); // Locks the component custom colourScheme
 	}
 	else if (property == Ids::uiComboTextColour)
 	{
 		ctrlrCombo->setColour (ComboBox::textColourId, VAR2COLOUR(getProperty(Ids::uiComboTextColour)));
+        setProperty(Ids::uiButtonLookAndFeelIsCustom, true); // Locks the component custom colourScheme
 	}
 	else if (property == Ids::uiComboOutlineColour)
 	{
 		ctrlrCombo->setColour (ComboBox::outlineColourId, VAR2COLOUR(getProperty(Ids::uiComboOutlineColour)));
+        setProperty(Ids::uiButtonLookAndFeelIsCustom, true); // Locks the component custom colourScheme
 	}
 	else if (property == Ids::uiComboArrowColour)
 	{
 		ctrlrCombo->setColour (ComboBox::arrowColourId, VAR2COLOUR(getProperty(Ids::uiComboArrowColour)));
+        setProperty(Ids::uiButtonLookAndFeelIsCustom, true); // Locks the component custom colourScheme
 	}
 	else if (property == Ids::uiComboTextJustification)
 	{
@@ -195,6 +255,7 @@ void CtrlrCombo::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasChange
 	{
 		ctrlrCombo->setLookAndFeel(0);
 		ctrlrCombo->setLookAndFeel(&lf);
+        setProperty(Ids::uiButtonLookAndFeelIsCustom, true); // Locks the component custom colourScheme
 	}
 	else if (property == Ids::uiComboDynamicContent)
 	{
@@ -346,10 +407,10 @@ void CtrlrCombo::CtrlrComboLF::drawPopupMenuItem (Graphics &g, const Rectangle<i
     {
         const float separatorIndent = 5.5f;
 
-        g.setColour (Colour (0x33000000));
+        g.setColour (findColour(ComboBox::textColourId).withAlpha(0.3f));// Colour (0x33000000));
         g.drawLine (separatorIndent, halfH, width - separatorIndent, halfH);
 
-        g.setColour (Colour (0x66ffffff));
+        g.setColour (findColour(ComboBox::textColourId).withAlpha(0.6f)); // Colour (0x66ffffff));
         g.drawLine (separatorIndent, halfH + 1.0f, width - separatorIndent, halfH + 1.0f);
     }
     else
@@ -572,6 +633,70 @@ void CtrlrCombo::customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel)
         ctrlrCombo->setLookAndFeel (&lf);
     else
         ctrlrCombo->setLookAndFeel (customLookAndFeel);
+}
+
+
+LookAndFeel *CtrlrCombo::getLookAndFeelFromComponentProperty(const String &lookAndFeelComponentProperty)
+{
+    if (lookAndFeelComponentProperty == "Default")
+    // Leave empty to get L&F from Global Property
+    if (lookAndFeelComponentProperty == "V4 Light")
+        return new LookAndFeel_V4(LookAndFeel_V4::getLightColourScheme());
+    if (lookAndFeelComponentProperty == "V4 Grey")
+        return new LookAndFeel_V4(LookAndFeel_V4::getGreyColourScheme());
+    if (lookAndFeelComponentProperty == "V4 Dark")
+        return new LookAndFeel_V4(LookAndFeel_V4::getDarkColourScheme());
+    if (lookAndFeelComponentProperty == "V4 Midnight")
+        return new LookAndFeel_V4(LookAndFeel_V4::getMidnightColourScheme());
+    if (lookAndFeelComponentProperty == "V3")
+        return new LookAndFeel_V3();
+    if (lookAndFeelComponentProperty == "V2")
+        return new LookAndFeel_V2();
+    if (lookAndFeelComponentProperty == "V1")
+        return new LookAndFeel_V1();
+    
+    return (nullptr);
+}
+
+void CtrlrCombo::resetLookAndFeelOverrides()
+{
+    if (restoreStateInProgress == false) // To prevent the prop lines stacking up from top and keeping their original position
+    {
+        setProperty (Ids::componentLabelColour, (String)findColour(Label::textColourId).toString());
+        
+        setProperty (Ids::uiComboArrowColour, (String)findColour(ComboBox::arrowColourId).toString()); // "0xff0000ff"
+        setProperty (Ids::uiComboOutlineColour, (String)findColour(ComboBox::outlineColourId).darker(0.5f).toString()); // "0xff0000ff"
+        
+        setProperty (Ids::uiComboTextColour, (String)findColour(ComboBox::textColourId).toString()); // "0xff000000"
+        
+        setProperty (Ids::uiComboMenuFontColour, (String)findColour(ComboBox::textColourId).toString()); // "0xff000000"
+        
+        setProperty (Ids::uiComboButtonColour, (String)findColour(ComboBox::buttonColourId).toString()); // "0xff0000ff"
+        setProperty (Ids::uiComboBgColour, (String)findColour(ComboBox::backgroundColourId).toString()); // "0xffffffff"
+        
+        setProperty (Ids::uiComboMenuBackgroundColour, (String)findColour(ComboBox::backgroundColourId).toString()); // "0xfff0f0f0"
+        
+        setProperty (Ids::uiComboMenuHighlightColour, (String)findColour(TextEditor::highlightColourId).toString()); // Colours::lightblue.toString()
+        setProperty (Ids::uiComboMenuFontHighlightedColour, (String)findColour(TextEditor::highlightedTextColourId).toString()); // "0xff232323"
+        
+        setProperty (Ids::uiComboButtonGradientColour1, (String)findColour(TextButton::buttonColourId).toString()); // Colours::blue.toString()
+        setProperty (Ids::uiComboButtonGradientColour2, (String)findColour(TextButton::buttonColourId).darker(0.2f).toString()); // Colours::darkblue.toString()
+        
+        setProperty (Ids::uiComboArrowColour, (String)findColour(ComboBox::arrowColourId).toString()); // "0xff0000ff"
+        
+        setProperty (Ids::uiButtonLookAndFeelIsCustom, false); // Resets the component colourScheme if a new default colourScheme is selected from the menu
+        
+        updatePropertiesPanel(); // Refreshes property pane
+    }
+}
+
+void CtrlrCombo::updatePropertiesPanel()
+{
+    CtrlrPanelProperties *props = owner.getCtrlrManagerOwner().getActivePanel()->getEditor(false)->getPropertiesPanel();
+    if (props)
+    {
+        props->refreshAll(); // Needs extra code to prevent scrolling back to top on refresh
+    }
 }
 
 

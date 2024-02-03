@@ -16,7 +16,8 @@
 class CtrlrPanelEditor;
 class CtrlrPanelComponentProperties;
 
-class CtrlrPanelFindProperty  : public juce::Component, public juce::TextEditor::Listener
+class CtrlrPanelFindProperty  : public juce::Component,
+                                public juce::TextEditor::Listener
 {
 public:
     CtrlrPanelFindProperty(CtrlrPanelEditor &_owner, CtrlrPanelComponentProperties *_props);

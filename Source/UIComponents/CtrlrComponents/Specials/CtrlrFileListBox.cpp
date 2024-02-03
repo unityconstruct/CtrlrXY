@@ -99,23 +99,24 @@ CtrlrFileListBox::CtrlrFileListBox (CtrlrModulator &owner)
 	treeComponent->addListener (this);
 	addAndMakeVisible (treeComponent);
 
-	setProperty (Ids::uiFileListBoxBgColour, "0xffffffff");
-	setProperty (Ids::uiFileListLineColour, "0xff000000");
+    setProperty (Ids::uiFileListBoxBgColour, (String)findColour(TextButton::buttonColourId).withAlpha(0.0f).toString()); // "0xffffffff"
+	setProperty (Ids::uiFileListLineColour, (String)findColour(TextButton::textColourOffId).toString()); // "0xff000000"
 	setProperty (Ids::uiFileListIndentSize, 16);
+    
 	setProperty (Ids::uiFileListFont, FONT2STR (Font(14)));
-	setProperty (Ids::uiFileListTextColour, "0xff000000");
+	setProperty (Ids::uiFileListTextColour, (String)findColour(TextButton::textColourOffId).toString()); // "0xff000000"
 
-	setProperty (Ids::uiFileListHighlightTextColour, "0xff000000");
-	setProperty (Ids::uiFileListHighlightBgColour, "0xff0000ff");
+	setProperty (Ids::uiFileListHighlightTextColour, (String)findColour(TextEditor::highlightColourId).toString()); // "0xff000000"
+	setProperty (Ids::uiFileListHighlightBgColour, (String)findColour(TextEditor::highlightedTextColourId).toString()); // "0xff0000ff"
 	setProperty (Ids::uiFileListBoxHighlightFont, FONT2STR (Font(14)));
 	setProperty (Ids::uiFileListBoxOutline, 0);
-	setProperty (Ids::uiFileListBoxOutlineColour, "0xff000000");
-	setProperty (Ids::uiFileListBoxVScrollBgColour, "0xffffffff");
-	setProperty (Ids::uiFileListBoxVScrollThumbColour, "0xffababab");
-	setProperty (Ids::uiFileListBoxVScrollTrackColour, "0xffff0000");
-	setProperty (Ids::uiFileListBoxHScrollBgColour, "0xffffffff");
-	setProperty (Ids::uiFileListBoxHScrollThumbColour, "0xffababab");
-	setProperty (Ids::uiFileListBoxHScrollTrackColour, "0xffff0000");
+	setProperty (Ids::uiFileListBoxOutlineColour, (String)findColour(TextEditor::outlineColourId).toString()); // "0xff000000"
+	setProperty (Ids::uiFileListBoxVScrollBgColour, (String)findColour(ScrollBar::backgroundColourId).toString()); // "0xffffffff"
+	setProperty (Ids::uiFileListBoxVScrollThumbColour, (String)findColour(ScrollBar::thumbColourId).toString()); // "0xffababab"
+	setProperty (Ids::uiFileListBoxVScrollTrackColour, (String)findColour(ScrollBar::trackColourId).toString()); // "0xffff0000"
+	setProperty (Ids::uiFileListBoxHScrollBgColour, (String)findColour(ScrollBar::backgroundColourId).toString()); // "0xffffffff"
+	setProperty (Ids::uiFileListBoxHScrollThumbColour, (String)findColour(ScrollBar::thumbColourId).toString()); // "0xffababab"
+	setProperty (Ids::uiFileListBoxHScrollTrackColour, (String)findColour(ScrollBar::trackColourId).toString()); // "0xffff0000"
 
 	setProperty (Ids::uiFileListOpenButtonVisible, true);
 	setProperty (Ids::uiFileListFileClicked, COMBO_NONE_ITEM);

@@ -47,6 +47,7 @@ CtrlrPanelCanvas::~CtrlrPanelCanvas()
 
 	getOwner().getPanelEditorTree().removeListener (this);
     deleteAndZero (ctrlrPanelCanvasResizableBorder);
+    setLookAndFeel (nullptr);
 }
 
 //==============================================================================
@@ -72,8 +73,6 @@ void CtrlrPanelCanvas::paint (Graphics& g)
 		g.fillAll();
 	}
 
-	Colour c = VAR2COLOUR (getOwner().getProperty (Ids::uiPanelBackgroundColour1, "ffffffff"));
-
 	if (ctrlrPanelBackgroundImage.isValid())
 	{
 		if ((int)getOwner().getProperty (Ids::uiPanelImageLayout) == 8192)
@@ -91,6 +90,9 @@ void CtrlrPanelCanvas::paint (Graphics& g)
 								RectanglePlacement((int)getOwner().getProperty (Ids::uiPanelImageLayout)));
 		}
 	}
+    
+    Colour c = VAR2COLOUR (getOwner().getProperty (Ids::uiPanelBackgroundColour1, "ffffffff"));
+    
 	if (getOwner().getProperty (Ids::uiPanelEditMode))
 	{
 		const int snapSize = (int)getOwner().getProperty (Ids::uiPanelSnapSize, 8);
@@ -115,6 +117,8 @@ void CtrlrPanelCanvas::paint (Graphics& g)
 				g.fillAll();
 			}
 		}
+        lassoComponent.setColour (decltype(lassoComponent)::ColourIds::lassoFillColourId, Colours::transparentBlack);
+        lassoComponent.setColour (decltype(lassoComponent)::ColourIds::lassoOutlineColourId, findColour(PopupMenu::highlightedBackgroundColourId));
 	}
     //[/UserPaint]
 }
@@ -1218,6 +1222,19 @@ Path CtrlrPopupMenuLook::getTickShape (const float height)
     return p;
 }
 
+void CtrlrPopupMenuLook::drawPopupMenuBackground (Graphics& g,
+                                                  int width,
+                                                  int height)
+{
+    g.fillAll (findColour (PopupMenu::backgroundColourId));
+    ignoreUnused (width, height);
+
+   #if ! JUCE_MAC
+    g.setColour (findColour (PopupMenu::textColourId).withAlpha (0.7f));
+    g.drawRect (0, 0, width, height);
+   #endif
+}
+
 void CtrlrPopupMenuLook::drawPopupMenuItem (Graphics& g,
                                      int width, int height,
                                      const bool isSeparator,
@@ -1242,26 +1259,26 @@ void CtrlrPopupMenuLook::drawPopupMenuItem (Graphics& g,
     if (isSeparator)
     {
         const float separatorIndent = 5.5f;
-
-        g.setColour (Colour (0x33000000));
+        
+        g.setColour (findColour(PopupMenu::textColourId).withAlpha(0.3f));// Colour (0x33000000));
         g.drawLine (separatorIndent, halfH, width - separatorIndent, halfH);
 
-        g.setColour (Colour (0x66ffffff));
+        g.setColour (findColour(PopupMenu::textColourId).withAlpha(0.6f)); // Colour (0x66ffffff));
         g.drawLine (separatorIndent, halfH + 1.0f, width - separatorIndent, halfH + 1.0f);
     }
     else
     {
-		Colour textColour (Colours::black);
+        Colour textColour(findColour(PopupMenu::textColourId)); //(Colours::black);
 
         if (textColourToUse != nullptr)
             textColour = *textColourToUse;
 
         if (isHighlighted)
         {
-			g.setColour (Colour(0x991111aa));
+            g.setColour (findColour(PopupMenu::highlightedBackgroundColourId));//(Colour(0x991111aa));
             g.fillRect (1, 1, width - 2, height - 2);
 
-			g.setColour (Colours::white);
+			g.setColour (findColour(PopupMenu::highlightedTextColourId)); // (Colours::white);
         }
         else
         {
@@ -1322,7 +1339,6 @@ void CtrlrPopupMenuLook::drawPopupMenuItem (Graphics& g,
                         Justification::centredRight,
 						3);
         }
-
         if (hasSubMenu)
         {
             const float arrowH = 0.6f * font.getAscent();

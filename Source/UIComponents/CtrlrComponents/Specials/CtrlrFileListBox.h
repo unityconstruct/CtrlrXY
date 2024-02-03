@@ -4,7 +4,7 @@
 #include "CtrlrComponents/CtrlrComponent.h"
 class CtrlrFileListBox;
 
-class CtrlrFileListBoxLF : public LookAndFeel_V2
+class CtrlrFileListBoxLF : public LookAndFeel_V4
 {
 	public:
 		CtrlrFileListBoxLF (CtrlrFileListBox &_owner);

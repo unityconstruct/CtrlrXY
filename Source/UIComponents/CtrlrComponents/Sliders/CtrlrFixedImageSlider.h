@@ -44,6 +44,9 @@ public:
     void paint (Graphics& g);
     void resized();
     void mouseUp (const MouseEvent& e);
+    static LookAndFeel* getLookAndFeelFromComponentProperty(const String &lookAndFeelComponentProperty);
+    void resetLookAndFeelOverrides();
+    void updatePropertiesPanel();
 
     //==============================================================================
     juce_UseDebuggingNewOperator

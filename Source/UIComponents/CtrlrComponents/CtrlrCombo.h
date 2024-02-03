@@ -29,8 +29,11 @@ public:
 	void valueTreeChildOrderChanged (ValueTree& parentTreeWhoseChildrenHaveMoved, int, int){}
 	void comboContentChanged();
 	bool keyPressed (const KeyPress& key, Component* originatingComponent);
+    static LookAndFeel* getLookAndFeelFromComponentProperty(const String &lookAndFeelComponentProperty);
+    void resetLookAndFeelOverrides();
+    void updatePropertiesPanel();
 
-	class CtrlrComboLF : public LookAndFeel_V2
+	class CtrlrComboLF : public LookAndFeel_V4
 	{
 		public:
 			CtrlrComboLF (CtrlrCombo &_owner) : owner(_owner) {}

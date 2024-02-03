@@ -26,13 +26,18 @@ class CtrlrQuickXmlPreview : public Button::Listener, public Component
 		ValueTree &treeToPreview;
 };
 
-class CtrlrPopupMenuLook : public LookAndFeel_V2
+
+class CtrlrPopupMenuLook : public LookAndFeel_V4
 {
 	public:
 		CtrlrPopupMenuLook(){}
 		~CtrlrPopupMenuLook(){}
 		Path getTickShape (float height);
-		void drawPopupMenuItem (Graphics& g,
+        void drawPopupMenuBackground (Graphics& g,
+                             int width,
+                             int height);
+		
+        void drawPopupMenuItem (Graphics& g,
                                      int width, int height,
                                      bool isSeparator,
                                      bool isActive,
@@ -43,8 +48,14 @@ class CtrlrPopupMenuLook : public LookAndFeel_V2
                                      const String& shortcutKeyText,
                                      Image* image,
                                      const Colour *textColourToUse);
-		void getIdealPopupMenuItemSize (const String &text, bool isSeparator, int standardMenuItemHeight, int &idealWidth, int &idealHeight);
+		
+        void getIdealPopupMenuItemSize (const String &text,
+                                        bool isSeparator,
+                                        int standardMenuItemHeight,
+                                        int &idealWidth,
+                                        int &idealHeight);
 };
+
 
 class CtrlrPanelEditor;
 

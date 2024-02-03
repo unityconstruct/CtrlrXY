@@ -71,13 +71,14 @@
   
   <id name="uiPanelTooltipBackgroundColour" text="Tooltip background colour" 		type="Colour" />
   <id name="uiPanelTooltipOutlineColour" 	text="Tooltip outline colour" 			type="Colour" />
-  <id name="uiPanelTooltipCornerRound" 		text="Tooltip rectangle roundness" 		type="Numeric" min="0" max="255" int="0.1" />
+  <id name="uiPanelTooltipCornerRound" 		text="Tooltip rectangle roundness" 		type="Numeric" min="0" max="24" int="0.1" />
   <id name="uiPanelTooltipPlacement" 		text="Tooltip placement" 				type="VarNumeric" defaults="Above=1,Below=2,Left=4,Right=8"/>
   <id name="uiPanelTooltipFont" 			text="Tooltip font"						type="Font" />
   <id name="uiPanelTooltipColour" 			text="Tooltip font colour"				type="Colour" />
   
-  <id name="uiPanelLookAndFeel"             text="LookAndFeel scheme for panel" type="VarText" defaults="@lookandfeel" />
-  <id name="uiPanelColourScheme"            text="LookAndFeel's colour scheme" type="VarText" defaults="@colourSchemes" />
+  <id name="uiPanelLookAndFeel"             text="LookAndFeel scheme for panel" type="VarText" defaults="@lookandfeelschemes" />
+  <id name="uiPanelColourScheme"            text="LookAndFeel V4 colour scheme" type="VarText" defaults="@colourSchemes" />
+  <id name="uiPanelLegacyMode"              text="LookAndFeel V3 for older panels" type="Bool" defaults="Legacy Mode/Disabled" />
 
   <!-- Panel properties -->
 
@@ -141,8 +142,8 @@
   <id name="panelAuthorEmail"               text="Panel author email" type="Text"/>
   <id name="panelAuthorUrl"                 text="Panel author url" type="Text"/>
   <id name="panelAuthorDesc"                text="Panel author description" type="MultiLineSmall"/>
-  <id name="panelVersionMajor"              text="Version MAJOR" type="Numeric" min="0" max="2048" int="1" />
-  <id name="panelVersionMinor"              text="Version MINOR" type="Numeric" min="0" max="2048" int="1" />
+  <id name="panelVersionMajor"              text="Version MAJOR" type="Numeric" min="0" max="24" int="1" />
+  <id name="panelVersionMinor"              text="Version MINOR" type="Numeric" min="0" max="48" int="1" />
   <id name="panelVersionName"               text="Version Name" type="Text"/>
   <id name="panelCtrlrRevision"             text="Ctrlr revision that this panel was saved with" type="Text"/>
   <id name="panelVendor"                    text="Vendor that made the device that this panel controls" type="Text"/>
@@ -193,7 +194,7 @@
   <id name="componentRotation"                    text="Component rotation" type="Numeric" min="0" max="2" int="0.01"/>
   <id name="componentExcludedFromLabelDisplay"    text="Component changes will not appear in labels that display them"  type="Bool" />
 
-  <id name="componentBubbleRoundAngle"            text="Bubble: Rounded corner angle" type="Numeric" min="0" max="255" int="0.1" />
+  <id name="componentBubbleRoundAngle"            text="Bubble: Rounded corner angle" type="Numeric" min="0" max="64" int="0.1" />
   <id name="componentBubbleBackgroundColour1"     text="Bubble: Background colour1" type="Colour"/>
   <id name="componentBubbleBackgroundColour2"     text="Bubble: Background colour2" type="Colour"/>
   <id name="componentBubbleBackgroundGradientType"  text="Bubble: Background Gradient Style" type="VarNumeric" defaults="@gradient" />
@@ -203,7 +204,12 @@
   <id name="componentBubbleNameColour"            text="Bubble: Name text colour" type="Colour" />
   <id name="componentBubbleNameFont"              text="Bubble: Name text font" type="Font" />
   <id name="componentBubbleNameJustification"     text="Bubble: Nam text justification" type="VarText" defaults="@justification" />
+  
+  <id name="componentLookAndFeel"                 text="Component LookAndFeel type" type="VarText" defaults="@componentlookandfeel" />
+  <id name="componentLookAndFeelIsCustom"         text="Component LookAndFeel is customized" type="Bool" defaults="Custom Colours/Default Colours" />
+  
   <id name="componentValueDecimalPlaces"          text="Decimal places to print if using floating point numbers" type="Numeric" min="0" max="10" int="1" />
+  
   <id name="componentLuaMouseMoved"               text="Called when a mouse is moved over this component" type="LuaMethod" />
   <id name="componentLuaMouseDown"                text="Called when a mouse is down on this component" type="LuaMethod" />
   <id name="componentLuaMouseUp"                text="Called when a mouse is up on this component" type="LuaMethod" />
@@ -211,9 +217,13 @@
   <id name="componentLuaMouseDoubleClick"         text="Called when a double-click event occurs on this component" type="LuaMethod" />
   <id name="componentLuaMouseEnter"                text="Called when a mouse enters this component" type="LuaMethod" />
   <id name="componentLuaMouseExit"                text="Called when a mouse leaves this component" type="LuaMethod" />
+  
   <id name="componentInternalFunction"            text="Internal function this component should execute" type="VarNumeric" defaults="@internalFunctions" />
 
   <!-- Slider -->
+  
+  <id name="uiSliderLookAndFeel"            text="LookAndFeel type" type="VarText" defaults="@componentlookandfeel" />
+  <id name="uiSliderLookAndFeelIsCustom"    text="LookAndFeel is customized" type="Bool" defaults="Custom Colours/Default Colours" />
   <id name="uiSliderStyle" 					text="Slider style"     type="VarNumeric" defaults="LinearHorizontal,LinearVertical,LinearBar,Rotary,RotaryHorizontalDrag,RotaryVerticalDrag,IncDecButtons"/>
   <id name="uiSliderMin" 					text="Minimum value"    type="Numeric" min="-2147483648" max="2147483647" int="0.000000001" />
   <id name="uiSliderMax" 					text="Maximum value"    type="Numeric" min="-2147483648" max="2147483647" int="0.000000001" />
@@ -223,14 +233,14 @@
   <id name="uiSliderValuePosition" 			text="Value position" type="VarNumeric" defaults="NoTextBox=0,TextBoxLeft=1,TextBoxRight=2,TextBoxAbove=3,TextBoxBelow=4"/>
   <id name="uiSliderValueHeight" 			text="Value height" type="Text"/>
   <id name="uiSliderValueWidth" 			text="Value width" type="Text"/>
-  <id name="uiSliderTrackCornerSize" 		text="Linear slider track corner size" type="Numeric" min="0" max="1024" int="1"/>
-  <id name="uiSliderThumbCornerSize"		text="Linear slider thumb coroner size(roundness)" type="Numeric"  min="0" max="1024" int="1"/>
-  <id name="uiSliderThumbWidth" 			text="Linear slider thumb width (0=default)" type="Numeric"  min="0" max="1024" int="1"/>
-  <id name="uiSliderThumbHeight" 			text="Linear slider thumb height (0=default)" type="Numeric"  min="0" max="1024" int="1"/>
-  <id name="uiSliderThumbFlatOnLeft" 		text="Thumb flat on left" type="Bool"/>
-  <id name="uiSliderThumbFlatOnRight" 		text="Thumb flat on right" type="Bool"/>
-  <id name="uiSliderThumbFlatOnTop" 		text="Thumb flat on top" type="Bool"/>
-  <id name="uiSliderThumbFlatOnBottom" 		text="Thumb flat on bottom" type="Bool"/>
+  <id name="uiSliderTrackCornerSize" 		text="LookAndFeel V2 Linear slider track corner size" type="Numeric" min="0" max="48" int="1"/>
+  <id name="uiSliderThumbCornerSize"		text="LookAndFeel V2 thumb coroner size(roundness)" type="Numeric"  min="0" max="48" int="1"/>
+  <id name="uiSliderThumbWidth" 			text="LookAndFeel V2 thumb width (0=default)" type="Numeric"  min="0" max="64" int="1"/>
+  <id name="uiSliderThumbHeight" 			text="LookAndFeel V2 Linear slider thumb height (0=default)" type="Numeric"  min="0" max="64" int="1"/>
+  <id name="uiSliderThumbFlatOnLeft" 		text="LookAndFeel V2 Thumb flat on left" type="Bool"/>
+  <id name="uiSliderThumbFlatOnRight" 		text="LookAndFeel V2 Thumb flat on right" type="Bool"/>
+  <id name="uiSliderThumbFlatOnTop" 		text="LookAndFeel V2 Thumb flat on top" type="Bool"/>
+  <id name="uiSliderThumbFlatOnBottom" 		text="LookAndFeel V2 Thumb flat on bottom" type="Bool"/>
   <id name="uiSliderValueTextColour" 		text="Value text colour" type="Colour"/>
   <id name="uiSliderValueBgColour" 			text="Value background colour" type="Colour"/>
   <id name="uiSliderRotaryOutlineColour" 	text="Rotary outline colour" type="Colour"/>
@@ -239,8 +249,8 @@
   <id name="uiSliderValueHighlightColour" 	text="Value text colour highlighted" type="Colour"/>
   <id name="uiSliderValueOutlineColour" 	text="Value outline colour" type="Colour"/>
   <id name="uiSliderTrackColour" 			text="Track colour (linear)" type="Colour"/>
-  <id name="uiSliderIncDecButtonColour" 	text="Inc/Dec buttons colour" type="Colour"/>
-  <id name="uiSliderIncDecTextColour" 		text="Inc/Dec buttons text ON colour" type="Colour"/>
+  <id name="uiSliderIncDecButtonColour" 	text="Inc/Dec buttons background colour" type="Colour"/>
+  <id name="uiSliderIncDecTextColour" 		text="Inc/Dec buttons text colour" type="Colour"/>
 
   <id name="uiSliderValueFont" 				text="Value font" type="Font"/>
   <id name="uiSliderValueTextJustification" text="Value text justification" type="VarText" defaults="@justification"/>
@@ -383,9 +393,12 @@
 
   <!-- Toggle button -->
   <id name="uiToggleButtonText"         text="Button text" type="Text"/>
+  <id name="uiToggleButtontickColour"   text="Button tick mark colour" type="Colour" />
   <id name="uiToggleButtonFocusOutline" text="Button outline when focused" type="Colour" />
 
   <!-- Text button -->
+  <id name="uiButtonLookAndFeel"        text="Button LookAndFeel type" type="VarText" defaults="@componentlookandfeel" />
+  <id name="uiButtonLookAndFeelIsCustom" text="Button LookAndFeel is customized" type="Bool" defaults="Custom Colours/Default Colours" />
   <id name="uiButtonTextColourOff"      text="Button text colour [off]" type="Colour"/>
   <id name="uiButtonTextColourOn"       text="Button text colour [on]" type="Colour"/>
   <id name="uiButtonTextFont"           text="Button text font" type="Font"/>
@@ -725,8 +738,9 @@
   <id name="number"                           text="Number" type="Numeric" min="-65535" max="65535" />
   <id name="uuid"                             text="Unique identifier" type="ReadOnly" />
   <id name="ctrlrScrollbarThickness"          text="Thickness for all scrollbars" type="Numeric" min="8" max="128"/>
-  <id name="ctrlrColourScheme"                text="Colour scheme" type="VarText" defaults="@colourSchemes"/>
+  <id name="ctrlrColourScheme"                text="Colour scheme" type="VarText" defaults="@ctrlrColourSchemes"/>
   <id name="ctrlrLookAndFeel"                 text="Look and feel" type="VarText" defaults="@lookandfeel"/>
+
 
   <!-- Logging settings  -->
   <id name="ctrlrMidiMonInputBufferSize"    text="MIDI Mon input buffer size"       type="Numeric" min="512" max="65535"/>
@@ -749,26 +763,26 @@
   <id name="ctrlrRecenetOpenedPanelFiles"   text="Recent opened Panel file" type="Text" />
   <id name="ctrlrLastBrowsedFileDirectory"  text="Last browsed file directory" type="Text" />
 
-  <id name="ctrlrMenuItemBackgroundColour"  	  text="Menu item background colour" type="Colour" />
-  <id name="ctrlrMenuItemTextColour" 			      text="Menu item text colour" type="Colour" />
+  <id name="ctrlrMenuItemBackgroundColour"  	text="Menu item background colour" type="Colour" />
+  <id name="ctrlrMenuItemTextColour" 			text="Menu item text colour" type="Colour" />
   <id name="ctrlrMenuItemHighlightedTextColour" text="Menu item highlighted text colour" type="Colour" />
-  <id name="ctrlrMenuItemHighlightColour" 		  text="Menu item highlight colour" type="Colour" />
-  <id name="ctrlrMenuItemFont" 					        text="Menu item font" type="Font" />
-  <id name="ctrlrMenuItemSeparatorColour"		    text="Menu separator colour" type="Colour" />
-  <id name="ctrlrMenuItemHeaderColour"			    text="Menu header colour" type="Colour" />
+  <id name="ctrlrMenuItemHighlightColour" 		text="Menu item highlight colour" type="Colour" />
+  <id name="ctrlrMenuItemFont" 					text="Menu item font" type="Font" />
+  <id name="ctrlrMenuItemSeparatorColour"		text="Menu separator colour" type="Colour" />
+  <id name="ctrlrMenuItemHeaderColour"			text="Menu header colour" type="Colour" />
 
-  <id name="ctrlrMenuBarBackgroundColour1" 		  text="Menu bar background gradient colour top" type="Colour" />
-  <id name="ctrlrMenuBarBackgroundColour2" 		  text="Menu bar background gradient colour bottom" type="Colour" />
-  <id name="ctrlrMenuBarTextColour" 			      text="Menu bar text colour" type="Colour" />
+  <id name="ctrlrMenuBarBackgroundColour1" 		text="Menu bar background gradient colour top" type="Colour" />
+  <id name="ctrlrMenuBarBackgroundColour2" 		text="Menu bar background gradient colour bottom" type="Colour" />
+  <id name="ctrlrMenuBarTextColour" 			text="Menu bar text colour" type="Colour" />
   <id name="ctrlrMenuBarHighlightedTextColour" 	text="Menu bar highlighted text colour" type="Colour" />
-  <id name="ctrlrMenuBarHighlightColour" 		    text="Menu bar highlight colour" type="Colour" />
-  <id name="ctrlrMenuBarFont" 					        text="Menu bar font" type="Font" />
-  <id name="ctrlrMenuBarHeight" 					        text="Menu bar height" type="Numeric" min="4" max="128"/>
-  <id name="ctrlrNativeAlerts"					        text="Use OS native dialog windows" type="Bool" />
+  <id name="ctrlrMenuBarHighlightColour" 		text="Menu bar highlight colour" type="Colour" />
+  <id name="ctrlrMenuBarFont" 					text="Menu bar font" type="Font" />
+  <id name="ctrlrMenuBarHeight" 				text="Menu bar height" type="Numeric" min="4" max="128"/>
+  <id name="ctrlrNativeAlerts"					text="Use OS native dialog windows" type="Bool" />
   <id name="ctrlrNativeFileDialogs"             text="Use OS native file open/save dialogs (disable for Linux)" type="Bool" />
   <id name="ctrlrPrivateKey"                    text="RSA private key used to sign exported panels" type="FileProperty" />
   <id name="ctrlrFontSizeBaseValue"             text="Base value for all font sizes in the Ctrlr UI (won't affect panel UI)" type="Numeric" min="6.0" max="128.0" int="0.1"/>
-  <id name="ctrlrTabBarDepth"             text="Depth of all tab bars" type="Numeric" min="6.0" max="128.0" int="0.1"/>
+  <id name="ctrlrTabBarDepth"                   text="Depth of all tab bars" type="Numeric" min="6" max="128" int="1"/>
 
   <!-- LUA callbacks -->
   <id name="luaManagerMethods"                text="luaManagerMethods"                                    type="Text" />
@@ -807,16 +821,16 @@
   <id name="luaPanelMidiSnapshotPre"          text="Called before a MIDI snapshot is sent"                                    type="LuaMethod" />
   <id name="luaPanelMidiSnapshotPost"         text="Called after a MIDI snapshot has been sent"                               type="LuaMethod" />
 
-  <id name="luaTransProcess"		              text="Transaction process" 					type="LuaMethod" />
-  <id name="luaTransDataUnpack"		            text="Transaction data unpacking" 			type="LuaMethod" />
-  <id name="luaTransDataPack"		              text="Transaction data packing" 			type="LuaMethod" />
-  <id name="luaTransRequest"		              text="Transaction request" 					type="LuaMethod" />
-  <id name="luaTransNameData"		              text="Transaction get name" 				type="LuaMethod" />
-  <id name="luaTransRequestData"	            text="Transaction get request data" 		type="LuaMethod" />
-  <id name="luaTransResponseData"	            text="Transaction get response data" 		type="LuaMethod" />
-  <id name="luaTransConfData"		              text="Transaction get confirmation data" 	type="LuaMethod" />
-  <id name="luaTransTimeout"		              text="Transaction timeout handler" 			type="LuaMethod" />
-  <id name="luaTransInfo"			                text="Transaction information query"		type="LuaMethod" />
+  <id name="luaTransProcess"		          text="Transaction process" 	    			type="LuaMethod" />
+  <id name="luaTransDataUnpack"		          text="Transaction data unpacking" 			type="LuaMethod" />
+  <id name="luaTransDataPack"		          text="Transaction data packing" 		    	type="LuaMethod" />
+  <id name="luaTransRequest"		          text="Transaction request" 			        type="LuaMethod" />
+  <id name="luaTransNameData"		          text="Transaction get name" 			    	type="LuaMethod" />
+  <id name="luaTransRequestData"	          text="Transaction get request data" 		    type="LuaMethod" />
+  <id name="luaTransResponseData"	          text="Transaction get response data"  		type="LuaMethod" />
+  <id name="luaTransConfData"		          text="Transaction get confirmation data"      type="LuaMethod" />
+  <id name="luaTransTimeout"		          text="Transaction timeout handler" 			type="LuaMethod" />
+  <id name="luaTransInfo"			          text="Transaction information query"		    type="LuaMethod" />
   <id name="luaCtrlrSaveState"                text="Called when Ctrlr state is saved (DAW saves a project)" type="LuaMethod" />
   <id name="luaCtrlrRestoreState"             text="Called when Ctrlr is loaded (DAW opens a project)" type="LuaMethod" />
   <id name="uiLuaConsoleInputRemoveAfterRun"  text="Clear console input after execute" type="Bool" />
@@ -871,8 +885,11 @@
     <const name="dynamicContent"    value="None=0,Modulator List=1,Filesystem=2,Bank,Program=3" />
     <const name="lcdFonts"          value="LCD=0,Digital-7=1,Dotty-Shadow=2,ZX81=3,Invasion2000=4,Digit=5,Computerfont=6,Electronic-Highway-Sign=7,Karmatic-Arcade=8,60sekuntia=9" />
     <const name="internalFunctions" value="-- None=0,MIDI Device Selection=1" />
+    <const name="componentlookandfeel"       value="Default,V4 Light,V4 Grey,V4 Dark,V4 Midnight,V3,V2,V1" />
+    <const name="lookandfeelschemes"       value="V4 Light,V4 Grey,V4 Dark,V4 Midnight,V3,V2,V1" />
     <const name="lookandfeel"       value="V4,V3,V2,V1" />
-    <const name="colourSchemes"     value="Dark,Midnight,Grey,Light" />
+    <const name="colourSchemes"     value="Default,Light,Grey,Dark,Midnight" />
+    <const name="ctrlrColourSchemes"     value="Light,Grey,Dark,Midnight" />
   </constants>
 
 </ctrlrIds>

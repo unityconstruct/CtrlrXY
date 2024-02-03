@@ -76,14 +76,14 @@ namespace gui {
 
     static LookAndFeel_V4::ColourScheme colourSchemeFromProperty(const var &property)
     {
+        if (property =="Light")
+            return LookAndFeel_V4::getLightColourScheme();
+        if (property == "Grey")
+            return LookAndFeel_V4::getMidnightColourScheme();
         if (property == "Dark")
             return LookAndFeel_V4::getDarkColourScheme();
         if (property == "Midnight")
             return LookAndFeel_V4::getMidnightColourScheme();
-        if (property == "Grey")
-            return LookAndFeel_V4::getMidnightColourScheme();
-        if (property == "Light")
-            return LookAndFeel_V4::getLightColourScheme();
 
         return LookAndFeel_V4::getLightColourScheme();
     }

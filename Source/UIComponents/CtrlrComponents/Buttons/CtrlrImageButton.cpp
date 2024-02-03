@@ -20,7 +20,7 @@ CtrlrImageButton::CtrlrImageButton (CtrlrModulator &owner)
 	setProperty (Ids::resourceImageHeight, 32);
 	setProperty (Ids::resourceImagePaintMode, 36);
 	setProperty (Ids::resourceImageOrientation, 1);
-	setProperty (Ids::uiImageButtonTextColour, "0xff000000");
+    setProperty (Ids::uiImageButtonTextColour, (String)findColour(TextButton::textColourOffId).toString());
 	setProperty (Ids::uiImageButtonContent, "");
 	setProperty (Ids::uiImageButtonTextPosition, 4);
 	setProperty (Ids::uiImageButtonTextWidth, 0);
@@ -33,7 +33,7 @@ CtrlrImageButton::CtrlrImageButton (CtrlrModulator &owner)
 	setProperty (Ids::uiButtonRepeatRate, 100);
     //[/UserPreSize]
 
-    setSize (96, 32);
+    setSize (96, 62);
 
     //[Constructor] You can add your own custom stuff here..
     //[/Constructor]

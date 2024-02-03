@@ -155,6 +155,7 @@ class CtrlrEditor  : public AudioProcessorEditor,
 		void performKeyGenerator();
 		void performMidiDeviceRefresh();
 		void setMenuBarVisible(const bool shouldBeVisible=true);
+        void setMenuBarLookAndFeel(const String &lookAndFeelDesc);
 
 		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrEditor)
 

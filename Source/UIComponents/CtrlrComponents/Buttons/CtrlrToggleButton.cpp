@@ -2,6 +2,7 @@
 #include "CtrlrToggleButton.h"
 #include "CtrlrValueMap.h"
 #include "CtrlrModulator/CtrlrModulator.h"
+#include "CtrlrPanel/CtrlrPanelEditor.h"
 #include "CtrlrIDs.h"
 #include "CtrlrPanel/CtrlrPanel.h"
 
@@ -17,17 +18,43 @@ CtrlrToggleButton::CtrlrToggleButton (CtrlrModulator &owner)
 
     //[UserPreSize]
 	ctrlrButton->setBufferedToImage (true);
-	setProperty (Ids::uiButtonTextColourOn, "0xff000000");
-	setProperty (Ids::uiToggleButtonFocusOutline, "0x00000000");
 	setProperty (Ids::uiToggleButtonText, "Button");
 	setProperty (Ids::uiButtonTrueValue, 1);
 	setProperty (Ids::uiButtonFalseValue, 0);
-	setProperty (Ids::uiButtonColourOff, "0xff0000ff");
 	owner.setProperty (Ids::modulatorMax, 1);
 	owner.setProperty (Ids::modulatorMin, 0);
+    
+    setProperty (Ids::uiButtonLookAndFeel, "Default");
+    setProperty (Ids::uiButtonLookAndFeelIsCustom, false);
+
     //[/UserPreSize]
 
-    setSize (88, 32);
+    if ( owner.getOwnerPanel().getEditor()->getProperty(Ids::uiPanelLookAndFeel) == "V3"
+        || owner.getOwnerPanel().getEditor()->getProperty(Ids::uiPanelLookAndFeel) == "V2"
+        || owner.getOwnerPanel().getEditor()->getProperty(Ids::uiPanelLookAndFeel) == "V1" )
+    {
+        setProperty (Ids::uiButtonTextColourOn, "0xff000000");
+        setProperty (Ids::uiButtonColourOff, "0xff0000ff");
+        setProperty (Ids::uiToggleButtonFocusOutline, "0x00000000");
+        setProperty (Ids::uiToggleButtontickColour, "0x00000000");
+    }
+    else if (owner.getOwnerPanel().getEditor()->getProperty(Ids::uiPanelLookAndFeel) == "V4 Light") // Because V4 Light scheme returns white on white colours
+    {
+        setProperty (Ids::uiButtonTextColourOn, "0xff000000"); // Text colour
+        setProperty (Ids::uiButtonColourOff, "0x80000000"); // V2 specific Colour
+        setProperty (Ids::uiToggleButtonFocusOutline, "0x60000000"); // Tick box colour
+        setProperty (Ids::uiToggleButtontickColour, "0xff000000"); // Tick colour
+    }
+    else
+    {
+        setProperty (Ids::uiButtonTextColourOn, (String)LookAndFeel::findColour(ToggleButton::textColourId).toString()); // Text colour
+        setProperty (Ids::uiButtonColourOff, (String)LookAndFeel::findColour(ToggleButton::textColourId).withAlpha(0.7f).toString()); // V2 specific Colour
+        setProperty (Ids::uiToggleButtonFocusOutline, (String)LookAndFeel::findColour(ToggleButton::tickDisabledColourId).withAlpha(0.5f).toString()); // Tick colour
+        setProperty (Ids::uiToggleButtontickColour, (String)LookAndFeel::findColour(ToggleButton::tickColourId).toString()); // Tick colour
+    }
+    setSize (88, 48);
+    
+    setProperty (Ids::uiButtonLookAndFeelIsCustom, false); // Resets the component colourScheme if a new default colourScheme is selected from the menu
 
     //[Constructor] You can add your own custom stuff here..
 	//owner.getProcessor().setValueFromGUI (0, true);
@@ -161,26 +188,47 @@ void CtrlrToggleButton::valueTreePropertyChanged (ValueTree &treeWhosePropertyHa
 	{
 		ctrlrButton->setToggleState (false, dontSendNotification);
 	}
-
-	if (property == Ids::uiButtonTextColourOn
-		|| property == Ids::uiButtonColourOff)
+    else if (property == Ids::uiButtonLookAndFeel)
+    {
+        String LookAndFeelType = getProperty(property);
+        setLookAndFeel(CtrlrToggleButton::getLookAndFeelFromComponentProperty(LookAndFeelType)); // Updates the current component LookAndFeel
+        
+        if (LookAndFeelType == "Default")
+        {
+            setProperty(Ids::uiButtonLookAndFeelIsCustom, false); // Resets the Customized Flag to False to allow Global L&F to apply
+        }
+        
+        if (!getProperty(Ids::uiButtonLookAndFeelIsCustom))
+        {
+            CtrlrToggleButton::resetLookAndFeelOverrides(); // Retrieves LookAndFeel colours from selected ColourScheme
+        }
+    }
+	if (property == Ids::uiButtonTextColourOn)
 	{
 		ctrlrButton->setColour (ToggleButton::textColourId, VAR2COLOUR(getProperty(Ids::uiButtonTextColourOn)));
-		ctrlrButton->setColour (TextButton::buttonColourId, VAR2COLOUR(getProperty(Ids::uiButtonColourOff)));
 	}
-	else if (property == Ids::uiToggleButtonText)
-	{
-		ctrlrButton->setButtonText (getProperty(Ids::uiToggleButtonText));
-	}
-	else if (property == Ids::uiButtonTrueValue || property == Ids::uiButtonFalseValue)
-	{
-		valueMap->setPair (0, getProperty(Ids::uiButtonFalseValue), "");
-		valueMap->setPair (1, getProperty(Ids::uiButtonTrueValue), "");
-		owner.getProcessor().setValueMap (*valueMap);
-	}
+    if (property == Ids::uiButtonColourOff)
+    {
+        ctrlrButton->setColour (TextButton::buttonColourId, VAR2COLOUR(getProperty(Ids::uiButtonColourOff)));
+    }
+    else if (property == Ids::uiToggleButtontickColour)
+    {
+        ctrlrButton->setColour (ToggleButton::tickColourId, VAR2COLOUR(getProperty(Ids::uiToggleButtontickColour)));
+    }
 	else if (property == Ids::uiToggleButtonFocusOutline)
     {
+        ctrlrButton->setColour (ToggleButton::tickDisabledColourId, VAR2COLOUR(getProperty(Ids::uiToggleButtonFocusOutline)));
         ctrlrButton->setColour (TextEditor::focusedOutlineColourId, VAR2COLOUR(getProperty(Ids::uiToggleButtonFocusOutline)));
+    }
+    else if (property == Ids::uiToggleButtonText)
+    {
+        ctrlrButton->setButtonText (getProperty(Ids::uiToggleButtonText));
+    }
+    else if (property == Ids::uiButtonTrueValue || property == Ids::uiButtonFalseValue)
+    {
+        valueMap->setPair (0, getProperty(Ids::uiButtonFalseValue), "");
+        valueMap->setPair (1, getProperty(Ids::uiButtonTrueValue), "");
+        owner.getProcessor().setValueMap (*valueMap);
     }
 	else
 	{
@@ -207,6 +255,71 @@ void CtrlrToggleButton::setToggleState(const bool toggleState, const bool sendCh
 {
 	ctrlrButton->setToggleState (toggleState, sendChangeMessage ? sendNotification : dontSendNotification);
 }
+
+
+
+LookAndFeel *CtrlrToggleButton::getLookAndFeelFromComponentProperty(const String &lookAndFeelComponentProperty)
+{
+    if (lookAndFeelComponentProperty == "Default")
+    // Leave empty to get L&F from Global Property
+    if (lookAndFeelComponentProperty == "V4 Light")
+        return new LookAndFeel_V4(LookAndFeel_V4::getLightColourScheme());
+    if (lookAndFeelComponentProperty == "V4 Grey")
+        return new LookAndFeel_V4(LookAndFeel_V4::getGreyColourScheme());
+    if (lookAndFeelComponentProperty == "V4 Dark")
+        return new LookAndFeel_V4(LookAndFeel_V4::getDarkColourScheme());
+    if (lookAndFeelComponentProperty == "V4 Midnight")
+        return new LookAndFeel_V4(LookAndFeel_V4::getMidnightColourScheme());
+    if (lookAndFeelComponentProperty == "V3")
+        return new LookAndFeel_V3();
+    if (lookAndFeelComponentProperty == "V2")
+        return new LookAndFeel_V2();
+    if (lookAndFeelComponentProperty == "V1")
+        return new LookAndFeel_V1();
+    
+    return (nullptr);
+}
+
+void CtrlrToggleButton::resetLookAndFeelOverrides()
+{
+    if (restoreStateInProgress == false) // To prevent the props lines position stacking up to top and keep their original position
+    {
+        setProperty (Ids::componentLabelColour, (String)LookAndFeel::findColour(Label::textColourId).toString());
+
+        if (getProperty(Ids::uiButtonLookAndFeel) == "V4 Light") // Because V4 Light scheme returns white on white colours
+        {
+            setProperty (Ids::uiButtonTextColourOn, "0xff000000"); // Text colour
+            setProperty (Ids::uiButtonColourOff, "0x80000000"); // V2 specific Colour
+            setProperty (Ids::uiToggleButtonFocusOutline, "0x60000000"); // Tick box colour
+            setProperty (Ids::uiToggleButtontickColour, "0xff000000"); // Tick colour
+        }
+        else
+        {
+            setProperty (Ids::uiButtonTextColourOn, (String)LookAndFeel::findColour(ToggleButton::textColourId).toString()); // Text colour
+            setProperty (Ids::uiButtonColourOff, (String)LookAndFeel::findColour(ToggleButton::textColourId).withAlpha(0.7f).toString()); // V2 specific Colour
+            setProperty (Ids::uiToggleButtonFocusOutline, (String)LookAndFeel::findColour(ToggleButton::tickDisabledColourId).withAlpha(0.5f).toString()); // Tick colour
+            setProperty (Ids::uiToggleButtontickColour, (String)LookAndFeel::findColour(ToggleButton::tickColourId).toString()); // Tick colour
+        }
+        
+        setProperty (Ids::uiButtonLookAndFeelIsCustom, false); // Resets the component colourScheme if a new default colourScheme is selected from the menu
+        
+        updatePropertiesPanel(); // Refreshes property pane
+    }
+}
+
+void CtrlrToggleButton::updatePropertiesPanel()
+{
+    CtrlrPanelProperties *props = owner.getCtrlrManagerOwner().getActivePanel()->getEditor(false)->getPropertiesPanel();
+    if (props)
+    {
+        props->refreshAll(); // Needs extra code to prevent scrolling back to top on refresh
+    }
+}
+
+
+
+
+
 //[/MiscUserCode]
 
 

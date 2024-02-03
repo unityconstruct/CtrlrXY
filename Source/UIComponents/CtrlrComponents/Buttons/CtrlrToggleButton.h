@@ -4,7 +4,9 @@
 #include "CtrlrComponents/CtrlrComponent.h"
 class CtrlrValueMap;
 
-class CtrlrToggleButton  : public CtrlrComponent, public Button::Listener
+class CtrlrToggleButton  : public CtrlrComponent,
+                           public Button::Listener,
+                           public LookAndFeel_V4
 {
 public:
     //==============================================================================
@@ -28,6 +30,9 @@ public:
 	void click();
 	bool isToggleButton();
 	void setToggleState(const bool toggleState, const bool sendChangeMessage=false);
+    static LookAndFeel* getLookAndFeelFromComponentProperty(const String &lookAndFeelComponentProperty);
+    void resetLookAndFeelOverrides();
+    void updatePropertiesPanel();
 	CtrlrValueMap &getValueMap() { return (*valueMap); }
 	void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr) {}
 

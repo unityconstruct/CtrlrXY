@@ -10,21 +10,27 @@ ToDo
 ----
 
 * VST Host must get the panel name while exported as VST3 plugin (currently always named as Ctrlr | Instigator)
-* Update to the latest version of JUCE 7
-* Implementation of the entire JUCE ValueTree Class
-* Implementation of the entire JUCE LookAndFeel class with all color schemes
-* Implementation of the entire JUCE ColourSelector class with built-in color picker popup for every color properties
+* APP/Plugin identifiers properly updated from panel infos in exported instances package.(info.plist, .exe, vst3, etc)
+* Implementation of the entire JUCE ValueTree Class with LUA
 * File path needs to be updated on save while the panel ID is changed (Save vs. Save as...)
 * Modulators located within a tabs must have their properties updated while the tab properties are changed 
 * Allow earlier "Undo" after a modulator has been deleted
 * Export instance process must be improved (dialog alerts, overwriting existing file...)
 * VST Parameter Index must start at 0 not 1 in Hosts (now VST Index 0 in Ctrlr is Param 1 in Cubase)
 * Re-generating UID must update resource path automatically
-* Description/ID in property pane must switch properly without selecting other tabs for refresh.
+* Update to the latest version of JUCE 7
 
 
 Changelog
 ---------
+
+#### Version 5.6.29
+
+* Implementation of the entire JUCE LookAndFeel_V4 design with all color schemes
+* Panels designed on previous versions (5.3.198 & 5.3.220) are compatible and will automatically use LookAndFeel_V2/V3
+* Implementation of the JUCE ColourSelector popup for every coloUr properties
+* Description/ID in the property pane switches without selecting other tabs to update
+* Overall improvement of Ctrlr GUI, component settings and functionalities
 
 #### Version 5.6.28
 *  Added support for scalable UI for responsive design via callback on APP/Plugin viewport resize and viewport resize parameters.
@@ -129,3 +135,6 @@ Tutorial coming soon
 # Credits
 * Thanks to @romankubiak for developing Ctrlr
 * Links to contributors coming soon
+
+# Notes
+* VST is a registered trademark of Steinberg Media Technologies GmbH

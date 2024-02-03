@@ -8,8 +8,8 @@ CtrlrProgressBar::CtrlrProgressBar(CtrlrModulator &owner)
 
     owner.setProperty (Ids::modulatorIsStatic, true);
 	owner.setProperty (Ids::modulatorVstExported, false);
-    setProperty (Ids::uiProgressBarBackgroundColour, "0xffffffff");
-    setProperty (Ids::uiProgressBarForegroundColour, "0xff0f0f0f");
+    setProperty (Ids::uiProgressBarForegroundColour, (String)findColour(ProgressBar::foregroundColourId).toString()); // "0xff0f0f0f"
+    setProperty (Ids::uiProgressBarBackgroundColour, (String)findColour(ProgressBar::backgroundColourId).toString()); // "0xffffffff"
     setProperty (Ids::uiProgressBarDisplayPercent, true);
 
     componentTree.addListener (this);

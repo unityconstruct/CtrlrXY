@@ -10,7 +10,9 @@ class LookAndFeelBase;
 /** @brief Class that represents a canvas layer
 
 */
-class CtrlrPanelCanvasLayer : public Component, public CtrlrLuaObject, public ValueTree::Listener
+class CtrlrPanelCanvasLayer :   public Component,
+                                public CtrlrLuaObject,
+                                public ValueTree::Listener
 {
 	public:
 		CtrlrPanelCanvasLayer(CtrlrPanelCanvas &_owner);

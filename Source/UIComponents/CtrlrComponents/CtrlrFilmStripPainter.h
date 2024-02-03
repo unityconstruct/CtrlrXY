@@ -34,7 +34,7 @@ class CtrlrFilmStripPainter
 		bool isVertical;
 };
 
-class CtrlrImageSliderLF : public CtrlrFilmStripPainter, public LookAndFeel_V2
+class CtrlrImageSliderLF : public CtrlrFilmStripPainter, public LookAndFeel_V4
 {
 	public:
 		CtrlrImageSliderLF(CtrlrComponent &_owner);

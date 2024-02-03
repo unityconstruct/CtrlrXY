@@ -15,6 +15,7 @@ class CtrlrDocumentPanel  : public MultiDocumentPanel
 		void activeDocumentChanged();
 		void setEditor (CtrlrEditor *_editorToSet);
 		void resized();
+        void lookAndFeelChanged();
 		JUCE_LEAK_DETECTOR(CtrlrDocumentPanel)
 
 	private:

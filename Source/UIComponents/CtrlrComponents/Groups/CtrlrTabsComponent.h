@@ -6,7 +6,7 @@
 
 class CtrlrTabsComponent;
 
-class CtrlrTabsLF : public LookAndFeel_V2
+class CtrlrTabsLF : public LookAndFeel_V4
 {
 	public:
 		CtrlrTabsLF(CtrlrTabsComponent &_owner);
@@ -109,6 +109,7 @@ public:
 	void itemDragEnter (const SourceDetails &dragSourceDetails);
 	bool isOwned(CtrlrComponent *componentToCheck);
 	Array <CtrlrComponent*> getOwnedChildren();
+    void updatePropertiesPanel();
 	void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr);
     //[/UserMethods]
 

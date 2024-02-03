@@ -200,23 +200,23 @@ CtrlrTabsComponent::CtrlrTabsComponent (CtrlrModulator &owner)
 
 	setProperty (Ids::uiTabsCurrentTabChanged, "");
 	setProperty (Ids::uiTabsDepth, 24);
-	setProperty (Ids::uiTabsOutlineThickness, 2);
-	setProperty (Ids::uiTabsFrontTabOutline, 1.0f);
+	setProperty (Ids::uiTabsOutlineThickness, 1);
 	setProperty (Ids::uiTabsTabOutline, 0.5f);
 	setProperty (Ids::uiTabsIndentThickness, 0);
 	setProperty (Ids::uiTabsOrientation, 0);
 
-	setProperty (Ids::uiTabsFrontTabFont, FONT2STR(Font(16)));
 	setProperty (Ids::uiTabsTabFont, FONT2STR(Font(16)));
+    setProperty (Ids::uiTabsTextTabColour, (String)findColour(TextButton::textColourOffId).toString()); // 0xff909090
+    setProperty (Ids::uiTabsOutlineTabColour, (String)findColour(TextButton::textColourOffId).brighter(0.2f).toString()); // 0xff303030
 
-	setProperty (Ids::uiTabsOutlineGlobalColour, "0x00000000");
-	setProperty (Ids::uiTabsOutlineGlobalBackgroundColour, "0x67000000");
-
-	setProperty (Ids::uiTabsOutlineTabColour, "0xff303030");
-	setProperty (Ids::uiTabsTextTabColour, "0xff909090");
-	setProperty (Ids::uiTabsFrontTabOutlineColour, "0xff000000");
-	setProperty (Ids::uiTabsFrontTabTextColour, "0xff000000");
-
+	setProperty (Ids::uiTabsOutlineGlobalBackgroundColour, (String)findColour(TextButton::textColourOffId).darker(0.25f).toString()); // 0x40000000 Container L,R,BTM outline
+    setProperty (Ids::uiTabsOutlineGlobalColour, "0x00000000"); // 0x00000000 Main container background colour
+    
+    setProperty (Ids::uiTabsFrontTabOutline, 1.0f);
+    setProperty (Ids::uiTabsFrontTabFont, FONT2STR(Font(16)));
+	setProperty (Ids::uiTabsFrontTabTextColour, (String)findColour(TextButton::textColourOffId).toString()); // 0xff000000
+    setProperty (Ids::uiTabsFrontTabOutlineColour, (String)findColour(TextButton::textColourOffId).brighter(0.5f).toString()); // 0xff000000
+    
 	setProperty (Ids::uiTabsAddTab, 0);
 	setProperty (Ids::uiTabsRemoveTab, 0);
     //[/UserPreSize]
@@ -390,6 +390,7 @@ void CtrlrTabsComponent::valueTreePropertyChanged (ValueTree &treeWhosePropertyH
 		}
 
 		setProperty(property, false);
+        updatePropertiesPanel(); // Updates the property pane with new tab props
 	}
 
 	else if (property == Ids::uiTabsRemoveTab)
@@ -415,6 +416,7 @@ void CtrlrTabsComponent::valueTreePropertyChanged (ValueTree &treeWhosePropertyH
 		}
 
 		setProperty(property, false);
+        updatePropertiesPanel();  // Updates the property pane with new tab props
 	}
 	else
 	{
@@ -516,10 +518,10 @@ void CtrlrTabsComponent::addTab(const ValueTree tabToAdd)
 		tabTree.setProperty (Ids::uiTabsTabName, "Tab "+String(tabId), 0);
 
 	if (!tabTree.hasProperty(Ids::uiTabsTabContentBackgroundColour))
-		tabTree.setProperty (Ids::uiTabsTabContentBackgroundColour, Colours::yellow.toString(), 0);
+		tabTree.setProperty (Ids::uiTabsTabContentBackgroundColour, (String)findColour(DocumentWindow::backgroundColourId).darker(0.1f).toString(), 0); // Colours::yellow.toString()
 
 	if (!tabTree.hasProperty(Ids::uiTabsTabBackgroundColour))
-		tabTree.setProperty (Ids::uiTabsTabBackgroundColour, Colours::lightgrey.toString(), 0);
+        tabTree.setProperty (Ids::uiTabsTabBackgroundColour, (String)findColour(DocumentWindow::backgroundColourId).darker(0.1f).toString(), 0); // Colours::lightgrey.toString()
 
 	if (!tabTree.hasProperty(Ids::uiTabsTabBackgroundImage))
 		tabTree.setProperty (Ids::uiTabsTabBackgroundImage, COMBO_NONE_ITEM, 0);
@@ -641,6 +643,18 @@ Array <CtrlrComponent*> CtrlrTabsComponent::getOwnedChildren()
 
 	return (ar);
 }
+
+
+
+void CtrlrTabsComponent::updatePropertiesPanel()
+{
+    CtrlrPanelProperties *props = owner.getCtrlrManagerOwner().getActivePanel()->getEditor(false)->getPropertiesPanel();
+    if (props)
+    {
+        props->refreshAll(); // Needs extra code to prevent scrolling back to top on refresh
+    }
+}
+
 //[/MiscUserCode]
 
 

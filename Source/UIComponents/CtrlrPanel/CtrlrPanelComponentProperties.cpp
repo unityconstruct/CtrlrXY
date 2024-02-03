@@ -10,7 +10,6 @@ CtrlrPanelComponentProperties::CtrlrPanelComponentProperties (CtrlrPanelEditor &
 {
     addAndMakeVisible (propertyPanel = new PropertyPanel());
     propertyPanel->getViewport().setScrollBarThickness(owner.getOwner().getOwner().getProperty(Ids::ctrlrScrollbarThickness));
-
     //[UserPreSize]
 	selectedItems=-1;
 	owner.getOwner().getCtrlrManagerOwner().addListener (this);
@@ -48,7 +47,9 @@ void CtrlrPanelComponentProperties::paint (Graphics& g)
 {
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
-
+    
+    g.fillAll(findColour(DocumentWindow::backgroundColourId).brighter(0.2f));  // Was missing before v5.6.29
+    
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
 }
@@ -232,16 +233,24 @@ void CtrlrPanelComponentProperties::setTree (const ValueTree &_treeToEdit, const
 		propertyPanel->clear();
 
 		if (panelProperties.size() != 0)
-			propertyPanel->addSection ("Panel", filterProperties(panelProperties));
+			propertyPanel->addSection ("Panel",
+                                       filterProperties(panelProperties)
+                                       );
 
 		if (panelMidiProperties.size() != 0)
-			propertyPanel->addSection ("MIDI", filterProperties(panelMidiProperties));
+			propertyPanel->addSection ("MIDI",
+                                       filterProperties(panelMidiProperties)
+                                       );
 
 		if (panelOSCProperties.size() != 0)
-			propertyPanel->addSection ("OSC", filterProperties(panelOSCProperties));
+			propertyPanel->addSection ("OSC",
+                                       filterProperties(panelOSCProperties)
+                                       );
 
 		if (panelMidiProperties.size() != 0)
-			propertyPanel->addSection ("Editor", filterProperties(panelEditorProperties));
+			propertyPanel->addSection ("Editor",
+                                       filterProperties(panelEditorProperties)
+                                       );
 
 		(propertyPanel);
 	}
@@ -463,16 +472,24 @@ void CtrlrPanelComponentProperties::setTree (const ValueTree &_treeToEdit, const
 		}
 
 		if (modulatorProperties.size() != 0)
-			propertyPanel->addSection ("Modulator", filterProperties(modulatorProperties));
+			propertyPanel->addSection ("Modulator",
+                                       filterProperties(modulatorProperties)
+                                       );
 
 		if (midiProperties.size() != 0)
-			propertyPanel->addSection ("MIDI", filterProperties(midiProperties));
+			propertyPanel->addSection ("MIDI",
+                                       filterProperties(midiProperties)
+                                       );
 
 		if (componentProperties.size() != 0)
-			propertyPanel->addSection ("Component generic", filterProperties(componentProperties));
+			propertyPanel->addSection ("Component generic",
+                                       filterProperties(componentProperties)
+                                       );
 
 		if (componentUIProperties.size() != 0)
-			propertyPanel->addSection ("Component", filterProperties(componentUIProperties));
+			propertyPanel->addSection ("Component",
+                                       filterProperties(componentUIProperties)
+                                       );
 	}
 }
 

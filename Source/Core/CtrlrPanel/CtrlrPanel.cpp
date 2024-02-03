@@ -3,6 +3,7 @@
 #include "CtrlrPanel.h"
 #include "CtrlrPanel/CtrlrPanelEditor.h"
 #include "CtrlrPanel/CtrlrPanelProperties.h"
+#include "CtrlrPanel/CtrlrPanelComponentProperties.h"
 #include "CtrlrProcessor.h"
 #include "CtrlrMacros.h"
 #include "CtrlrUtilities.h"
@@ -158,21 +159,21 @@ CtrlrPanel::CtrlrPanel(CtrlrManager &_owner, const String &panelName, const int 
 	setProperty (Ids::panelResources, COMBO_ITEM_NONE);
 	setProperty (Ids::panelPropertyDisplayIDs, false);
 
-	setProperty (Ids::ctrlrMenuItemBackgroundColour, 		Colours::white.toString());
-	setProperty (Ids::ctrlrMenuItemTextColour, 				Colours::black.toString());
-	setProperty (Ids::ctrlrMenuItemHighlightedTextColour, 	Colours::white.toString());
-	setProperty (Ids::ctrlrMenuItemHighlightColour, 		Colour(HIGHLIGHT_COLOUR).toString());
-	setProperty (Ids::ctrlrMenuItemFont, 					owner.getFontManager().getStringFromFont (Font (18.0f)));
-	setProperty (Ids::ctrlrMenuItemSeparatorColour,			Colour (0x44000000).toString());
-	setProperty (Ids::ctrlrMenuItemHeaderColour,			Colours::black.toString());
+//	setProperty (Ids::ctrlrMenuItemBackgroundColour, 		Colours::white.toString());
+//	setProperty (Ids::ctrlrMenuItemTextColour, 				Colours::black.toString());
+//	setProperty (Ids::ctrlrMenuItemHighlightedTextColour, 	Colours::white.toString());
+//	setProperty (Ids::ctrlrMenuItemHighlightColour, 		Colour(HIGHLIGHT_COLOUR).toString());
+//	setProperty (Ids::ctrlrMenuItemFont, 					owner.getFontManager().getStringFromFont (Font (18.0f)));
+//	setProperty (Ids::ctrlrMenuItemSeparatorColour,			Colour (0x44000000).toString());
+//	setProperty (Ids::ctrlrMenuItemHeaderColour,			Colours::black.toString());
+//
+//	setProperty (Ids::ctrlrMenuBarBackgroundColour1, 		Colour(0xfff7f7f7).toString());
+//	setProperty (Ids::ctrlrMenuBarBackgroundColour2, 		Colour(0xffcccccc).toString());
+//	setProperty (Ids::ctrlrMenuBarTextColour, 				Colours::black.toString());
+//	setProperty (Ids::ctrlrMenuBarHighlightedTextColour, 	Colours::white.toString());
+//	setProperty (Ids::ctrlrMenuBarHighlightColour, 			Colour(HIGHLIGHT_COLOUR).toString());
+//	setProperty (Ids::ctrlrMenuBarFont, 					owner.getFontManager().getStringFromFont (Font (18.0f)));
     
-    setProperty (Ids::ctrlrMenuBarHeight, 24);
-	setProperty (Ids::ctrlrMenuBarBackgroundColour1, 		Colour(0xfff7f7f7).toString());
-	setProperty (Ids::ctrlrMenuBarBackgroundColour2, 		Colour(0xffcccccc).toString());
-	setProperty (Ids::ctrlrMenuBarTextColour, 				Colours::black.toString());
-	setProperty (Ids::ctrlrMenuBarHighlightedTextColour, 	Colours::white.toString());
-	setProperty (Ids::ctrlrMenuBarHighlightColour, 			Colour(HIGHLIGHT_COLOUR).toString());
-	setProperty (Ids::ctrlrMenuBarFont, 					owner.getFontManager().getStringFromFont (Font (18.0f)));
 	setProperty (Ids::ctrlrUseEditorWrapper, false);
 
 	owner.addChangeListener (this);
@@ -607,8 +608,35 @@ void CtrlrPanel::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasChange
 	}
     else if (property == Ids::panelPropertyDisplayIDs)
     {
-        // ctrlrPanelEditor->getPanelProperties()->repaint(); // Crashes
-        // ctrlrPanelEditor->getPanelProperties()->currentTabChanged(); // Crashes, to force refresh GUI from tab switching
+        if (ctrlrPanelEditor)
+        {
+            ctrlrPanelEditor->getPropertiesPanel()->refreshAll(); // refreshes the property pane
+            if (ctrlrPanelEditor->getSelection())
+            {
+                ctrlrPanelEditor->getSelection()->sendChangeMessage();  // Bring back the screen position to where it left
+            }
+        }
+    }
+    else if (property == Ids::ctrlrMenuBarBackgroundColour1
+             || property == Ids::ctrlrMenuBarBackgroundColour2
+             || property == Ids::ctrlrMenuItemBackgroundColour
+             || property == Ids::ctrlrMenuItemTextColour
+             || property == Ids::ctrlrMenuItemHighlightedTextColour
+             || property == Ids::ctrlrMenuItemHighlightColour
+             || property == Ids::ctrlrMenuItemFont
+             || property == Ids::ctrlrMenuItemSeparatorColour
+             || property == Ids::ctrlrMenuItemHeaderColour
+             || property == Ids::ctrlrMenuBarTextColour
+             || property == Ids::ctrlrMenuBarHighlightedTextColour
+             || property == Ids::ctrlrMenuBarHighlightColour
+             || property == Ids::ctrlrMenuBarFont)
+    {
+        // CtrlrLookAndFeel.cpp L#93 from Ctrlr v5.1.198 has been removed
+        //owner.getEditor()->activeCtrlrChanged();
+    }
+    else if (property == Ids::ctrlrMenuBarHeight)
+    {
+        // setting the menuBar component size with setSize() and resized() via owner.getEditor() does not work
     }
 }
 

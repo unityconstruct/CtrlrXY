@@ -18,14 +18,14 @@ CtrlrEditor::CtrlrEditor (CtrlrProcessor *_ownerFilter, CtrlrManager &_owner)
 		menuHandlerCalled(false),
 		lastCommandInvocationMillis(0)
 {
-	LookAndFeel::setDefaultLookAndFeel(this);
+	LookAndFeel::setDefaultLookAndFeel(this);  // Set V4 Light as Default LnF. Requires updating depending on the selected LnF
+    // menuBarLookAndFeel = new CtrlrMenuBarLookAndFeel (*this); // For version 5.3.198 and before
 	Rectangle<int> editorRect;
     // http://www.juce.com/forum/topic/applicationcommandmanager-menus-not-active-annoyance#new
     owner.getCommandManager().setFirstCommandTarget (this);
 
     menuBar = new MenuBarComponent (this);
     addAndMakeVisible(menuBar);
-	// menuBarLookAndFeel = new CtrlrMenuBarLookAndFeel (*this);
 
 	setApplicationCommandManagerToWatch (&owner.getCommandManager());
 
@@ -57,12 +57,12 @@ CtrlrEditor::CtrlrEditor (CtrlrProcessor *_ownerFilter, CtrlrManager &_owner)
 	{
         if (owner.getInstanceMode() != InstanceSingle && owner.getInstanceMode() != InstanceSingleRestriced)
 		{
-			editorRect = VAR2RECT(owner.getProperty(Ids::ctrlrEditorBounds)); // Size of full Editor window including top tabs and 2x1px borders
+			editorRect = VAR2RECT(owner.getProperty(Ids::ctrlrEditorBounds)); // Size of full Editor window including top tabs and 1px borders
 		}
 		else if (owner.getActivePanel())
 		{
             ValueTree editorTree = owner.getActivePanel()->getEditor()->getPanelEditorTree();  // owner is CtrlrManager for the current class
-            editorRect = VAR2RECT(editorTree.getProperty(Ids::uiPanelCanvasRectangle));
+            editorRect = VAR2RECT(owner.getProperty(Ids::ctrlrEditorBounds));
             vpMenuBarVisible = editorTree.getProperty(Ids::uiPanelMenuBarVisible);
             vpResizable = editorTree.getProperty(Ids::uiViewPortResizable);
             vpEnableFixedAspectRatio = editorTree.getProperty(Ids::uiViewPortEnableFixedAspectRatio);
@@ -84,11 +84,10 @@ CtrlrEditor::CtrlrEditor (CtrlrProcessor *_ownerFilter, CtrlrManager &_owner)
                 editorRect.setWidth (editorRect.getWidth());
 				editorRect.setHeight (editorRect.getHeight());
             }
-            
+                        
             if (!JUCEApplication::isStandaloneApp() && owner.getInstanceMode() == InstanceSingleRestriced)
             {
                 setResizable(vpResizable, true);
-                CtrlrViewport().setScrollBarsShown(false,false);
  
                 if (auto* constrainer = getConstrainer())
                 {
@@ -128,12 +127,11 @@ CtrlrEditor::CtrlrEditor (CtrlrProcessor *_ownerFilter, CtrlrManager &_owner)
 		else
 			setSize(800, 600);
 	}
+    
+    setColourScheme(gui::colourSchemeFromProperty(owner.getProperty(Ids::ctrlrColourScheme))); // Sets the LookAndFeel_V4 colourScheme from the Ctrlr General Preferences, not from the loaded Panel
+    getLookAndFeel().setUsingNativeAlertWindows((bool)owner.getProperty(Ids::ctrlrNativeAlerts)); // Sets OS Native alert windows or JUCE
 
-	setColourScheme(gui::colourSchemeFromProperty(owner.getProperty(Ids::ctrlrColourScheme)));
-
-    getLookAndFeel().setUsingNativeAlertWindows((bool)owner.getProperty(Ids::ctrlrNativeAlerts));
-	lookAndFeelChanged();
-	activeCtrlrChanged();
+    activeCtrlrChanged(); // Refresh CtrlrEditor Template, wether panel mode or Editor with or WO menuBar from properties
 
 	if (isRestricted() && owner.getActivePanel())
 	{
@@ -146,13 +144,13 @@ CtrlrEditor::CtrlrEditor (CtrlrProcessor *_ownerFilter, CtrlrManager &_owner)
 
 CtrlrEditor::~CtrlrEditor()
 {
-	deleteAndZero (menuBar);
+    deleteAndZero (menuBar);
 	masterReference.clear();
 }
 
 void CtrlrEditor::paint (Graphics& g)
 {
-    g.fillAll(Colours::lightgrey);
+    g.fillAll(Component::findColour(DocumentWindow::backgroundColourId));
 }
 
 void CtrlrEditor::resized()
@@ -164,7 +162,7 @@ void CtrlrEditor::resized()
 	}
 	else
 	{
-		owner.getCtrlrDocumentPanel().setBounds (0, 0, getWidth(), getHeight()); // Needs offsets -1 , 0 +2, +1 for Cubase to disable auto scrollbars and hide borders
+		owner.getCtrlrDocumentPanel().setBounds (0, 0, getWidth(), getHeight());
 	}
 	resizer.setBounds (getWidth()-24, getHeight()-24, 24, 24);
 	owner.setProperty (Ids::ctrlrEditorBounds, getBounds().toString());
@@ -184,6 +182,26 @@ void CtrlrEditor::activeCtrlrChanged()
 		{
 			setMenuBarVisible(menuBarVisible);
 		}
+        
+        String currentLookAndFeel = owner.getActivePanel()->getEditor()->getProperty(Ids::uiPanelLookAndFeel);
+        setMenuBarLookAndFeel(currentLookAndFeel); // Updates the current component LookAndFeel : PanelEditor
+        
+        lookAndFeelChanged();
+
+//        Pass all menuBar Props updates here
+//        String customMenuBarBackgroundColour1 = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuBarBackgroundColour1);
+//        String customMenuBarBackgroundColour2 = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuBarBackgroundColour2);
+//        String customMenuBarItemBackgroundColour = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuItemBackgroundColour);
+//        String customMenuBarItemTextColour = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuItemTextColour);
+//        String customMenuBarItemHighlightedTextColour = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuItemHighlightedTextColour);
+//        String customMenuBarItemHighlightColour = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuItemHighlightColour);
+//        String customMenuBarItemFont = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuItemFont);
+//        String customMenuBarItemSeparatorColour = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuItemSeparatorColour);
+//        String customMenuBarItemHeaderColour = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuItemHeaderColour);
+//        String customMenuBarTextColour = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuBarTextColour);
+//        String customMenuBarHighlightedTextColour = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuBarHighlightedTextColour);
+//        String customMenuBarHighlightColour = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuBarHighlightColour);
+//        String customMenuBarFont = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuBarFont);
 	}
 }
 
@@ -238,4 +256,24 @@ void CtrlrEditor::setMenuBarVisible(const bool shouldBeVisible)
 {
 	menuBar->setVisible (shouldBeVisible);
 	resized();
+}
+
+void CtrlrEditor::setMenuBarLookAndFeel(const String &lookAndFeelDesc)
+{
+    if (lookAndFeelDesc == "V4" || lookAndFeelDesc == "V4 Light")
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getLightColourScheme()));
+    else if (lookAndFeelDesc == "V4 Grey")
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getGreyColourScheme()));
+    else if (lookAndFeelDesc == "V4 Dark")
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getDarkColourScheme()));
+    else if (lookAndFeelDesc == "V4 Midnight")
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getMidnightColourScheme()));
+    else if (lookAndFeelDesc == "V3")
+        menuBar->setLookAndFeel(new LookAndFeel_V3());
+    else if (lookAndFeelDesc == "V2")
+        menuBar->setLookAndFeel(new LookAndFeel_V2());
+    else if (lookAndFeelDesc == "V1")
+        menuBar->setLookAndFeel(new LookAndFeel_V1());
+    else
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getLightColourScheme()));
 }

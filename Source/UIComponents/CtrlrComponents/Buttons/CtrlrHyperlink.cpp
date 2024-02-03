@@ -46,7 +46,7 @@ CtrlrHyperlink::CtrlrHyperlink (CtrlrModulator &owner)
 
     //[UserPreSize]
     setProperty (Ids::uiButtonContent, "False\nTrue");
-	setProperty (Ids::uiHyperlinkColour, "0xff0000ff");
+    setProperty (Ids::uiHyperlinkColour, (String)findColour(HyperlinkButton::textColourId).toString()); // 0xff0000ff
 	setProperty (Ids::uiHyperlinkFont, Font (14, Font::underlined).toString());
 	setProperty (Ids::uiHyperlinkFitTextToSize, true);
 	setProperty (Ids::uiHyperlinkTextJustification, "centred");

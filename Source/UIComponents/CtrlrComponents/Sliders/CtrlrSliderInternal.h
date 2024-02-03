@@ -79,6 +79,9 @@ class CtrlrSliderLookAndFeel_V2 : public LookAndFeel_V2
 		CtrlrComponent &owner;
 };
 
+
+
+
 class CtrlrSliderLookAndFeel_V3 : public LookAndFeel_V3
 {
 public:
@@ -138,12 +141,15 @@ private:
     CtrlrComponent &owner;
 };
 
+
+
+
 class CtrlrSliderLookAndFeel_V4 : public LookAndFeel_V4
 {
 public:
     CtrlrSliderLookAndFeel_V4(CtrlrComponent &_owner, ValueTree &_ownerTree) : ownerTree(_ownerTree), owner(_owner)
     {
-        setColour (0xdeadbeed, Colour(0x00000000));
+        //setColour (0xdeadbeed, Colour(0x00000000));
     }
 
     Button *createSliderButton (Slider&, bool isIncrement)
@@ -186,14 +192,21 @@ public:
     {
         return jmin (7,slider.getHeight() / 2,slider.getWidth() / 2) + 2;
     }
+    
     Colour findColour (int colourId) const noexcept;
+    
     int getSliderPopupPlacement(Slider &);
+    
     Font getSliderPopupFont(Slider &);
+    
     void drawLinearSliderBackground (Graphics& g, int x, int y, int width, int height, float /*sliderPos*/, float /*minSliderPos*/, float /*maxSliderPos*/, const Slider::SliderStyle /*style*/, Slider& slider);
+    
     void drawLinearSliderThumb (Graphics& g, int x, int y, int width, int height, float sliderPos, float minSliderPos, float maxSliderPos, const Slider::SliderStyle style, Slider& slider);
-
+    
 private:
+    
     ValueTree &ownerTree;
     CtrlrComponent &owner;
 };
+
 #endif

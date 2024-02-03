@@ -49,7 +49,8 @@ class CtrlrPanel:	public ValueTree::Listener,
 					public ChangeListener,
 					public CtrlrLuaObject,
 					public AsyncUpdater,
-					public CtrlrMidiMessageOwner
+					public CtrlrMidiMessageOwner,
+                    public LookAndFeel_V4
 {
 	public:
 		/** @brief When saving a panel this tells the LUA callback what sort of format is beeing saved
@@ -322,7 +323,6 @@ class CtrlrPanel:	public ValueTree::Listener,
         const String getPanelInstanceName();
         const String getPanelInstanceManufacturer();
 
-
 		WeakReference<CtrlrPanel>::Master masterReference;
 		friend class WeakReference<CtrlrPanel>;
 
@@ -338,7 +338,8 @@ class CtrlrPanel:	public ValueTree::Listener,
 					controllerInputChannel;
 
 		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrPanel)
-
+    
+    
 	private:
 		ValueTree initialProgram, panelTree;
 		ReadWriteLock panelLock;

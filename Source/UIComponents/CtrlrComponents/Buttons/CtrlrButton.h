@@ -33,6 +33,9 @@ public:
 	bool isToggleButton();
 	void setToggleState(const bool toggleState, const bool sendChangeMessage=false);
 	void timerCallback();
+    static LookAndFeel* getLookAndFeelFromComponentProperty(const String &lookAndFeelComponentProperty);
+    void resetLookAndFeelOverrides();
+    void updatePropertiesPanel();
 	void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr) {}
 	CtrlrValueMap &getValueMap() { return (*valueMap); }
 

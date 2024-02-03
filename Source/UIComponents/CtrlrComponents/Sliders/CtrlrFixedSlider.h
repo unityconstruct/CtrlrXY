@@ -34,7 +34,10 @@ public:
 	void valueTreeChildOrderChanged (ValueTree& parentTreeWhoseChildrenHaveMoved, int, int){}
 	Slider *getOwnedSlider() { return (ctrlrSlider); }
 	CtrlrValueMap &getValueMap() { return (*valueMap); }
-	void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr) {}
+    void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr) {};
+    static LookAndFeel* getLookAndFeelFromComponentProperty(const String &lookAndFeelComponentProperty);
+    void resetLookAndFeelOverrides();
+    void updatePropertiesPanel();
 
 	static void wrapForLua(lua_State *L);
     //[/UserMethods]
@@ -43,12 +46,16 @@ public:
     void resized();
     void mouseUp (const MouseEvent& e);
 
+
     //==============================================================================
     juce_UseDebuggingNewOperator
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-	ScopedPointer<CtrlrSliderLookAndFeel_V2> lf;
+    CtrlrSliderLookAndFeel_V2 lf;
+    CtrlrSliderLookAndFeel_V2 lfV2;
+    CtrlrSliderLookAndFeel_V3 lfV3;
+    CtrlrSliderLookAndFeel_V4 lfV4;
 	ScopedPointer<CtrlrValueMap> valueMap;
     //[/UserVariables]
 

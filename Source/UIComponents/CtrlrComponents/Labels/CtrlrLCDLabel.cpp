@@ -14,8 +14,8 @@ CtrlrLCDLabel::CtrlrLCDLabel (CtrlrModulator &owner)
     ctrlrLabel->setJustificationType (Justification::centred);
     ctrlrLabel->setEditable (false, false, false);
     ctrlrLabel->setColour (Label::backgroundColourId, Colour (0x0));
-    ctrlrLabel->setColour (Label::textColourId, Colours::black);
-    ctrlrLabel->setColour (TextEditor::textColourId, Colours::black);
+    ctrlrLabel->setColour (Label::textColourId, findColour(Label::textColourId)); // Colours::black
+    ctrlrLabel->setColour (TextEditor::textColourId, findColour(TextEditor::textColourId)); // Colours::black
     ctrlrLabel->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
 

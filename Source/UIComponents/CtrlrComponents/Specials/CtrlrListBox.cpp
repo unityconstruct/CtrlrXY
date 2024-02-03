@@ -19,26 +19,31 @@ CtrlrListBox::CtrlrListBox (CtrlrModulator &owner)
 	//[UserPreSize]
 	setProperty (Ids::uiListBoxContent, "");
 	setProperty (Ids::uiListBoxRowHeight, 16);
-	setProperty (Ids::uiListBoxBackgroundColour, "0xffffffff");
-	setProperty (Ids::uiListBoxHighlightBgColour, "0xff0000ff");
-	setProperty (Ids::uiListBoxHighlightFgColour, "0xff000000");
-	setProperty (Ids::uiListBoxTextColour, "0xff000000");
-	setProperty (Ids::uiListBoxFont, FONT2STR (Font(14)));
-	setProperty (Ids::uiListBoxHighlightFont, FONT2STR (Font(14)));
-	setProperty (Ids::uiListBoxOutline, 0);
-	setProperty (Ids::uiListBoxOutlineColour, "0xff000000");
-	setProperty (Ids::uiListBoxVScrollBgColour, "0xffffffff");
-	setProperty (Ids::uiListBoxVScrollThumbColour, "0xffababab");
-	setProperty (Ids::uiListBoxVScrollTrackColour, "0xffff0000");
-	setProperty (Ids::uiListBoxHScrollBgColour, "0xffffffff");
-	setProperty (Ids::uiListBoxHScrollThumbColour, "0xffababab");
-	setProperty (Ids::uiListBoxHScrollTrackColour, "0xffff0000");
-	setProperty (Ids::uiListBoxJustification, "centred");
+    setProperty (Ids::uiListBoxJustification, "centred");
+    setProperty (Ids::uiListBoxTextColour, (String)findColour(Label::textColourId).withAlpha(0.8f).toString()); // "0xff000000"
+    setProperty (Ids::uiListBoxFont, FONT2STR (Font(14)));
+    setProperty (Ids::uiListBoxHighlightFont, FONT2STR (Font(14)));
+    
+	setProperty (Ids::uiListBoxBackgroundColour, (String)findColour(TextButton::buttonColourId).withAlpha(0.0f).toString()); // "0xffffffff"
+	setProperty (Ids::uiListBoxHighlightBgColour,(String)findColour(TextEditor::highlightColourId).toString()); // "0xff0000ff"
+	setProperty (Ids::uiListBoxHighlightFgColour, (String)findColour(TextEditor::highlightedTextColourId).toString()); // "0xff00000"
+	
+    setProperty (Ids::uiListBoxOutline, 0);
+	setProperty (Ids::uiListBoxOutlineColour, (String)findColour(TextEditor::outlineColourId).toString()); // "0xff000000"
+	
+    setProperty (Ids::uiListBoxVScrollBgColour, (String)findColour(ScrollBar::backgroundColourId).toString()); // "0xffffffff"
+	setProperty (Ids::uiListBoxVScrollThumbColour, (String)findColour(ScrollBar::thumbColourId).toString()); // "0xffababab"
+	setProperty (Ids::uiListBoxVScrollTrackColour, (String)findColour(ScrollBar::trackColourId).toString()); // "0xffff0000"
+	setProperty (Ids::uiListBoxHScrollBgColour, (String)findColour(ScrollBar::backgroundColourId).toString()); // "0xffffffff"
+	setProperty (Ids::uiListBoxHScrollThumbColour, (String)findColour(ScrollBar::thumbColourId).toString()); // "0xffababab"
+	setProperty (Ids::uiListBoxHScrollTrackColour, (String)findColour(ScrollBar::trackColourId).toString()); // "0xffff0000"
+	
 	setProperty (Ids::uiListBoxMultipleSelection, false);
 	setProperty (Ids::uiListBoxItemClicked, COMBO_NONE_ITEM);
 	setProperty (Ids::uiListBoxItemDoubleClicked, COMBO_NONE_ITEM);
 	setProperty (Ids::uiListBoxItemDeleteKeyPressed, COMBO_NONE_ITEM);
 	setProperty (Ids::uiListBoxItemReturnKeyPressed, COMBO_NONE_ITEM);
+
     //[/UserPreSize]
 
     setSize (128, 256);

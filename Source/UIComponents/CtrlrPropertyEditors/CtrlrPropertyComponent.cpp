@@ -44,7 +44,7 @@ const String CtrlrPropertyComponent::getVisibleText()
 {
 	return visibleText;
 }
-void CtrlrPropertyComponent::paint (Graphics &g)
+void CtrlrPropertyComponent::paint (Graphics &g) // Property ID/Description
 {
 	getLookAndFeel().drawPropertyComponentBackground (g, getLookAndFeel().getPropertyComponentContentPosition (*this).getX(), getHeight(), *this);
 	if (isMouseOver(false) && !currentFont.isUnderlined())
@@ -55,15 +55,15 @@ void CtrlrPropertyComponent::paint (Graphics &g)
 	{
 		currentFont.setUnderline(false);
 	}
-
-	g.setFont (currentFont);
-	g.setColour(findColour(PropertyComponent::labelTextColourId));
-	g.drawFittedText (visibleText, 3, 0, getLookAndFeel().getPropertyComponentContentPosition (*this).getX()-5, getHeight(), Justification::centredLeft, 2);
+  
+    g.setFont (currentFont);
+	g.setColour (findColour(CtrlrPropertyComponent::labelTextColourId));
+    g.drawFittedText (visibleText, 6, 0, getLookAndFeel().getPropertyComponentContentPosition (*this).getX()-12, getHeight(), Justification::centredLeft, 2, 1.0f);
 }
 
 void CtrlrPropertyComponent::resized()
 {
-	currentFont.setHeight (jmin (getHeight(), 24) * 0.55f);
+	// currentFont.setHeight (jmin (getHeight(), 24) * 0.55f);
 
 	if (getNumChildComponents() > 0)
 	{
@@ -85,32 +85,34 @@ void CtrlrPropertyComponent::refresh()
 
 Component *CtrlrPropertyComponent::getPropertyComponent()
 {
-	Value valueToControl	= propertyElement.getPropertyAsValue (propertyName, panel ? panel->getUndoManager() : nullptr);
+	Value valueToControl = propertyElement.getPropertyAsValue (propertyName, panel ? panel->getUndoManager() : nullptr);
 
 	if (panel)
 	{
 		if ((bool)panel->getProperty(Ids::panelPropertyDisplayIDs) == false)
 		{
-			visibleText				= identifierDefinition.getProperty ("text").toString();
+            visibleText = identifierDefinition.getProperty ("text").toString();
 		}
 		else
 		{
-			visibleText				= propertyName.toString();
+            visibleText = propertyName.toString();
 		}
 	}
 	else
 	{
-		visibleText				= identifierDefinition.getProperty ("text").toString();
+        visibleText = identifierDefinition.getProperty ("text").toString();
 	}
 
-	propertyType			= CtrlrIDManager::stringToType(identifierDefinition.getProperty("type"));
+	propertyType = CtrlrIDManager::stringToType(identifierDefinition.getProperty("type"));
 
 	switch (propertyType)
 	{
 		case CtrlrIDManager::ReadOnly:
-			return (new CtrlrTextPropertyComponent (valueToControl, 1024, false, true));
-
+            preferredHeight = 36;
+			return (new CtrlrTextPropertyComponent (valueToControl, 1024, false, true)); // valueToControl, maxNumChars, isMultiLine, isReadOnly
+            
 		case CtrlrIDManager::Text:
+            preferredHeight = 36;
 			return (new CtrlrTextPropertyComponent (valueToControl, 1024, false));
 
 		case CtrlrIDManager::MultiLine:
@@ -126,44 +128,55 @@ Component *CtrlrPropertyComponent::getPropertyComponent()
 			return (new CtrlrExpressionProperty (valueToControl));
 
 		case CtrlrIDManager::Colour:
+            preferredHeight = 36;
 			return (new CtrlrColourPropertyComponent (valueToControl));
-
+            
 		case CtrlrIDManager::Font:
+            preferredHeight = 36;
 			return (new CtrlrFontPropertyComponent (valueToControl, panel));
 
 		case CtrlrIDManager::Bool:
+            preferredHeight = 36;
 			return (new CtrlrBooleanPropertyComponent(valueToControl, identifierDefinition.getProperty ("defaults")));
-
+            
 		case CtrlrIDManager::MultiMidi:
 			preferredHeight = 128;
 			return (new CtrlrMultiMidiPropertyComponent(valueToControl));
 
 		case CtrlrIDManager::SysEx:
-			preferredHeight = 28;
+			preferredHeight = 36;
 			return (new CtrlrSysExPropertyComponent(valueToControl, propertyElement, propertyName, panel));
 
 		case CtrlrIDManager::LuaMethod:
+            preferredHeight = 36;
 			return (new CtrlrLuaMethodProperty(valueToControl, propertyName, panel));
-
+            
 		case CtrlrIDManager::ActionButton:
+            preferredHeight = 36;
 			return (new CtrlrButtonPropertyComponent(valueToControl, visibleText));
-
+            
 		case CtrlrIDManager::Numeric:
+            preferredHeight = 36;
 			return (new CtrlrSliderPropertyComponent(valueToControl, (double)identifierDefinition.getProperty ("min", 0), (double)identifierDefinition.getProperty ("max", 127), (double)identifierDefinition.getProperty ("int", 1)));
-
+            
 		case CtrlrIDManager::VarNumeric:
+            preferredHeight = 36;
 			return (new CtrlrChoicePropertyComponent(valueToControl, possibleChoices, possibleValues, true));
-
+            
 		case CtrlrIDManager::VarText:
+            preferredHeight = 36;
 			return (new CtrlrChoicePropertyComponent(valueToControl, possibleChoices, possibleValues, false));
-
+            
 		case CtrlrIDManager::FileProperty:
+            preferredHeight = 36;
 			return (new CtrlrFileProperty (valueToControl));
-
+            
 		case CtrlrIDManager::Timestamp:
+            preferredHeight = 36;
 			return (new CtrlrTimestampProperty (valueToControl));
-
+            
 		case CtrlrIDManager::ModulatorList:
+            preferredHeight = 36;
 			return (new CtrlrModulatorListProperty (valueToControl, panel));
 
 		default:
@@ -391,7 +404,7 @@ CtrlrColourEditorComponent::CtrlrColourEditorComponent(ChangeListener *defaultLi
 	addAndMakeVisible (&colourTextInput);
 	colourTextInput.setJustificationType (Justification::centred);
 	colourTextInput.setFont (colourTextInput.getFont().withStyle(Font::bold));
-	colourTextInput.setEditable (true, false, false);
+	colourTextInput.setEditable (true, false, false); // single click, double-click, lossOfFocusDiscardsChanges
 	colourTextInput.setAlwaysOnTop (true);
 	colourTextInput.addListener (this);
 	colourTextInput.addMouseListener (this, true);
@@ -404,6 +417,7 @@ void CtrlrColourEditorComponent::updateLabel()
 {
 	colourTextInput.setColour (Label::backgroundColourId, getColour());
 	colourTextInput.setColour (Label::textColourId, getColour().contrasting().darker(0.25f));
+    colourTextInput.setColour (Label::outlineColourId, findColour(ComboBox::outlineColourId));
 	colourTextInput.setText (getColour().toDisplayString (true), dontSendNotification);
 }
 
@@ -430,25 +444,19 @@ void CtrlrColourEditorComponent::setColour (const Colour& newColour, const bool 
 
 void CtrlrColourEditorComponent::mouseDown (const MouseEvent &e)
 {
-	if (e.mods.isPopupMenu())
-	{
-		/*
-		DialogWindow::LaunchOptions o;
+    auto colourSelector = std::make_unique<ColourSelector> (ColourSelector::showAlphaChannel
+                                                                | ColourSelector::showColourAtTop
+                                                                | ColourSelector::editableColour
+                                                                | ColourSelector::showSliders
+                                                                | ColourSelector::showColourspace);
 
-    	CtrlrColourSelectorComp *editor 		= new CtrlrColourSelectorComp (this, canResetToDefault);
-		o.dialogTitle					= "Colour editor";
-		o.content.set (editor, true);
-		o.resizable						= true;
-		o.useNativeTitleBar				= true;
-		o.dialogBackgroundColour 		= Colours::whitesmoke;
-		o.escapeKeyTriggersCloseButton	= true;
-		o.componentToCentreAround		= this;
-		o.launchAsync();
-		*/
-		auto colourSelector = std::make_unique<CtrlrColourSelectorComp> (this, canResetToDefault);
+        colourSelector->setName ("background");
+        colourSelector->setCurrentColour(colourTextInput.findColour(Label::backgroundColourId)); // Gets colour from the property box BG
+        colourSelector->addChangeListener (this);
+        colourSelector->setColour (ColourSelector::backgroundColourId, Colours::transparentBlack);
+        colourSelector->setSize (300, 400);
 
-		 CallOutBox::launchAsynchronously (std::move(colourSelector), getScreenBounds(), nullptr);
-	}
+        CallOutBox::launchAsynchronously (std::move (colourSelector), getScreenBounds(), nullptr);
 }
 
 void CtrlrColourEditorComponent::changeListenerCallback (ChangeBroadcaster* source)
@@ -500,8 +508,9 @@ CtrlrReadOnlyProperty::CtrlrReadOnlyProperty(const Identifier &_propertyName,
 															StringArray *possibleValues) : propertyName(_propertyName), propertyElement(_propertyElement)
 {
 	addAndMakeVisible (&value);
-	value.setColour(Label::backgroundColourId, Colours::white.withAlpha(0.5f));
-	value.setColour(Label::outlineColourId, Colours::black.withAlpha(0.5f));
+
+    value.setColour(Label::backgroundColourId, findColour(Slider::backgroundColourId).withAlpha(0.5f));
+    value.setColour(Label::outlineColourId, findColour(Slider::textBoxTextColourId).withAlpha(0.5f));
 }
 
 CtrlrReadOnlyProperty::~CtrlrReadOnlyProperty()
@@ -528,9 +537,11 @@ CtrlrExpressionProperty::CtrlrExpressionProperty (const Value &_valeToControl) :
     text->setCaretVisible (true);
     text->setPopupMenuEnabled (true);
     text->setText ("");
-	text->setColour (TextEditor::outlineColourId, findColour (TextEditor::outlineColourId));
-	text->setColour(TextEditor::highlightedTextColourId, findColour(TextEditor::highlightedTextColourId));
-	text->setColour(TextEditor::highlightColourId, findColour(TextEditor::focusedOutlineColourId));
+    text->setColour (TextEditor::backgroundColourId, findColour (TextEditor::backgroundColourId));
+	text->setColour (TextEditor::textColourId, findColour (TextEditor::textColourId));
+    text->setColour (TextEditor::outlineColourId, findColour (TextEditor::outlineColourId));
+	text->setColour (TextEditor::highlightedTextColourId, findColour(TextEditor::highlightedTextColourId));
+	text->setColour (TextEditor::highlightColourId, findColour(TextEditor::focusedOutlineColourId));
 
     addAndMakeVisible (apply = gui::createDrawableButton("Apply", BIN2STR(bug_svg)));
     apply->addListener (this);
@@ -812,7 +823,7 @@ Label* CtrlrFontPropertyComponent::createSliderTextBox (Slider& slider)
 
     l->setColour (Label::backgroundColourId,
                   (slider.getSliderStyle() == Slider::LinearBar || slider.getSliderStyle() == Slider::LinearBarVertical)
-                            ? Colours::transparentBlack
+                            ? slider.findColour (Slider::textBoxBackgroundColourId) // Colours::transparentBlack
                             : slider.findColour (Slider::textBoxBackgroundColourId));
     l->setColour (Label::outlineColourId, slider.findColour (Slider::textBoxOutlineColourId));
 
@@ -1001,7 +1012,7 @@ void CtrlrModulatorListProperty::listChanged()
 
 	if (choices.contains (storedModulatorName))
 	{
-		combo->setColour (ComboBox::textColourId, Colours::black);
+		combo->setColour (ComboBox::textColourId, findColour(ComboBox::textColourId));
 		combo->setText (storedModulatorName, sendNotification);
 	}
 	else
@@ -1181,11 +1192,13 @@ void CtrlrMultiMidiPropertyComponent::paintListBoxItem(int rowNumber, Graphics &
 	if (rowIsSelected)
 	{
 		g.setColour (Colours::lightblue);
+        //g.setColour (findColour(ListBox::backgroundColourId));
 		g.fillAll();
 	}
 	else
 	{
-		g.setColour (Colours::white);
+        g.setColour (Colours::white);
+        //g.setColour (findColour(ListBox::backgroundColourId));
 		g.fillAll();
 	}
 }
@@ -1875,17 +1888,22 @@ void CtrlrSysExPropertyComponent::refresh()
 	sysexPreview->setText (valueToControl.toString(), dontSendNotification);
 }
 
-class CtrlrTextPropLabel  : public Label
+class CtrlrTextPropLabel  : public Label  // Text Box for Type In Properties such as Panel Name etc
 {
 	public:
 		CtrlrTextPropLabel (CtrlrTextPropertyComponent& owner_, const int maxChars_, const bool isMultiline_)
 			: Label ("", ""),
 				owner (owner_), maxChars (maxChars_), isMultiline (isMultiline_)
 		{
-	        setEditable (true, true, false);
-			setColour (backgroundColourId, findColour(ComboBox::backgroundColourId));
-			setColour (outlineColourId, findColour (ComboBox::outlineColourId));
-			setColour (TextEditor::highlightColourId, findColour(TextEditor::focusedOutlineColourId));
+            setEditable (true, true, false); // single click, double-click, lossOfFocusDiscardsChanges
+            
+            setColour (Label::backgroundColourId, findColour(Slider::backgroundColourId)); // The background colour to fill the label with
+            setColour(Label::textColourId, findColour(Slider::textBoxTextColourId)); // The colour for the text
+            setColour (Label::outlineColourId, findColour (Slider::textBoxOutlineColourId)); // An optional colour to use to draw a border around the label
+            
+            setColour(Label::backgroundWhenEditingColourId, findColour(Slider::backgroundColourId).withAlpha(0.7f)); // The background colour when the label is being edited
+            setColour(Label::textWhenEditingColourId, findColour(Label::textWhenEditingColourId).withAlpha(0.7f)); // The colour for the text when the label is being edited
+            setColour(Label::outlineWhenEditingColourId, findColour(Slider::textBoxOutlineColourId)); // An optional border colour when the label is being edited
 		}
 
 		TextEditor* createEditorComponent()
@@ -1923,8 +1941,10 @@ CtrlrTextPropertyComponent::CtrlrTextPropertyComponent (const Value& _valueToCon
 
 	if (isReadOnly)
 	{
-		textEditor->setColour (Label::backgroundColourId, textEditor->findColour(Label::backgroundColourId,false).withAlpha(0.5f));
-		textEditor->setColour (Label::textColourId, textEditor->findColour(Label::textColourId,false).brighter(0.5f));
+		//textEditor->setColour (Label::backgroundColourId, textEditor->findColour(Label::backgroundColourId,false).withAlpha(0.5f)); // Was set to false for non inheritance
+		//textEditor->setColour (Label::textColourId, textEditor->findColour(Label::textColourId,false).brighter(0.5f)); // Was set to false for non inheritance
+        textEditor->setColour (Label::backgroundColourId, findColour(Label::backgroundColourId));
+        textEditor->setColour (Label::textColourId, findColour(Label::textColourId));
 		textEditor->setEditable (false, false, false);
 	}
 }
@@ -2005,7 +2025,7 @@ CtrlrUnknownPropertyComponent::CtrlrUnknownPropertyComponent(const Identifier &_
 															StringArray *possibleChoices,
 															StringArray *possibleValues) : propertyName(_propertyName), propertyElement(_propertyElement)
 {
-	l.setColour (Label::backgroundColourId, Colours::white);
+	l.setColour (Label::backgroundColourId, findColour(Label::backgroundColourId));
 	l.setColour (Label::textColourId, Colours::red.brighter());
 	l.setText (propertyElement.getProperty(propertyName), dontSendNotification);
 	addAndMakeVisible (&l);
