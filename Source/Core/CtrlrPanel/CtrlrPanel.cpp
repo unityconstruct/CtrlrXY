@@ -54,134 +54,134 @@ CtrlrPanel::CtrlrPanel(CtrlrManager &_owner, const String &panelName, const int 
 		currentActionIndex(0),
 		indexOfSavedState(-1)
 {
-	ctrlrPanelUndoManager	= new CtrlrPanelUndoManager(*this);
-	ctrlrLuaManager 		= new CtrlrLuaManager(*this);
+    ctrlrPanelUndoManager	= new CtrlrPanelUndoManager(*this);
+    ctrlrLuaManager 		= new CtrlrLuaManager(*this);
 
-	if ((bool)getCtrlrManagerOwner().getProperty (Ids::ctrlrLuaDisabled) == false)
-	{
-		ctrlrLuaManager->getMethodManager().setDebug ((bool)owner.getProperty(Ids::ctrlrLuaDebug));
-	}
+    if ((bool)getCtrlrManagerOwner().getProperty (Ids::ctrlrLuaDisabled) == false)
+    {
+        ctrlrLuaManager->getMethodManager().setDebug ((bool)owner.getProperty(Ids::ctrlrLuaDebug));
+    }
 
-	ctrlrPanelUndoManager->addChangeListener (this);
+    ctrlrPanelUndoManager->addChangeListener (this);
 
-	getUndoManager()->beginNewTransaction ("Panel::ctor");
-	setProperty (Ids::name, panelName);
-	panelTree.addChild (ctrlrLuaManager->getLuaManagerTree(), -1, 0);
-	panelTree.addChild (panelWindowManager.getManagerTree(), -1, 0);
-	panelTree.addChild (resourceManager.getManagerTree(), -1, 0);
+    getUndoManager()->beginNewTransaction ("Panel::ctor");
+    setProperty (Ids::name, panelName);
+    panelTree.addChild (ctrlrLuaManager->getLuaManagerTree(), -1, 0);
+    panelTree.addChild (panelWindowManager.getManagerTree(), -1, 0);
+    panelTree.addChild (resourceManager.getManagerTree(), -1, 0);
 
-	panelTree.addListener (this);
+    panelTree.addListener (this);
 
-	setProperty (Ids::panelScheme, CTRLR_PANEL_SCHEME);
-	setProperty (Ids::panelShowDialogs, true);
-	setProperty (Ids::panelMessageTime, 10000);
-	setProperty (Ids::panelAuthorName, "");
-	setProperty (Ids::panelAuthorEmail, "");
-	setProperty (Ids::panelAuthorDonateUrl, "");
-	setProperty (Ids::panelAuthorUrl, "");
-	setProperty (Ids::panelAuthorDesc, "");
-	setProperty (Ids::panelVersionMajor, 1);
-	setProperty (Ids::panelVersionMinor, 0);
+    setProperty (Ids::panelScheme, CTRLR_PANEL_SCHEME);
+    setProperty (Ids::panelShowDialogs, true);
+    setProperty (Ids::panelMessageTime, 10000);
+    setProperty (Ids::panelAuthorName, "");
+    setProperty (Ids::panelAuthorEmail, "");
+    setProperty (Ids::panelAuthorDonateUrl, "");
+    setProperty (Ids::panelAuthorUrl, "");
+    setProperty (Ids::panelAuthorDesc, "");
+    setProperty (Ids::panelVersionMajor, 1);
+    setProperty (Ids::panelVersionMinor, 0);
 
-	setProperty (Ids::panelVersionMinor, 0);
-	setProperty (Ids::panelVersionName, "");
-	setProperty (Ids::panelVendor, "");
-	setProperty (Ids::panelDevice, "");
-	setProperty (Ids::panelMidiSnapshotAfterLoad, false);
-	setProperty (Ids::panelMidiSnapshotAfterProgramChange, false);
-	setProperty (Ids::panelMidiSnapshotDelay, 10);
-	setProperty (Ids::panelMidiSnapshotShowProgress, false);
-	setProperty (Ids::panelMidiInputChannelDevice, 1);
-	setProperty (Ids::panelMidiInputDevice, COMBO_NONE_ITEM);
-	setProperty (Ids::panelMidiControllerChannelDevice, 1);
-	setProperty (Ids::panelMidiControllerDevice, COMBO_NONE_ITEM);
-	setProperty (Ids::panelMidiOutputChannelDevice, 1);
-	setProperty (Ids::panelMidiOutputDevice, COMBO_NONE_ITEM);
+    setProperty (Ids::panelVersionMinor, 0);
+    setProperty (Ids::panelVersionName, "");
+    setProperty (Ids::panelVendor, "");
+    setProperty (Ids::panelDevice, "");
+    setProperty (Ids::panelMidiSnapshotAfterLoad, false);
+    setProperty (Ids::panelMidiSnapshotAfterProgramChange, false);
+    setProperty (Ids::panelMidiSnapshotDelay, 10);
+    setProperty (Ids::panelMidiSnapshotShowProgress, false);
+    setProperty (Ids::panelMidiInputChannelDevice, 1);
+    setProperty (Ids::panelMidiInputDevice, COMBO_NONE_ITEM);
+    setProperty (Ids::panelMidiControllerChannelDevice, 1);
+    setProperty (Ids::panelMidiControllerDevice, COMBO_NONE_ITEM);
+    setProperty (Ids::panelMidiOutputChannelDevice, 1);
+    setProperty (Ids::panelMidiOutputDevice, COMBO_NONE_ITEM);
 
-	setProperty (Ids::panelMidiInputFromHost, false);
-	setProperty (Ids::panelMidiInputChannelHost, 1);
-	setProperty (Ids::panelMidiOutputToHost, false);
-	setProperty (Ids::panelMidiOutputChannelHost, 1);
+    setProperty (Ids::panelMidiInputFromHost, false);
+    setProperty (Ids::panelMidiInputChannelHost, 1);
+    setProperty (Ids::panelMidiOutputToHost, false);
+    setProperty (Ids::panelMidiOutputChannelHost, 1);
 
-	setProperty (Ids::panelMidiThruH2H, false);
-	setProperty (Ids::panelMidiThruH2HChannelize, false);
-	setProperty (Ids::panelMidiThruH2D, false);
-	setProperty (Ids::panelMidiThruH2DChannelize, false);
-	setProperty (Ids::panelMidiThruD2D, false);
-	setProperty (Ids::panelMidiThruD2DChannelize, false);
-	setProperty (Ids::panelMidiThruD2H, false);
-	setProperty (Ids::panelMidiThruD2HChannelize, false);
-	setProperty (Ids::panelMidiRealtimeIgnore, true);
-	setProperty (Ids::panelMidiInputThreadPriority, 7);
-	setProperty (Ids::panelMidiProgram, 0);
-	setProperty (Ids::panelMidiBankLsb, 0);
-	setProperty (Ids::panelMidiBankMsb, 0);
-	setProperty (Ids::panelMidiSendProgramChangeOnLoad, false);
-	setProperty (Ids::panelMidiProgramCalloutOnprogramChange, false);
-	setProperty (Ids::panelMidiMatchCacheSize, 32);
-	setProperty (Ids::panelMidiGlobalDelay, 0);
-	setProperty (Ids::panelMidiPauseOut, false);
-	setProperty (Ids::panelMidiPauseIn, false);
+    setProperty (Ids::panelMidiThruH2H, false);
+    setProperty (Ids::panelMidiThruH2HChannelize, false);
+    setProperty (Ids::panelMidiThruH2D, false);
+    setProperty (Ids::panelMidiThruH2DChannelize, false);
+    setProperty (Ids::panelMidiThruD2D, false);
+    setProperty (Ids::panelMidiThruD2DChannelize, false);
+    setProperty (Ids::panelMidiThruD2H, false);
+    setProperty (Ids::panelMidiThruD2HChannelize, false);
+    setProperty (Ids::panelMidiRealtimeIgnore, true);
+    setProperty (Ids::panelMidiInputThreadPriority, 7);
+    setProperty (Ids::panelMidiProgram, 0);
+    setProperty (Ids::panelMidiBankLsb, 0);
+    setProperty (Ids::panelMidiBankMsb, 0);
+    setProperty (Ids::panelMidiSendProgramChangeOnLoad, false);
+    setProperty (Ids::panelMidiProgramCalloutOnprogramChange, false);
+    setProperty (Ids::panelMidiMatchCacheSize, 32);
+    setProperty (Ids::panelMidiGlobalDelay, 0);
+    setProperty (Ids::panelMidiPauseOut, false);
+    setProperty (Ids::panelMidiPauseIn, false);
 
-	setProperty (Ids::panelOSCEnabled, false);
-	setProperty (Ids::panelOSCPort, -1);
-	setProperty (Ids::panelOSCProtocol, 0);
+    setProperty (Ids::panelOSCEnabled, false);
+    setProperty (Ids::panelOSCPort, -1);
+    setProperty (Ids::panelOSCProtocol, 0);
 
     setProperty (Ids::luaPanelMidiChannelChanged, COMBO_ITEM_NONE);
-	setProperty (Ids::luaPanelMidiReceived, COMBO_ITEM_NONE);
-	setProperty (Ids::luaPanelMidiMultiReceived, COMBO_ITEM_NONE);
-	setProperty (Ids::luaPanelLoaded, COMBO_ITEM_NONE);
-	setProperty (Ids::luaPanelBeforeLoad, COMBO_ITEM_NONE);
-	setProperty (Ids::luaPanelSaved, COMBO_ITEM_NONE);
-	setProperty (Ids::luaPanelResourcesLoaded, COMBO_ITEM_NONE);
-	setProperty (Ids::luaPanelProgramChanged, COMBO_ITEM_NONE);
-	setProperty (Ids::luaPanelGlobalChanged, COMBO_ITEM_NONE);
-	setProperty (Ids::luaPanelMessageHandler, COMBO_ITEM_NONE);
-	setProperty (Ids::luaPanelModulatorValueChanged, COMBO_ITEM_NONE);
-	setProperty (Ids::luaPanelSaveState, COMBO_ITEM_NONE);
-	setProperty (Ids::luaPanelRestoreState, COMBO_ITEM_NONE);
+    setProperty (Ids::luaPanelMidiReceived, COMBO_ITEM_NONE);
+    setProperty (Ids::luaPanelMidiMultiReceived, COMBO_ITEM_NONE);
+    setProperty (Ids::luaPanelLoaded, COMBO_ITEM_NONE);
+    setProperty (Ids::luaPanelBeforeLoad, COMBO_ITEM_NONE);
+    setProperty (Ids::luaPanelSaved, COMBO_ITEM_NONE);
+    setProperty (Ids::luaPanelResourcesLoaded, COMBO_ITEM_NONE);
+    setProperty (Ids::luaPanelProgramChanged, COMBO_ITEM_NONE);
+    setProperty (Ids::luaPanelGlobalChanged, COMBO_ITEM_NONE);
+    setProperty (Ids::luaPanelMessageHandler, COMBO_ITEM_NONE);
+    setProperty (Ids::luaPanelModulatorValueChanged, COMBO_ITEM_NONE);
+    setProperty (Ids::luaPanelSaveState, COMBO_ITEM_NONE);
+    setProperty (Ids::luaPanelRestoreState, COMBO_ITEM_NONE);
     setProperty (Ids::luaPanelMidiSnapshotPost, COMBO_ITEM_NONE);
     setProperty (Ids::luaPanelMidiSnapshotPre, COMBO_ITEM_NONE);
     setProperty (Ids::luaAudioProcessBlock, COMBO_ITEM_NONE);
     setProperty (Ids::luaPanelOSCReceived, COMBO_ITEM_NONE);
 
-	setProperty (Ids::panelFilePath, "");
-	setProperty (Ids::panelLastSaveDir, "");
-	setProperty (Ids::panelUID, generateRandomUnique());
-	setProperty (Ids::panelInstanceUID, generateRandomUniquePluginId());
+    setProperty (Ids::panelFilePath, "");
+    setProperty (Ids::panelLastSaveDir, "");
+    setProperty (Ids::panelUID, generateRandomUnique());
+    setProperty (Ids::panelInstanceUID, generateRandomUniquePluginId());
     setProperty (Ids::panelInstanceManufacturerID, generateRandomUniquePluginId());
-	setProperty (Ids::panelModulatorListColumns, COMBO_ITEM_NONE);
-	setProperty (Ids::panelModulatorListCsvDelimiter, ",");
-	setProperty (Ids::panelModulatorListXmlRoot, "ctrlrModulatorList");
-	setProperty (Ids::panelModulatorListXmlModulator, "ctrlrModulator");
-	setProperty (Ids::panelModulatorListSortOption, true);
-	setProperty (Ids::panelGlobalVariables, "-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1");
-	setProperty (Ids::panelResources, COMBO_ITEM_NONE);
-	setProperty (Ids::panelPropertyDisplayIDs, false);
-    
-    /** Markup bug fixed in V5.2.30 */
-    setProperty (Ids::ctrlrMenuItemBackgroundColour, 		Colours::white.toString());
-    setProperty (Ids::ctrlrMenuItemTextColour, 				Colours::black.toString());
-    setProperty (Ids::ctrlrMenuItemHighlightedTextColour, 	Colours::white.toString());
-    setProperty (Ids::ctrlrMenuItemHighlightColour, 		Colour(HIGHLIGHT_COLOUR).toString());
-    setProperty (Ids::ctrlrMenuItemFont, 					owner.getFontManager().getStringFromFont (Font (18.0f)));
-    setProperty (Ids::ctrlrMenuItemSeparatorColour,			Colour (0x44000000).toString());
-    setProperty (Ids::ctrlrMenuItemHeaderColour,			Colours::black.toString());
-    
-    setProperty (Ids::ctrlrMenuBarBackgroundColour1, 		Colour(0xfff7f7f7).toString());
-    setProperty (Ids::ctrlrMenuBarBackgroundColour2, 		Colour(0xffcccccc).toString());
-    setProperty (Ids::ctrlrMenuBarTextColour, 				Colours::black.toString());
-    setProperty (Ids::ctrlrMenuBarHighlightedTextColour, 	Colours::white.toString());
-    setProperty (Ids::ctrlrMenuBarHighlightColour, 			Colour(HIGHLIGHT_COLOUR).toString());
-    setProperty (Ids::ctrlrMenuBarFont, 					owner.getFontManager().getStringFromFont (Font (18.0f)));
-    
+    setProperty (Ids::panelModulatorListColumns, COMBO_ITEM_NONE);
+    setProperty (Ids::panelModulatorListCsvDelimiter, ",");
+    setProperty (Ids::panelModulatorListXmlRoot, "ctrlrModulatorList");
+    setProperty (Ids::panelModulatorListXmlModulator, "ctrlrModulator");
+    setProperty (Ids::panelModulatorListSortOption, true);
+    setProperty (Ids::panelGlobalVariables, "-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1:-1");
+    setProperty (Ids::panelResources, COMBO_ITEM_NONE);
+    setProperty (Ids::panelPropertyDisplayIDs, false);
+
+    /** Markup bug fixed in V5.6.29b */
+    setProperty (Ids::ctrlrMenuItemBackgroundColour, Colours::white.toString());
+    setProperty (Ids::ctrlrMenuItemTextColour, Colours::black.toString());
+    setProperty (Ids::ctrlrMenuItemHighlightedTextColour, Colours::white.toString());
+    setProperty (Ids::ctrlrMenuItemHighlightColour, Colour(HIGHLIGHT_COLOUR).toString());
+    setProperty (Ids::ctrlrMenuItemFont, owner.getFontManager().getStringFromFont (Font (18.0f)));
+    setProperty (Ids::ctrlrMenuItemSeparatorColour, Colour (0x44000000).toString());
+    setProperty (Ids::ctrlrMenuItemHeaderColour, Colours::black.toString());
+
+    setProperty (Ids::ctrlrMenuBarBackgroundColour1, Colour(0xfff7f7f7).toString());
+    setProperty (Ids::ctrlrMenuBarBackgroundColour2, Colour(0xffcccccc).toString());
+    setProperty (Ids::ctrlrMenuBarTextColour, Colours::black.toString());
+    setProperty (Ids::ctrlrMenuBarHighlightedTextColour, Colours::white.toString());
+    setProperty (Ids::ctrlrMenuBarHighlightColour, Colour(HIGHLIGHT_COLOUR).toString());
+    setProperty (Ids::ctrlrMenuBarFont, owner.getFontManager().getStringFromFont (Font (18.0f)));
+
     setProperty (Ids::ctrlrUseEditorWrapper, false);
 
     owner.addChangeListener (this);
     midiMessageCollector.reset (SAMPLERATE);
 
-	midiInputThread.startThread(5);
-	midiControllerInputThread.startThread(5);
+    midiInputThread.startThread(5);
+    midiControllerInputThread.startThread(5);
 }
 
 CtrlrPanel::~CtrlrPanel()
