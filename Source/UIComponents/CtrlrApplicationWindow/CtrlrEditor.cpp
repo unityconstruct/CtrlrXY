@@ -188,7 +188,7 @@ void CtrlrEditor::activeCtrlrChanged()
         
         lookAndFeelChanged();
 
-//        Pass all menuBar Props updates here
+//        menuBar colour properties are deprecated and need to be removed in v5.6.30
 //        String customMenuBarBackgroundColour1 = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuBarBackgroundColour1);
 //        String customMenuBarBackgroundColour2 = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuBarBackgroundColour2);
 //        String customMenuBarItemBackgroundColour = owner.getActivePanel()->getEditor()->getProperty(Ids::ctrlrMenuItemBackgroundColour);
