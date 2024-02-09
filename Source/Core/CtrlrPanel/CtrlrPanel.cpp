@@ -626,10 +626,10 @@ void CtrlrPanel::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasChange
              || property == Ids::ctrlrMenuItemHighlightColour
              || property == Ids::ctrlrMenuItemFont
              || property == Ids::ctrlrMenuItemSeparatorColour
-             || property == Ids::ctrlrMenuItemHeaderColour
+             || property == Ids::ctrlrMenuItemHeaderColour
              || property == Ids::ctrlrMenuBarTextColour
-             || property == Ids::ctrlrMenuBarHighlightedTextColour
-             || property == Ids::ctrlrMenuBarHighlightColour
+             || property == Ids::ctrlrMenuBarHighlightedTextColour
+             || property == Ids::ctrlrMenuBarHighlightColour
              || property == Ids::ctrlrMenuBarFont)
     {
         // CtrlrLookAndFeel.cpp L#93 from Ctrlr v5.1.198 has been removed
