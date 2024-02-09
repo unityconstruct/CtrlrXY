@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CtrlrSliderInternal" Collapsed="true">
+    <Position X="7.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAACAAAAAAAAEAIAAAAACA=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\Source\UIComponents\CtrlrComponents\Sliders\CtrlrSliderInternal.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CtrlrSliderLookAndFeel_V2" Collapsed="true">
+    <Position X="9.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAgAAQAAAAAAAEACiAAIAAABQAABAAABA=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\Source\UIComponents\CtrlrComponents\Sliders\CtrlrSliderInternal.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CtrlrSliderLookAndFeel_V3" Collapsed="true">
+    <Position X="7.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAgAAgAAAAAAAEACiAAIAAABQAABAAABA=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\Source\UIComponents\CtrlrComponents\Sliders\CtrlrSliderInternal.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CtrlrSliderLookAndFeel_V4" Collapsed="true">
+    <Position X="9.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAgABAAAAAAAAEACiAAIAAABQAABAAABA=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\Source\UIComponents\CtrlrComponents\Sliders\CtrlrSliderInternal.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CtrlrSlider" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ICFAACAC8AAAAQMQAAQIEAACAE0ACEAAAAQAAAAIIAA=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\Source\UIComponents\CtrlrComponents\Sliders\CtrlrSlider.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CtrlrComponent" Collapsed="true">
+    <Position X="4" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BKwgmBiaYBaAgIMUQBAXASCTTtIUQOihSAgjvAopIIQ=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\Source\UIComponents\CtrlrComponents\CtrlrComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="juce::SettableTooltipClient" Collapsed="true">
+    <Position X="6.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAACAAAAAAAAAAAAQAAAAgAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\mouse\juce_TooltipClient.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="juce::Slider">
+    <Position X="1" Y="1" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="juce::Slider::SliderLayout" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\widgets\juce_Slider.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Enum Name="juce::Slider::DragMode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\widgets\juce_Slider.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="juce::Slider::IncDecButtonMode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\widgets\juce_Slider.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Class Name="juce::Slider::Listener" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\widgets\juce_Slider.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Enum Name="juce::Slider::SliderStyle" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\widgets\juce_Slider.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Struct Name="juce::Slider::LookAndFeelMethods" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\widgets\juce_Slider.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Enum Name="juce::Slider::ColourIds" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\widgets\juce_Slider.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Struct Name="juce::Slider::RotaryParameters" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\widgets\juce_Slider.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Enum Name="juce::Slider::TextEntryBoxPosition" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\widgets\juce_Slider.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>GItYACLVXyCBoCteAgIKewkQWIKCWAoOLIC7CAIMhkk=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\widgets\juce_Slider.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CtrlrLuaManager">
+    <Position X="5.25" Y="1" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>YAEggBiCaAAIgAACAAgEmAAKEA0EAAIFAADwCUCoCIQ=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\Source\Lua\CtrlrLuaManager.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="methodManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CtrlrLuaMethodManager">
+    <Position X="10.5" Y="1" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>Wo0EiICCIUQAwEABAAKAMYACAC0EEAECYBQC4ICZCSE=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\Source\Lua\Methods\CtrlrLuaMethodManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CtrlrGrouppingComponent">
+    <Position X="13.5" Y="10.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\Source\UIComponents\CtrlrComponents\CtrlrComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CtrlrComponentResizableBorder">
+    <Position X="13.5" Y="12" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAgAACAAAAAAAAAAAAAAIAAAAAAAAAEAA=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\Source\UIComponents\CtrlrComponents\CtrlrComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CtrlrComponent">
+    <Position X="17.5" Y="1" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>BKwgmBiaYBaAgIMUQBAXASCTTtIUQOihSAgjvAopIIQ=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\Source\UIComponents\CtrlrComponents\CtrlrComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="juce::Component">
+    <Position X="22.25" Y="1" Width="3.25" />
+    <NestedTypes>
+      <Enum Name="juce::Component::FocusChangeType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\components\juce_Component.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Class Name="juce::Component::SafePointer&lt;ComponentType&gt;" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\components\juce_Component.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="juce::Component::BailOutChecker" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\components\juce_Component.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="juce::Component::Positioner" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\components\juce_Component.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="juce::Component::MouseListenerList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\components\juce_Component.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Struct Name="juce::Component::ComponentFlags" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\components\juce_Component.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="juce::Component::ComponentHelpers" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\components\juce_Component.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>3t5/rEw+9J+5OdsZcV/eD+kf75LBzq/VpWvPzuOlpLo=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\components\juce_Component.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="juce::ChangeListener">
+    <Position X="13.5" Y="7.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\JUCE\modules\juce_events\broadcasters\juce_ChangeListener.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="juce::ComponentListener">
+    <Position X="13.5" Y="4.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAgYAAAAAAAAIAEAAAAAAAAAAAAAIAAAAAIAAAQBAA=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\components\juce_ComponentListener.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="juce::ValueTree">
+    <Position X="1.5" Y="1" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="juce::ValueTree::Iterator" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_data_structures\values\juce_ValueTree.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Class Name="juce::ValueTree::Listener">
+        <TypeIdentifier>
+          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_data_structures\values\juce_ValueTree.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>BAbAMBKCFAQGKGCAABAAAwAyEQkgIRgBgAEgwABAIEY=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\JUCE\modules\juce_data_structures\values\juce_ValueTree.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CtrlrLuaObject">
+    <Position X="13.5" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAEBAAAIAAASAAAAAAAQAEAEAgAAgBAEAABAAAAAA=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\Source\Lua\CtrlrLuaObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="CtrlrComponentInternalFunctions">
+    <Position X="13.5" Y="9.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AQAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\source\repos\CtrlrX\Source\UIComponents\CtrlrComponents\CtrlrComponent.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
