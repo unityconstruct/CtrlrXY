@@ -4,4 +4,4 @@
 
 [submodule "LuaLib"]
 	path = LuaLib
-	url = https://github.com:unityconstruct/LuaLib.git
+	url = https://github.com/unityconstruct/LuaLib.git
