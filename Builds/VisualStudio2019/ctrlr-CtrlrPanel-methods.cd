@@ -11,28 +11,11 @@
     <Position X="24.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIgAIAQCAAACQAAEAAIgAAAACACACAQAAABAAAAQAAA=</HashCode>
-      <FileName>D:\source\repos\CtrlrX\JUCE\modules\juce_gui_basics\application\juce_Application.h</FileName>
+      <FileName>D:\source\repos\CtrlrXY\JUCE\modules\juce_gui_basics\application\juce_Application.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CtrlrManager" Collapsed="true">
     <Position X="15.75" Y="8.25" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="CtrlrManager::CtrlrModulatorMapType" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>D:\source\repos\CtrlrX\Source\Core\CtrlrManager\CtrlrManager.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-      <Enum Name="CtrlrManager::CtrlrManagerState" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>D:\source\repos\CtrlrX\Source\Core\CtrlrManager\CtrlrManager.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-      <Class Name="CtrlrManager::Listener" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>D:\source\repos\CtrlrX\Source\Core\CtrlrManager\CtrlrManager.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>hm18kFiCcANSpNmhzgoCUoQqQImOFDsFjAIB6gMXmDo=</HashCode>
       <FileName>D:\source\repos\CtrlrX\Source\Core\CtrlrManager\CtrlrManager.h</FileName>
@@ -40,13 +23,6 @@
   </Class>
   <Class Name="CtrlrModulator" Collapsed="true">
     <Position X="22.25" Y="2.75" Width="1.5" />
-    <NestedTypes>
-      <Class Name="CtrlrModulator::ModulatorListener" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>D:\source\repos\CtrlrX\Source\Core\CtrlrModulator\CtrlrModulator.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAVDFBCSMGAiqKSEYQJsl4BCFGkECAChwIEMFBBAKBg=</HashCode>
       <FileName>D:\source\repos\CtrlrX\Source\Core\CtrlrModulator\CtrlrModulator.h</FileName>
@@ -64,25 +40,13 @@
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
-    <NestedTypes>
-      <Enum Name="CtrlrPanel::CtrlrPanelFileType">
-        <TypeIdentifier>
-          <NewMemberFileName>D:\source\repos\CtrlrX\Source\Core\CtrlrPanel\CtrlrPanel.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-      <Class Name="CtrlrPanel::Listener">
-        <TypeIdentifier>
-          <NewMemberFileName>D:\source\repos\CtrlrX\Source\Core\CtrlrPanel\CtrlrPanel.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>5Q/D7zjud/dthY0U9WH/s+p+/92cXJ/VzMqf5s5/mJM=</HashCode>
       <FileName>D:\source\repos\CtrlrX\Source\Core\CtrlrPanel\CtrlrPanel.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CtrlrLuaManager" Collapsed="true">
-    <Position X="19.75" Y="8.5" Width="3.75" />
+    <Position X="26.25" Y="16.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>YAEggBiCaAAIgAACAAgEmAAKEA0EAAIFAADwCUCoCIQ=</HashCode>
       <FileName>D:\source\repos\CtrlrX\Source\Lua\CtrlrLuaManager.h</FileName>
@@ -95,40 +59,40 @@
       <FileName>D:\source\repos\CtrlrX\Source\Lua\CtrlrLuaObject.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="juce::ValueTree" Collapsed="true">
-    <Position X="21.75" Y="5.25" Width="2.5" />
+  <Class Name="juce::ValueTree">
+    <Position X="22.5" Y="5.25" Width="2.5" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <NestedTypes>
       <Class Name="juce::ValueTree::Listener">
         <TypeIdentifier>
-          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_data_structures\values\juce_ValueTree.h</NewMemberFileName>
+          <NewMemberFileName>D:\source\repos\CtrlrXY\JUCE\modules\juce_data_structures\values\juce_ValueTree.h</NewMemberFileName>
         </TypeIdentifier>
       </Class>
-      <Struct Name="juce::ValueTree::Iterator">
+      <Struct Name="juce::ValueTree::Iterator" Collapsed="true">
         <TypeIdentifier>
-          <NewMemberFileName>D:\source\repos\CtrlrX\JUCE\modules\juce_data_structures\values\juce_ValueTree.h</NewMemberFileName>
+          <NewMemberFileName>D:\source\repos\CtrlrXY\JUCE\modules\juce_data_structures\values\juce_ValueTree.h</NewMemberFileName>
         </TypeIdentifier>
       </Struct>
     </NestedTypes>
     <TypeIdentifier>
       <HashCode>BAbAMBKCFAQGKGCAABAAAwAyEQkgIRgBgAEgwABAIEY=</HashCode>
-      <FileName>D:\source\repos\CtrlrX\JUCE\modules\juce_data_structures\values\juce_ValueTree.h</FileName>
+      <FileName>D:\source\repos\ctrlrXY\JUCE\modules\juce_data_structures\values\juce_ValueTree.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="juce::ChangeListener" Collapsed="true">
     <Position X="17.5" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAQAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>D:\source\repos\CtrlrX\JUCE\modules\juce_events\broadcasters\juce_ChangeListener.h</FileName>
+      <FileName>D:\source\repos\ctrlrXY\JUCE\modules\juce_events\broadcasters\juce_ChangeListener.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="juce::AsyncUpdater" Collapsed="true">
     <Position X="15.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgABAgAAAAAEAAAAAAAAAQABAAAAAAAAAAABAEAA=</HashCode>
-      <FileName>D:\source\repos\CtrlrX\JUCE\modules\juce_events\broadcasters\juce_AsyncUpdater.h</FileName>
+      <FileName>D:\source\repos\CtrlrXY\JUCE\modules\juce_events\broadcasters\juce_AsyncUpdater.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CtrlrMidiMessageOwner" Collapsed="true">
@@ -146,56 +110,42 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CtrlrLuaMultiTimer" Collapsed="true">
-    <Position X="23.75" Y="7.75" Width="1.75" />
+    <Position X="20.25" Y="7.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AABAAAEAAAAAIgAABAgAAAAAAEAAAIACAAAACAABAAA=</HashCode>
       <FileName>D:\source\repos\CtrlrX\Source\Lua\CtrlrLuaMultiTimer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CtrlrLuaDebugger" Collapsed="true">
-    <Position X="23.75" Y="7" Width="1.5" />
+    <Position X="20.5" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAABAAAAAAgAAQBAAAAAAIAEAAQAAABAAAAAAAAAA=</HashCode>
       <FileName>D:\source\repos\CtrlrX\Source\Lua\CtrlrLuaDebugger.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CtrlrLuaAudioConverter" Collapsed="true">
-    <Position X="23.75" Y="9.5" Width="2" />
+    <Position X="20" Y="9.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAgAAAAAAEAAEAAABAAAAAEAAQAAABAIAAAgAAAA=</HashCode>
       <FileName>D:\source\repos\CtrlrX\Source\Lua\CtrlrLuaAudioConverter.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CtrlrUInt16" Collapsed="true">
-    <Position X="23.75" Y="10.25" Width="2.75" />
-    <NestedTypes>
-      <Enum Name="CtrlrUInt16::__unnamed_enum_09ee_1" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>D:\source\repos\CtrlrX\Source\Lua\CtrlrLuaAudioConverter.cpp</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
+    <Position X="20.5" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEgAAACAABACBIAAAgAABAAAAAAAASAIgAAQQAAAAAA=</HashCode>
       <FileName>D:\source\repos\CtrlrX\Source\Lua\CtrlrLuaAudioConverter.cpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CtrlrLuaMethod" Collapsed="true">
-    <Position X="19.75" Y="10" Width="2.5" />
-    <NestedTypes>
-      <Enum Name="CtrlrLuaMethod::MethodSouce" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>D:\source\repos\CtrlrX\Source\Lua\Methods\CtrlrLuaMethod.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
+    <Position X="26.25" Y="17.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IIEAQGCAIAAIiAgUgCAEGAICBAkCACIQBAGEAAAAFYA=</HashCode>
       <FileName>D:\source\repos\CtrlrX\Source\Lua\Methods\CtrlrLuaMethod.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CtrlrLuaMethodManager" Collapsed="true">
-    <Position X="19.75" Y="9.25" Width="2.75" />
+    <Position X="25.75" Y="18.75" Width="2" />
     <TypeIdentifier>
       <HashCode>Wo0EiICCIUQAwEABAAKAMYACAC0EEAECYBQC4ICZCSE=</HashCode>
       <FileName>D:\source\repos\CtrlrX\Source\Lua\Methods\CtrlrLuaMethodManager.h</FileName>
@@ -206,20 +156,13 @@
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
-    <NestedTypes>
-      <Enum Name="CtrlrModulatorValue::LastChangeSource">
-        <TypeIdentifier>
-          <NewMemberFileName>D:\source\repos\CtrlrX\Source\Core\CtrlrModulator\CtrlrModulatorProcessor.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAABQAAAAAAACIAAAAAAAAAAAA=</HashCode>
       <FileName>D:\source\repos\CtrlrX\Source\Core\CtrlrModulator\CtrlrModulatorProcessor.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="LuaTimerCallback" Collapsed="true">
-    <Position X="23.75" Y="8.75" Width="1.5" />
+    <Position X="20.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
       <FileName>D:\source\repos\CtrlrX\Source\Lua\CtrlrLuaMultiTimer.h</FileName>
