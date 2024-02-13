@@ -3,10 +3,10 @@
 	url = https://github.com/RomanKubiak/Panels.git
 [submodule "CtrlrDocs"]
 	path = CtrlrDocs
-	url = https://github.com/unityconstruct/CtrlrDocs.git
+	url = git@github.com:unityconstruct/CtrlrDocs.git
 [submodule "CtrlrLuaLib"]
 	path = CtrlrLuaLib
-	url = https://github.com/unityconstruct/CtrlrLuaLib.git
+	url = git@github.com:unityconstruct/CtrlrLuaLib.git
 [submodule "CtrlrPanels"]
 	path = CtrlrPanels
-	url = https://github.com/unityconstruct/CtrlrPanels.git
+	url = git@github.com:unityconstruct/CtrlrPanels.git
