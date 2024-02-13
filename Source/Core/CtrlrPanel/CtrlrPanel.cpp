@@ -618,24 +618,22 @@ void CtrlrPanel::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasChange
             }
         }
     }
-    
-//    menuBar properties removed since v5.6.30 useless with JUCE v6. Used to call CtrlrLookAndFeel.cpp L#93 from Ctrlr v5.1.198 but it has been removed
-//    else if (property == Ids::ctrlrMenuBarBackgroundColour1
-//             || property == Ids::ctrlrMenuBarBackgroundColour2
-//             || property == Ids::ctrlrMenuItemBackgroundColour
-//             || property == Ids::ctrlrMenuItemTextColour
-//             || property == Ids::ctrlrMenuItemHighlightedTextColour
-//             || property == Ids::ctrlrMenuItemHighlightColour
-//             || property == Ids::ctrlrMenuItemFont
-//             || property == Ids::ctrlrMenuItemSeparatorColour
-//             || property == Ids::ctrlrMenuItemHeaderColour
-//             || property == Ids::ctrlrMenuBarTextColour
-//             || property == Ids::ctrlrMenuBarHighlightedTextColour
-//             || property == Ids::ctrlrMenuBarHighlightColour
-//             || property == Ids::ctrlrMenuBarFont)
-//    {
-//    }
-
+    else if (property == Ids::ctrlrMenuBarBackgroundColour1
+             || property == Ids::ctrlrMenuBarBackgroundColour2
+             || property == Ids::ctrlrMenuItemBackgroundColour
+             || property == Ids::ctrlrMenuItemTextColour
+             || property == Ids::ctrlrMenuItemHighlightedTextColour
+             || property == Ids::ctrlrMenuItemHighlightColour
+             || property == Ids::ctrlrMenuItemFont
+             || property == Ids::ctrlrMenuItemSeparatorColour
+             || property == Ids::ctrlrMenuItemHeaderColour
+             || property == Ids::ctrlrMenuBarTextColour
+             || property == Ids::ctrlrMenuBarHighlightedTextColour
+             || property == Ids::ctrlrMenuBarHighlightColour
+             || property == Ids::ctrlrMenuBarFont)
+    {
+        // CtrlrLookAndFeel.cpp L#93 from Ctrlr v5.1.198 has been removed
+    }
     else if (property == Ids::ctrlrMenuBarHeight)
     {
         // setting the menuBar component size with setSize() and resized() via owner.getEditor() does not work
