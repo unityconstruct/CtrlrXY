@@ -1,3 +1,111 @@
+# CtrlrXY
+ 
+ `CtrlrXY` is a fork of `CtrlrX` is a fork of `Ctrlr` originally by of `Roman Kubiak's Ctrlr`. 
+ 
+ - `CtrlrX` is hosted by `Damien Sellier` & has taken the lead in pushing the project forward, notably with a recent `Look-and-Feel` update that significantly improved the overall UI & provides configurable UI properties for colors/fonts/ui components.
+- `Ctrlr` repo can be found at https://github.com/RomanKubiak/ctrlr
+- `Roman Kubiak` has created quite an amazing utility for musicians and prodect developers alike.
+
+<hr/>
+
+# Differentiation of this Fork
+- This project was forked namely to allow it to be dissected & documented to produce much needed technical, architectural, use & setup documentation to enable newcomers get up to speed quickly & for legacy users/devs to more easily understand the code & get around.
+- The results of THIS project being forked are actually being hosted in 3 other repos...
+  - ...each of which are created in such a way to lend them to being `added as submodules & completely optional to building/using Ctrlr`.
+  - `CtrlrDocs`
+    - Amassing everything into this repo regardless of asset type, but items typically fall in one of these categories
+        - source code documentation, diagrams, and code extraction to tables or more digestable/portable formats
+        - lua code extracted from panels
+        - lua language library that is holistic in nature for purposes of training on the language itself, creating generic utility methods, tutorials, Panel-extracted functions,
+        - ctrlrlualib - lua code that is specific tailor
+        - Ctrlr-specific notes, examples
+        - language & tooling reference docus
+  - `CtrlrLuaLib`
+    - official library purposed for Ctrlr panels in a form that should be consumable/used by CtrlrXY-master, and/or any Ctrlr|CtrlrX repo/branch with compatible with both the Lua code, but also the foundational Ctrlr objects that are exposed. Typically if CtrlrXY can be merged/rebased onto/over the implementing project, CtrlrLuaLib should be fully usable.
+  - `CtrlrPanels`
+    - Amassing every panel encountered along with 'all things panel'
+    - While the actual 'panel' files are the main asset, meta-files like images, decriptions, usage information will be collected
+
+<hr/>
+
+# Ctrlr Submodules
+
+- must use the git submodule command to add submodules
+- adding the specs to `.gitmodules` didn't trigger git properly & it never registered it internally, so was not polling the submodule(s) url to fetch the `<HEAD>commit`
+- SYNTAX `git submodule add --name NAME URL PATH`
+  - NAME is an arbitrary id that will show up in the project so it doesn't have to match the repo's name
+  - URL is the repo's URL and can be in the form of `HTTP(https://github.com/)` or `SSH(git@github.com:)`
+  - if using SSH the client must have keys registered for that repo/project/owner
+- for CtrlrXY, gitmodules are using the SSH url & MUST be changed for end-users
+  - VSCode prompted to authenticate between GitHub & VSCODE backend & that simply doesn't sound like a great idea,since ALL repos, the profile, and everything else would be essentially be accessible to those 3rd parties.
+     - if VSCode has God-Mode on the GitHub account, then so do the VSCode Extensions & all of it just poses a security/hazard risk justifying requiring anyone using CtrlXY to run 3 `git submodule set-url NAME URL` commands
+
+### add git submodule to project
+
+```bash
+## basic syntax
+git submodule add git@github.com:path_to/submodule.git path-to-submodule
+# public
+git submodule add --name CtrlrDocs   https://github.com/unityconstruct/CtrlrDocs.git CtrlrDocs
+git submodule add --name CtrlrLuaLib https://github.com/unityconstruct/CtrlrLuaLib.git CtrlrLuaLib
+git submodule add --name CtrlrPanels https://github.com/unityconstruct/CtrlrPanels.git CtrlrPanels
+# private
+git submodule add --name CtrlrDocs   git@github.com:unityconstruct/CtrlrDocs.git CtrlrDocs
+git submodule add --name CtrlrLuaLib git@github.com:unityconstruct/CtrlrLuaLib.git CtrlrLuaLib
+git submodule add --name CtrlrPanels git@github.com:unityconstruct/CtrlrPanels.git CtrlrPanels
+# update repo url to private
+git submodule set-url CtrlrDocs   git@github.com:unityconstruct/CtrlrDocs.git
+git submodule set-url CtrlrLuaLib git@github.com:unityconstruct/CtrlrLuaLib.git
+git submodule set-url CtrlrPanels git@github.com:unityconstruct/CtrlrPanels.git
+
+# update repo url to public
+git submodule set-url CtrlrDocs   https://github.com/unityconstruct/CtrlrDocs.git
+git submodule set-url CtrlrLuaLib https://github.com/unityconstruct/CtrlrLuaLib.git
+git submodule set-url CtrlrPanels https://github.com/unityconstruct/CtrlrPanels.git
+```
+
+### .gitsubmodules result
+
+```bash
+[submodule "Panels"]
+	path = Panels
+	url = https://github.com/RomanKubiak/Panels.git
+[submodule "CtrlrDocs"]
+	path = CtrlrDocs
+	url = git@github.com:unityconstruct/CtrlrDocs.git
+[submodule "CtrlrLuaLib"]
+	path = CtrlrLuaLib
+	url = git@github.com:unityconstruct/CtrlrLuaLib.git
+[submodule "CtrlrPanels"]
+	path = CtrlrPanels
+	url = git@github.com:unityconstruct/CtrlrPanels.git
+```
+
+### git/config result
+
+- .git/config
+```bash
+[submodule "Panels"]
+	active = true
+	url = https://github.com/RomanKubiak/Panels.git
+
+[submodule "CtrlrDocs"]
+	url = git@github.com:unityconstruct/CtrlrDocs.git
+	active = true
+[submodule "CtrlrLuaLib"]
+	url = git@github.com:unityconstruct/CtrlrLuaLib.git
+	active = true
+[submodule "CtrlrPanels"]
+	url = git@github.com:unityconstruct/CtrlrPanels.git
+	active = true
+```
+
+<hr/>
+
+# README.md from CTRLX Repo Unchanged:
+
+<hr/>
+
 CtrlrX
 =====
 
