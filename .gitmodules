@@ -2,6 +2,6 @@
 	path = Panels
 	url = https://github.com/RomanKubiak/Panels.git
 
-[submodule "LuaLib"]
-	path = LuaLib
-	url = https://github.com/unityconstruct/LuaLib.git
+[submodule "CtrlrLuaLib"]
+	path = CtrlrLuaLib
+	url = https://github.com/unityconstruct/CtrlrLuaLib.git

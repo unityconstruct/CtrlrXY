@@ -7,3 +7,5 @@ Builds/*/*/*
 CMakeFiles
 CMakeCache.txt
 .DS_store
+
+/JUCE-6.0.8
