@@ -11,3 +11,7 @@
 [submodule "CtrlrLuaLib"]
 	path = CtrlrLuaLib
 	url = https://github.com/unityconstruct/CtrlrLuaLib.git
+
+[submodule "CtrlrPanels"]
+	path = CtrlrPanels
+	url = https://github.com/unityconstruct/CtrlrPanels.git
