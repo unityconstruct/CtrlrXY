@@ -64,7 +64,7 @@
   <id name="uiPanelSnapActive"	 			text="Snap component position" type="Bool"/>
   <id name="uiPanelSnapSize"                text="Snap size" type="Text"/>
   <id name="uiPanelClipboardTree" 			text="uiPanelClipboardTree" type="Text"/>
-  <id name="uiPanelPropertiesOnRight" 		text="Properties panel on the right side" type="Bool"/>
+  <id name="uiPanelPropertiesOnRight" 		text="Properties panel position" type="Bool" defaults="Right/Left" />
 
   <id name="uiPanelInvisibleComponentAlpha" text="Alpha for invisible components in edit mode" type="Numeric" max="1" int="0.01"/>
   <id name="uiPanelDisableCombosOnEdit" 	text="Disable combos when editing panel" type="Bool" />
@@ -143,7 +143,7 @@
   <id name="panelAuthorUrl"                 text="Panel author url" type="Text"/>
   <id name="panelAuthorDesc"                text="Panel author description" type="MultiLineSmall"/>
   <id name="panelVersionMajor"              text="Version MAJOR" type="Numeric" min="0" max="24" int="1" />
-  <id name="panelVersionMinor"              text="Version MINOR" type="Numeric" min="0" max="48" int="1" />
+  <id name="panelVersionMinor"              text="Version MINOR" type="Numeric" min="0" max="2048" int="1" />
   <id name="panelVersionName"               text="Version Name" type="Text"/>
   <id name="panelCtrlrRevision"             text="Ctrlr revision that this panel was saved with" type="Text"/>
   <id name="panelVendor"                    text="Vendor that made the device that this panel controls" type="Text"/>
