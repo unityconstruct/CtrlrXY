@@ -324,6 +324,26 @@ LookAndFeel *CtrlrFixedImageSlider::getLookAndFeelFromComponentProperty(const St
         return new LookAndFeel_V4(LookAndFeel_V4::getDarkColourScheme());
     if (lookAndFeelComponentProperty == "V4 Midnight")
         return new LookAndFeel_V4(LookAndFeel_V4::getMidnightColourScheme());
+    if (lookAndFeelComponentProperty == "V4 JetBlack")
+        return new LookAndFeel_V4(LookAndFeel_V4::getJetBlackColourScheme());
+    if (lookAndFeelComponentProperty == "V4 YamDX")
+        return new LookAndFeel_V4(LookAndFeel_V4::getYamDxColourScheme());
+    if (lookAndFeelComponentProperty == "V4 AkAPC")
+        return new LookAndFeel_V4(LookAndFeel_V4::getAkApcColourScheme());
+    if (lookAndFeelComponentProperty == "V4 AkMPC")
+        return new LookAndFeel_V4(LookAndFeel_V4::getAkMpcColourScheme());
+    if (lookAndFeelComponentProperty == "V4 LexiBlue")
+        return new LookAndFeel_V4(LookAndFeel_V4::getLexiBlueColourScheme());
+    if (lookAndFeelComponentProperty == "V4 KurzGreen")
+        return new LookAndFeel_V4(LookAndFeel_V4::getKurzGreenColourScheme());
+    if (lookAndFeelComponentProperty == "V4 KorGrey")
+        return new LookAndFeel_V4(LookAndFeel_V4::getKorGreyColourScheme());
+    if (lookAndFeelComponentProperty == "V4 KorGold")
+        return new LookAndFeel_V4(LookAndFeel_V4::getKorGoldColourScheme());
+    if (lookAndFeelComponentProperty == "V4 ArturOrange")
+        return new LookAndFeel_V4(LookAndFeel_V4::getArturOrangeColourScheme());
+    if (lookAndFeelComponentProperty == "V4 AiraGreen")
+        return new LookAndFeel_V4(LookAndFeel_V4::getAiraGreenColourScheme());
     if (lookAndFeelComponentProperty == "V3")
         return new LookAndFeel_V3();
     if (lookAndFeelComponentProperty == "V2")

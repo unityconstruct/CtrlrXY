@@ -79,6 +79,17 @@
   <id name="uiPanelLookAndFeel"             text="LookAndFeel scheme for panel" type="VarText" defaults="@lookandfeelschemes" />
   <id name="uiPanelColourScheme"            text="LookAndFeel V4 colour scheme" type="VarText" defaults="@colourSchemes" />
   <id name="uiPanelLegacyMode"              text="LookAndFeel V3 for older panels" type="Bool" defaults="Legacy Mode/Disabled" />
+  
+  <id name="uiPanelUIColourWindowBackground"    text="Window background colour"  type="Colour" />
+  <id name="uiPanelUIColourWidgetBackground"    text="Widget Background Colour"  type="Colour" />
+  <id name="uiPanelUIColourMenuBackground"      text="Menu background colour"    type="Colour" />
+  <id name="uiPanelUIColourOutline"             text="Outline Colour"            type="Colour" />
+  <id name="uiPanelUIColourDefaultText"         text="Text colour"               type="Colour" />
+  <id name="uiPanelUIColourDefaultFill"         text="Fill colour"               type="Colour" />
+  <id name="uiPanelUIColourHighlightedText"     text="Highlighted text colour"   type="Colour" />
+  <id name="uiPanelUIColourHighlightedFill"     text="Highlighted fill colour"   type="Colour" />
+  <id name="uiPanelUIColourMenuText"            text="Menu text colour"          type="Colour" />
+  <id name="uiPanelUIColourNumColours"          text="Num colour"                type="Colour" />
 
   <!-- Panel properties -->
 
@@ -142,7 +153,7 @@
   <id name="panelAuthorEmail"               text="Panel author email" type="Text"/>
   <id name="panelAuthorUrl"                 text="Panel author url" type="Text"/>
   <id name="panelAuthorDesc"                text="Panel author description" type="MultiLineSmall"/>
-  <id name="panelVersionMajor"              text="Version MAJOR" type="Numeric" min="0" max="24" int="1" />
+  <id name="panelVersionMajor"              text="Version MAJOR" type="Numeric" min="0" max="2048" int="1" />
   <id name="panelVersionMinor"              text="Version MINOR" type="Numeric" min="0" max="2048" int="1" />
   <id name="panelVersionName"               text="Version Name" type="Text"/>
   <id name="panelCtrlrRevision"             text="Ctrlr revision that this panel was saved with" type="Text"/>
@@ -875,7 +886,7 @@
   <!-- Constants used in properties -->
   <constants>
     <const name="justification"     value="left=1,right=2,horizontallyCentred=4,top=8,bottom=16,verticallyCentred=32,horizontallyJustified=64,centred=36,centredLeft=33,centredRight=34,centredTop=12,centredBottom=20,topLeft=9,topRight=10,bottomLeft=17,bottomRight=18" />
-    <const name="gradient"          value="SolidColour=0,Vertical=1,Horizontal=2,Radial=3" />
+    <const name="gradient"          value="None=0,Vertical=1,Horizontal=2,Radial=3" />
     <const name="imageLayout"       value="tile=8192,xLeft=1,xRight=2,xMid=4,yTop=8,yBottom=16,yMid=32,stretchToFit=64,fillDestination=128,onlyReduceInSize=256,onlyIncreaseInSize=512,centred=36" />
     <const name="relativePosition"  value="none,top,bottom,left,right" />
     <const name="midiInputChannel"  value="All Channels=0,Channel 1=1,Channel 2=2,Channel 3=3,Channel 4=4,Channel 5=5,Channel 6=6,Channel 7=7,Channel 8=8,Channel 9=9,Channel 10=10,Channel 11=11,Channel 12=12,Channel 13=13,Channel 14=14,Channel 15=15,Channel 16=16" />
@@ -884,12 +895,12 @@
     <const name="imageEffect"       value="No Effect,Glow,Shadow" />
     <const name="dynamicContent"    value="None=0,Modulator List=1,Filesystem=2,Bank,Program=3" />
     <const name="lcdFonts"          value="LCD=0,Digital-7=1,Dotty-Shadow=2,ZX81=3,Invasion2000=4,Digit=5,Computerfont=6,Electronic-Highway-Sign=7,Karmatic-Arcade=8,60sekuntia=9" />
-    <const name="internalFunctions" value="-- None=0,MIDI Device Selection=1" />
-    <const name="componentlookandfeel"       value="Default,V4 Light,V4 Grey,V4 Dark,V4 Midnight,V3,V2,V1" />
-    <const name="lookandfeelschemes"       value="V4 Light,V4 Grey,V4 Dark,V4 Midnight,V3,V2,V1" />
-    <const name="lookandfeel"       value="V4,V3,V2,V1" />
-    <const name="colourSchemes"     value="Default,Light,Grey,Dark,Midnight" />
-    <const name="ctrlrColourSchemes"     value="Light,Grey,Dark,Midnight" />
+    <const name="internalFunctions"    value="-- None=0,MIDI Device Selection=1,MIDI Monitor=2" />
+    <const name="componentlookandfeel" value="Default,V4 Light,V4 Grey,V4 Dark,V4 Midnight,V4 JetBlack,V4 YamDX,V4 AkAPC,V4 AkMPC,V4 LexiBlue,V4 KurzGreen,V4 KorGrey,V4 KorGold,V4 ArturOrange,V4 AiraGreen,V3,V2,V1" />
+    <const name="lookandfeelschemes"   value="V4 Light,V4 Grey,V4 Dark,V4 Midnight,V4 JetBlack,V4 YamDX,V4 AkAPC,V4 AkMPC,V4 LexiBlue,V4 KurzGreen,V4 KorGrey,V4 KorGold,V4 ArturOrange,V4 AiraGreen,V3,V2,V1" />
+    <const name="lookandfeel"          value="V4,V3,V2,V1" />
+    <const name="colourSchemes"        value="Default,Light,Grey,Dark,Midnight" />
+    <const name="ctrlrColourSchemes"   value="Light,Grey,Dark,Midnight,JetBlack,YamDX,AkAPC,AkMPC,LexiBlue,KurzGreen,KorGrey,KorGold,ArturOrange,AiraGreen" />
   </constants>
 
 </ctrlrIds>

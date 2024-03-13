@@ -168,9 +168,9 @@ CtrlrPanel::CtrlrPanel(CtrlrManager &_owner, const String &panelName, const int 
 //    setProperty (Ids::ctrlrMenuItemSeparatorColour, Colour (0x44000000).toString());
 //    setProperty (Ids::ctrlrMenuItemHeaderColour, Colours::black.toString());
 //
-//    setProperty (Ids::ctrlrMenuBarBackgroundColour1, Colour(0xfff7f7f7).toString());
+    setProperty (Ids::ctrlrMenuBarBackgroundColour1, Colour(0xfff7f7f7).toString());
 //    setProperty (Ids::ctrlrMenuBarBackgroundColour2, Colour(0xffcccccc).toString());
-//    setProperty (Ids::ctrlrMenuBarTextColour, Colours::black.toString());
+    setProperty (Ids::ctrlrMenuBarTextColour, Colours::black.toString());
 //    setProperty (Ids::ctrlrMenuBarHighlightedTextColour, Colours::white.toString());
 //    setProperty (Ids::ctrlrMenuBarHighlightColour, Colour(HIGHLIGHT_COLOUR).toString());
 //    setProperty (Ids::ctrlrMenuBarFont, owner.getFontManager().getStringFromFont (Font (18.0f)));
@@ -1868,6 +1868,9 @@ void CtrlrPanel::performInternalComponentFunction(CtrlrComponent *sourceComponen
 		case MIDIDeviceSelection:
 			CtrlrMIDISettingsDialog::showDialog(*this);
 			break;
+        case MIDIMonitor:
+            owner.getWindowManager().toggle(CtrlrManagerWindowManager::MidiMonWindow, true);
+            break;
 		case none:
 		default:
 			break;

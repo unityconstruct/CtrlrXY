@@ -399,6 +399,10 @@ void CtrlrChoicePropertyComponent::changed()
     }
 }
 
+//void CtrlrChoicePropertyComponent::changeListenerCallback (ChangeBroadcaster* source)
+//{
+//}
+
 CtrlrColourEditorComponent::CtrlrColourEditorComponent(ChangeListener *defaultListener) : canResetToDefault (true)
 {
 	addAndMakeVisible (&colourTextInput);
@@ -1281,6 +1285,7 @@ void CtrlrMultiMidiPropertyComponent::labelTextChanged (Label* l)
 	}
 }
 
+//==============================================================================
 CtrlrSliderPropertyComponent::CtrlrSliderPropertyComponent (const Value &_valueToControl, double rangeMin, double rangeMax, double interval)
 	: valueToControl(_valueToControl)
 {

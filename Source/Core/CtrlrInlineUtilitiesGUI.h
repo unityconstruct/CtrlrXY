@@ -79,12 +79,34 @@ namespace gui {
         if (property =="Light")
             return LookAndFeel_V4::getLightColourScheme();
         if (property == "Grey")
-            return LookAndFeel_V4::getMidnightColourScheme();
+            return LookAndFeel_V4::getGreyColourScheme();
         if (property == "Dark")
             return LookAndFeel_V4::getDarkColourScheme();
         if (property == "Midnight")
             return LookAndFeel_V4::getMidnightColourScheme();
-
+        if (property == "JetBlack")
+            return LookAndFeel_V4::getJetBlackColourScheme();
+        if (property == "YamDX")
+            return LookAndFeel_V4::getYamDxColourScheme();
+        if (property == "YamDX")
+            return LookAndFeel_V4::getYamDxColourScheme();
+        if (property == "AkAPC")
+            return LookAndFeel_V4::getAkApcColourScheme();
+        if (property == "AkMPC")
+            return LookAndFeel_V4::getAkMpcColourScheme();
+        if (property == "LexiBlue")
+            return LookAndFeel_V4::getLexiBlueColourScheme();
+        if (property == "KurzGreen")
+            return LookAndFeel_V4::getKurzGreenColourScheme();
+        if (property == "KorGrey")
+            return LookAndFeel_V4::getKorGreyColourScheme();
+        if (property == "KorGold")
+            return LookAndFeel_V4::getKorGoldColourScheme();
+        if (property == "ArturOrange")
+            return LookAndFeel_V4::getArturOrangeColourScheme();
+        if (property == "AiraGreen")
+            return LookAndFeel_V4::getAiraGreenColourScheme();
+        
         return LookAndFeel_V4::getLightColourScheme();
     }
 }

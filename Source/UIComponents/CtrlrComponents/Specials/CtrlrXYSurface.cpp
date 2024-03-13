@@ -55,7 +55,7 @@ CtrlrXYSurface::CtrlrXYSurface (CtrlrModulator &owner)
 	setProperty (Ids::uiXYSurfaceOutlineColour1, "0xff909090");
 	setProperty (Ids::uiXYSurfaceOutlineColour2, "0xff909090");
 	setProperty (Ids::uiXYSurfaceOutlineThickness, 1);
-	setProperty (Ids::uiXYSurfaceCornerSize, 10);
+	setProperty (Ids::uiXYSurfaceCornerSize, 5);
 	setProperty (Ids::uiXYSurfaceBgImageResource, COMBO_NONE_ITEM);
 	setProperty (Ids::uiXYSurfaceBgImageLayout, 0);
 	setProperty (Ids::uiXYSurfaceBgImageAlpha, 255);

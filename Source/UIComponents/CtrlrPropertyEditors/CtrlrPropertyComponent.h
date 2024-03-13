@@ -97,6 +97,7 @@ class CtrlrChoicePropertyComponent  : public Component,
 		void resized();
 		void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
 		void changed();
+        //void changeListenerCallback (ChangeBroadcaster* source);
 
 	private:
 		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrChoicePropertyComponent)

@@ -76,10 +76,10 @@ CtrlrPanelEditor::CtrlrPanelEditor(CtrlrPanel &_owner, CtrlrManager &_ctrlrManag
     setProperty(Ids::uiViewPortFixedAspectRatio, 1.5);
     setProperty(Ids::uiPanelZoom, 1.0);
     
-    setProperty(Ids::uiPanelViewPortBackgroundColour, (String)findColour (ResizableWindow::backgroundColourId).withAlpha(0.7f).toString());  // ViewPort background color. was "transparentblack"
-    setProperty(Ids::uiPanelBackgroundColour, (String)findColour (ResizableWindow::backgroundColourId).toString()); // Canvas Colour 0xffffffff
-    setProperty(Ids::uiPanelBackgroundColour1, (String)findColour (ResizableWindow::backgroundColourId).toString()); // Canvas Colour1 if gradient
-    setProperty(Ids::uiPanelBackgroundColour2, (String)findColour (ResizableWindow::backgroundColourId).darker(0.2f).toString()); // Canvas Colour2 if gradient
+    setProperty(Ids::uiPanelViewPortBackgroundColour, (String) Component::findColour (ResizableWindow::backgroundColourId).withAlpha(0.7f).toString());  // ViewPort background color. was "transparentblack"
+    setProperty(Ids::uiPanelBackgroundColour, (String) Component::findColour (ResizableWindow::backgroundColourId).toString()); // Canvas Colour 0xffffffff
+    setProperty(Ids::uiPanelBackgroundColour1, (String) Component::findColour (ResizableWindow::backgroundColourId).toString()); // Canvas Colour1 if gradient
+    setProperty(Ids::uiPanelBackgroundColour2, (String) Component::findColour (ResizableWindow::backgroundColourId).darker(0.2f).toString()); // Canvas Colour2 if gradient
     setProperty(Ids::uiPanelBackgroundGradientType, 0); // Default set to SolidColor [No background gradient]
     setProperty(Ids::uiPanelImageResource, COMBO_ITEM_NONE);
     setProperty(Ids::uiPanelImageAlpha, 255);
@@ -100,14 +100,27 @@ CtrlrPanelEditor::CtrlrPanelEditor(CtrlrPanel &_owner, CtrlrManager &_ctrlrManag
     
     setProperty(Ids::uiPanelTooltipPlacement, BubbleComponent::below);
     setProperty(Ids::uiPanelTooltipFont, Font(12.0f, Font::plain).toString());
-    setProperty(Ids::uiPanelTooltipColour, (String)findColour (Label::textColourId).toString()); // 0xff000000
-    setProperty(Ids::uiPanelTooltipBackgroundColour, (String)findColour (BubbleComponent::backgroundColourId).toString()); // 0xffeeeebb
-    setProperty(Ids::uiPanelTooltipOutlineColour, (String)findColour (BubbleComponent::outlineColourId).toString()); // 0xff000000
+    setProperty(Ids::uiPanelTooltipColour, (String) Component::findColour (Label::textColourId).toString()); // 0xff000000
+    setProperty(Ids::uiPanelTooltipBackgroundColour, (String) Component::findColour (BubbleComponent::backgroundColourId).toString()); // 0xffeeeebb
+    setProperty(Ids::uiPanelTooltipOutlineColour, (String) Component::findColour (BubbleComponent::outlineColourId).toString()); // 0xff000000
     setProperty(Ids::uiPanelTooltipCornerRound, 1.0);
 
     setProperty(Ids::uiPanelLegacyMode, false);
     setProperty(Ids::uiPanelLookAndFeel, "V4 Light");
-
+    
+//    /** displays the current LookAndFeel colourScheme UIColours */
+//    LookAndFeel_V4::setColourScheme(getLightColourScheme());
+//
+//    setProperty(Ids::uiPanelUIColourWindowBackground, (String) LookAndFeel_V4::getCurrentColourScheme().getUIColour (ColourScheme::UIColour::windowBackground).toString());
+//    setProperty(Ids::uiPanelUIColourWidgetBackground, (String) LookAndFeel_V4::getCurrentColourScheme().getUIColour (ColourScheme::UIColour::widgetBackground).toString());
+//    setProperty(Ids::uiPanelUIColourMenuBackground, (String) LookAndFeel_V4::getCurrentColourScheme().getUIColour (ColourScheme::UIColour::menuBackground).toString());
+//    setProperty(Ids::uiPanelUIColourOutline, (String) LookAndFeel_V4::getCurrentColourScheme().getUIColour (ColourScheme::UIColour::outline).toString());
+//    setProperty(Ids::uiPanelUIColourDefaultText, (String) LookAndFeel_V4::getCurrentColourScheme().getUIColour (ColourScheme::UIColour::defaultText).toString());
+//    setProperty(Ids::uiPanelUIColourDefaultFill, (String) LookAndFeel_V4::getCurrentColourScheme().getUIColour (ColourScheme::UIColour::defaultFill).toString());
+//    setProperty(Ids::uiPanelUIColourHighlightedText, (String) LookAndFeel_V4::getCurrentColourScheme().getUIColour (ColourScheme::UIColour::highlightedText).toString());
+//    setProperty(Ids::uiPanelUIColourHighlightedFill, (String) LookAndFeel_V4::getCurrentColourScheme().getUIColour (ColourScheme::UIColour::highlightedFill).toString());
+//    setProperty(Ids::uiPanelUIColourMenuText, (String) LookAndFeel_V4::getCurrentColourScheme().getUIColour (ColourScheme::UIColour::menuText).toString());
+    
     ctrlrComponentSelection->addChangeListener(ctrlrPanelProperties);
     
     setSize(600, 400);
@@ -348,22 +361,22 @@ void CtrlrPanelEditor::valueTreePropertyChanged(ValueTree &treeWhosePropertyHasC
             resized();
         }
         else if (property == Ids::uiViewPortResizable
-        || property == Ids::uiViewPortShowScrollBars
-        || property == Ids::uiViewPortEnableFixedAspectRatio
-        || property == Ids::uiViewPortFixedAspectRatio
-        || property == Ids::uiViewPortEnableResizeLimits
-        || property == Ids::uiViewPortMinWidth
-        || property == Ids::uiViewPortMinHeight
-        || property == Ids::uiViewPortMaxWidth
-        || property == Ids::uiViewPortMaxHeight
-        || property == Ids::uiViewPortShowScrollBars
-        )
+                 || property == Ids::uiViewPortShowScrollBars
+                 || property == Ids::uiViewPortEnableFixedAspectRatio
+                 || property == Ids::uiViewPortFixedAspectRatio
+                 || property == Ids::uiViewPortEnableResizeLimits
+                 || property == Ids::uiViewPortMinWidth
+                 || property == Ids::uiViewPortMinHeight
+                 || property == Ids::uiViewPortMaxWidth
+                 || property == Ids::uiViewPortMaxHeight
+                 || property == Ids::uiViewPortShowScrollBars
+                 )
         {
             resized();
         }
         else if (property == Ids::uiViewPortWidth
-               || property == Ids::uiViewPortHeight
-               )
+                 || property == Ids::uiViewPortHeight
+                 )
         {
             resized();
         }
@@ -398,18 +411,39 @@ void CtrlrPanelEditor::valueTreePropertyChanged(ValueTree &treeWhosePropertyHasC
                 getCanvas()->setLookAndFeel(nullptr);
                 delete lookAndFeel.release();
             }
+            
             lookAndFeel.reset(getLookAndFeelFromDescription(getProperty(property)));
             getCanvas()->setLookAndFeel(lookAndFeel.get());
-        
+            
             setLookAndFeel(getLookAndFeelFromDescription(getProperty(Ids::uiPanelLookAndFeel))); // Updates the current component LookAndFeel : PanelEditor
             LookAndFeel::setDefaultLookAndFeel(getLookAndFeelFromDescription(getProperty(Ids::uiPanelLookAndFeel))); // Force selected LnF as Default LnF for popups, combobox, alert windows
-            setProperty(Ids::uiPanelViewPortBackgroundColour, (String)findColour (ResizableWindow::backgroundColourId).withAlpha(0.7f).toString()); // Update Canvas props
-            setProperty(Ids::uiPanelBackgroundColour, (String)findColour (ResizableWindow::backgroundColourId).toString());
-            setProperty(Ids::uiPanelBackgroundColour1, (String)findColour (ResizableWindow::backgroundColourId).toString());
-            setProperty(Ids::uiPanelBackgroundColour2, (String)findColour (ResizableWindow::backgroundColourId).darker(0.2f).toString());
-            setProperty(Ids::uiPanelTooltipBackgroundColour, (String)findColour (BubbleComponent::backgroundColourId).toString());
-            setProperty(Ids::uiPanelTooltipOutlineColour, (String)findColour (BubbleComponent::outlineColourId).toString());
-            setProperty(Ids::uiPanelTooltipColour, (String)findColour (Label::textColourId).toString());
+            lookAndFeelChanged();
+            
+            if (!getProperty(Ids::uiPanelLegacyMode)) // Added v5.6.30. Protects Legacy panels' BKG Colours when being assigned LnF V3
+            {
+                setProperty(Ids::uiPanelViewPortBackgroundColour, (String) Component::findColour (ResizableWindow::backgroundColourId).withAlpha(0.7f).toString()); // Update Canvas props
+                setProperty(Ids::uiPanelBackgroundColour, (String) Component::findColour (ResizableWindow::backgroundColourId).toString());
+                setProperty(Ids::uiPanelBackgroundColour1, (String) Component::findColour (ResizableWindow::backgroundColourId).toString());
+                setProperty(Ids::uiPanelBackgroundColour2, (String) Component::findColour (ResizableWindow::backgroundColourId).darker(0.2f).toString());
+                setProperty(Ids::uiPanelTooltipBackgroundColour, (String) Component::findColour (BubbleComponent::backgroundColourId).toString());
+                setProperty(Ids::uiPanelTooltipOutlineColour, (String) Component::findColour (BubbleComponent::outlineColourId).toString());
+                setProperty(Ids::uiPanelTooltipColour, (String) Component::findColour (Label::textColourId).toString());
+            }
+            
+//            /** Stores the updated LnF ColourScheme **/
+//            auto* currentLookAndFeel = dynamic_cast<LookAndFeel_V4*>(&getLookAndFeel());
+//            auto currentLookAndFeelScheme = currentLookAndFeel->getCurrentColourScheme();
+//
+//            /** Updates Default UIColours  property fields for the new ColourScheme **/
+//            setProperty(Ids::uiPanelUIColourWindowBackground, (String) currentLookAndFeelScheme.getUIColour (ColourScheme::UIColour::windowBackground).toString());
+//            setProperty(Ids::uiPanelUIColourWidgetBackground, (String) currentLookAndFeelScheme.getUIColour (ColourScheme::UIColour::widgetBackground).toString());
+//            setProperty(Ids::uiPanelUIColourMenuBackground, (String) currentLookAndFeelScheme.getUIColour (ColourScheme::UIColour::menuBackground).toString());
+//            setProperty(Ids::uiPanelUIColourOutline, (String) currentLookAndFeelScheme.getUIColour (ColourScheme::UIColour::outline).toString());
+//            setProperty(Ids::uiPanelUIColourDefaultText, (String) currentLookAndFeelScheme.getUIColour (ColourScheme::UIColour::defaultText).toString());
+//            setProperty(Ids::uiPanelUIColourDefaultFill, (String) currentLookAndFeelScheme.getUIColour (ColourScheme::UIColour::defaultFill).toString());
+//            setProperty(Ids::uiPanelUIColourHighlightedText, (String) currentLookAndFeelScheme.getUIColour (ColourScheme::UIColour::highlightedText).toString());
+//            setProperty(Ids::uiPanelUIColourHighlightedFill, (String) currentLookAndFeelScheme.getUIColour (ColourScheme::UIColour::highlightedFill).toString());
+//            setProperty(Ids::uiPanelUIColourMenuText, (String) (String) currentLookAndFeelScheme.getUIColour (ColourScheme::UIColour::menuText).toString());
             
             /** Updates LookAndFeel of the menuBar **/
             if (owner.getCtrlrManagerOwner().getEditor())
@@ -417,11 +451,11 @@ void CtrlrPanelEditor::valueTreePropertyChanged(ValueTree &treeWhosePropertyHasC
                 owner.getCtrlrManagerOwner().getEditor()->activeCtrlrChanged();
             }
 
-            /** Updates  the Propery List to get textboxes LnF right  **/
+            /** Updates  the Property List to get textboxes LnF right  **/
             ctrlrPanelProperties->refreshAll();
             if (getSelection())
             {
-                getSelection()->sendChangeMessage();  // Bring back the screen position to where it left
+                getSelection()->sendChangeMessage();  // Brings back the screen position to where it left
             }
         }
         else if (property == Ids::uiPanelBackgroundGradientType
@@ -432,6 +466,37 @@ void CtrlrPanelEditor::valueTreePropertyChanged(ValueTree &treeWhosePropertyHasC
                 )
         {
             resized();
+        }
+        else if (property == Ids::uiPanelUIColourWindowBackground
+                 || property == Ids::uiPanelUIColourWidgetBackground
+                 || property == Ids::uiPanelUIColourMenuBackground
+                 || property == Ids::uiPanelUIColourOutline
+                 || property == Ids::uiPanelUIColourDefaultText
+                 || property == Ids::uiPanelUIColourDefaultFill
+                 || property == Ids::uiPanelUIColourHighlightedText
+                 || property == Ids::uiPanelUIColourHighlightedFill
+                 || property == Ids::uiPanelUIColourMenuText
+                 )
+        {
+
+//            /** Not working yet, need to be fixed */
+//            auto* customLookAndFeel = dynamic_cast<LookAndFeel_V4*>(&getLookAndFeel());
+//            auto customLookAndFeelScheme = customLookAndFeel->getCurrentColourScheme();
+//
+//            getCurrentColourScheme().setUIColour(ColourScheme::UIColour::windowBackground, VAR2COLOUR (owner.getProperty(Ids::uiPanelUIColourWindowBackground)));
+//            getCurrentColourScheme().setUIColour(ColourScheme::UIColour::widgetBackground, VAR2COLOUR (owner.getProperty(Ids::uiPanelUIColourWidgetBackground)));
+//            getCurrentColourScheme().setUIColour(ColourScheme::UIColour::menuBackground, VAR2COLOUR (owner.getProperty(Ids::uiPanelUIColourMenuBackground)));
+//            getCurrentColourScheme().setUIColour(ColourScheme::UIColour::outline, VAR2COLOUR (owner.getProperty(Ids::uiPanelUIColourOutline)));
+//            getCurrentColourScheme().setUIColour(ColourScheme::UIColour::defaultText, VAR2COLOUR (owner.getProperty(Ids::uiPanelUIColourDefaultText)));
+//            getCurrentColourScheme().setUIColour(ColourScheme::UIColour::defaultFill, VAR2COLOUR (owner.getProperty(Ids::uiPanelUIColourDefaultFill)));
+//            getCurrentColourScheme().setUIColour(ColourScheme::UIColour::highlightedText, VAR2COLOUR (owner.getProperty(Ids::uiPanelUIColourHighlightedText)));
+//            getCurrentColourScheme().setUIColour(ColourScheme::UIColour::highlightedFill, VAR2COLOUR (owner.getProperty(Ids::uiPanelUIColourHighlightedFill)));
+//            getCurrentColourScheme().setUIColour(ColourScheme::UIColour::menuText, VAR2COLOUR (owner.getProperty(Ids::uiPanelUIColourMenuText)));
+//
+//            setLookAndFeel(customLookAndFeel);
+//            getCanvas()->setLookAndFeel(customLookAndFeel);
+//            LookAndFeel::setDefaultLookAndFeel(customLookAndFeel);
+            
         }
     }
 }
@@ -446,6 +511,26 @@ LookAndFeel *CtrlrPanelEditor::getLookAndFeelFromDescription(const String &lookA
         return new LookAndFeel_V4(LookAndFeel_V4::getDarkColourScheme());
     if (lookAndFeelDesc == "V4 Midnight")
         return new LookAndFeel_V4(LookAndFeel_V4::getMidnightColourScheme());
+    if (lookAndFeelDesc == "V4 JetBlack")
+        return new LookAndFeel_V4(LookAndFeel_V4::getJetBlackColourScheme());
+    if (lookAndFeelDesc == "V4 YamDX")
+        return new LookAndFeel_V4(LookAndFeel_V4::getYamDxColourScheme());
+    if (lookAndFeelDesc == "V4 AkAPC")
+        return new LookAndFeel_V4(LookAndFeel_V4::getAkApcColourScheme());
+    if (lookAndFeelDesc == "V4 AkMPC")
+        return new LookAndFeel_V4(LookAndFeel_V4::getAkMpcColourScheme());
+    if (lookAndFeelDesc == "V4 LexiBlue")
+        return new LookAndFeel_V4(LookAndFeel_V4::getLexiBlueColourScheme());
+    if (lookAndFeelDesc == "V4 KurzGreen")
+        return new LookAndFeel_V4(LookAndFeel_V4::getKurzGreenColourScheme());
+    if (lookAndFeelDesc == "V4 KorGrey")
+        return new LookAndFeel_V4(LookAndFeel_V4::getKorGreyColourScheme());
+    if (lookAndFeelDesc == "V4 KorGold")
+        return new LookAndFeel_V4(LookAndFeel_V4::getKorGoldColourScheme());
+    if (lookAndFeelDesc == "V4 ArturOrange")
+        return new LookAndFeel_V4(LookAndFeel_V4::getArturOrangeColourScheme());
+    if (lookAndFeelDesc == "V4 AiraGreen")
+        return new LookAndFeel_V4(LookAndFeel_V4::getAiraGreenColourScheme());
     if (lookAndFeelDesc == "V3")
         return new LookAndFeel_V3();
     if (lookAndFeelDesc == "V2")

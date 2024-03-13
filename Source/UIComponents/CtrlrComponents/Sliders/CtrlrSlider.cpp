@@ -89,8 +89,8 @@ CtrlrSlider::CtrlrSlider (CtrlrModulator &owner)
         setProperty (Ids::uiSliderLookAndFeelIsCustom, false);
     }
     
-    setProperty (Ids::uiSliderIncDecButtonColour, (String)findColour (Slider::backgroundColourId).toString());
-    setProperty (Ids::uiSliderIncDecTextColour, (String)findColour (Label::textColourId).toString());
+    setProperty (Ids::uiSliderIncDecButtonColour, (String)findColour(Slider::backgroundColourId).toString());
+    setProperty (Ids::uiSliderIncDecTextColour, (String)findColour(Label::textColourId).toString());
     
     /**For LookAndFeel_V2 only*/
     setProperty (Ids::uiSliderTrackCornerSize, 5);
@@ -107,10 +107,10 @@ CtrlrSlider::CtrlrSlider (CtrlrModulator &owner)
     setProperty (Ids::uiSliderValueHeight, 10);
     setProperty (Ids::uiSliderValueTextJustification, "centred");
     setProperty (Ids::uiSliderValueFont, FONT2STR (Font(12)));
-    setProperty (Ids::uiSliderValueTextColour, (String)findColour (Slider::textBoxTextColourId).toString());
-    setProperty (Ids::uiSliderValueHighlightColour, (String)findColour (Slider::textBoxHighlightColourId).toString());
-    setProperty (Ids::uiSliderValueBgColour, "0x00ffffff"); // (String)findColour (Slider::textBoxBackgroundColourId).toString());
-    setProperty (Ids::uiSliderValueOutlineColour, "0x00ffffff"); //(String)findColour (Slider::textBoxOutlineColourId).toString());
+    setProperty (Ids::uiSliderValueTextColour, (String)findColour(Slider::textBoxTextColourId).toString());
+    setProperty (Ids::uiSliderValueHighlightColour, (String)findColour(Slider::textBoxHighlightColourId).toString());
+    setProperty (Ids::uiSliderValueBgColour, "0x00ffffff"); // (String)findColour(Slider::textBoxBackgroundColourId).toString());
+    setProperty (Ids::uiSliderValueOutlineColour, "0x00ffffff"); //(String)findColour(Slider::textBoxOutlineColourId).toString());
     
     setProperty (Ids::uiSliderLookAndFeelIsCustom, false);
 }
@@ -273,7 +273,7 @@ void CtrlrSlider::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasChang
     else if (property == Ids::uiSliderValuePosition || property == Ids::uiSliderValueHeight || property == Ids::uiSliderValueWidth)
     {
         ctrlrSlider.setTextBoxStyle (
-            (Slider::TextEntryBoxPosition)(int)getProperty (Ids::uiSliderValuePosition),
+            (Slider::TextEntryBoxPosition)(int)getProperty(Ids::uiSliderValuePosition),
             false,
             getProperty (Ids::uiSliderValueWidth, 64),
             getProperty (Ids::uiSliderValueHeight, 12));
@@ -385,6 +385,26 @@ LookAndFeel *CtrlrSlider::getLookAndFeelFromComponentProperty(const String &look
         return new LookAndFeel_V4(LookAndFeel_V4::getDarkColourScheme());
     if (lookAndFeelComponentProperty == "V4 Midnight")
         return new LookAndFeel_V4(LookAndFeel_V4::getMidnightColourScheme());
+    if (lookAndFeelComponentProperty == "V4 JetBlack")
+        return new LookAndFeel_V4(LookAndFeel_V4::getJetBlackColourScheme());
+    if (lookAndFeelComponentProperty == "V4 YamDX")
+        return new LookAndFeel_V4(LookAndFeel_V4::getYamDxColourScheme());
+    if (lookAndFeelComponentProperty == "V4 AkAPC")
+        return new LookAndFeel_V4(LookAndFeel_V4::getAkApcColourScheme());
+    if (lookAndFeelComponentProperty == "V4 AkMPC")
+        return new LookAndFeel_V4(LookAndFeel_V4::getAkMpcColourScheme());
+    if (lookAndFeelComponentProperty == "V4 LexiBlue")
+        return new LookAndFeel_V4(LookAndFeel_V4::getLexiBlueColourScheme());
+    if (lookAndFeelComponentProperty == "V4 KurzGreen")
+        return new LookAndFeel_V4(LookAndFeel_V4::getKurzGreenColourScheme());
+    if (lookAndFeelComponentProperty == "V4 KorGrey")
+        return new LookAndFeel_V4(LookAndFeel_V4::getKorGreyColourScheme());
+    if (lookAndFeelComponentProperty == "V4 KorGold")
+        return new LookAndFeel_V4(LookAndFeel_V4::getKorGoldColourScheme());
+    if (lookAndFeelComponentProperty == "V4 ArturOrange")
+        return new LookAndFeel_V4(LookAndFeel_V4::getArturOrangeColourScheme());
+    if (lookAndFeelComponentProperty == "V4 AiraGreen")
+        return new LookAndFeel_V4(LookAndFeel_V4::getAiraGreenColourScheme());
     if (lookAndFeelComponentProperty == "V3")
         return new LookAndFeel_V3();
     if (lookAndFeelComponentProperty == "V2")
@@ -412,8 +432,8 @@ void CtrlrSlider::resetLookAndFeelOverrides()
         
         setProperty (Ids::uiSliderValueTextColour, (String)findColour(Slider::textBoxTextColourId).toString());
         setProperty (Ids::uiSliderValueHighlightColour, (String)findColour(Slider::textBoxHighlightColourId).toString());
-        setProperty (Ids::uiSliderValueBgColour, "0x00ffffff"); // (String)findColour (Slider::textBoxBackgroundColourId).toString());
-        setProperty (Ids::uiSliderValueOutlineColour, "0x00ffffff"); //(String)findColour (Slider::textBoxOutlineColourId).toString());
+        setProperty (Ids::uiSliderValueBgColour, "0x00ffffff"); // (String)findColour(Slider::textBoxBackgroundColourId).toString());
+        setProperty (Ids::uiSliderValueOutlineColour, "0x00ffffff"); //(String)findColour(Slider::textBoxOutlineColourId).toString());
         
         setProperty (Ids::uiSliderLookAndFeelIsCustom, false); // Resets the component colourScheme if a new default colourScheme is selected from the menu
         

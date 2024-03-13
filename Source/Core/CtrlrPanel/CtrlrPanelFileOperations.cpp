@@ -204,7 +204,7 @@ const File CtrlrPanel::savePanelAs(const CommandID saveOption)
 {
 	File fileToSave;
 	File f(getProperty(Ids::panelLastSaveDir));
-
+    
 	if (saveOption == CtrlrEditor::doExportFileText)
 	{
 		fileToSave = CtrlrPanel::askForPanelFileToSave (this, f, true, false);
@@ -215,6 +215,16 @@ const File CtrlrPanel::savePanelAs(const CommandID saveOption)
 		savePanelXml (fileToSave, this);
 		setProperty (Ids::panelFilePath, fileToSave.getFullPathName());
 		setProperty (Ids::panelLastSaveDir, fileToSave.getParentDirectory().getFullPathName());
+        
+        bool panelWasDirty = isPanelDirty();  // Added v5.6.30 (removes asterisk suffix from name in panel tab
+        setPanelDirty(false);
+        
+        if (panelWasDirty)
+        {
+            setPanelDirty(panelWasDirty);
+        }
+        getUndoManager()->clearUndoHistory();
+        updatePanelWindowTitle();
 	}
 	if (saveOption == CtrlrEditor::doExportFileZText)
 	{

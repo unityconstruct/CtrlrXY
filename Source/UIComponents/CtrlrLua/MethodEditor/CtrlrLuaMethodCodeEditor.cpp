@@ -23,18 +23,24 @@ CtrlrLuaMethodCodeEditor::CtrlrLuaMethodCodeEditor(CtrlrLuaMethodEditor &_owner,
 	document.addListener (this);
 	editorComponent->addMouseListener (this, true);
 	editorComponent->addKeyListener (this);
-	editorComponent->setColour(CodeEditorComponent::lineNumberBackgroundId, Colours::lightgrey);
+    
+    editorComponent->setColour(CodeEditorComponent::backgroundColourId, Colours::white); // findColour(CodeEditorComponent::backgroundColourId));
+    editorComponent->setColour(CodeEditorComponent::defaultTextColourId, Colours::black); // findColour(CodeEditorComponent::defaultTextColourId));
+	editorComponent->setColour(CodeEditorComponent::lineNumberBackgroundId, findColour(CodeEditorComponent::lineNumberBackgroundId));
+    editorComponent->setColour(CodeEditorComponent::lineNumberTextId, findColour(CodeEditorComponent::lineNumberTextId));
+    editorComponent->setColour(CodeEditorComponent::highlightColourId, findColour(CodeEditorComponent::highlightColourId));
+    
 	if (method != nullptr)
 		method->setCodeEditor (this);
 
 	if (owner.getComponentTree().hasProperty (Ids::luaMethodEditorFont))
 	{
 		setFontAndColour (owner.getOwner().getCtrlrManagerOwner().getFontManager().getFontFromString (owner.getComponentTree().getProperty (Ids::luaMethodEditorFont))
-					,VAR2COLOUR(owner.getComponentTree().getProperty (Ids::luaMethodEditorBgColour, Colours::white.toString())));
+                          ,VAR2COLOUR(owner.getComponentTree().getProperty (Ids::luaMethodEditorBgColour, Colours::white.toString())));// (String) findColour(CodeEditorComponent::backgroundColourId).toString())));
 	}
 	else
 	{
-		setFontAndColour (Font (Font::getDefaultMonospacedFontName(), 14.0f, Font::plain), Colours::white);
+		setFontAndColour (Font (Font::getDefaultMonospacedFontName(), 14.0f, Font::plain), Colours::white); // findColour(CodeEditorComponent::backgroundColourId));
 	}
 	//editorComponent->grabKeyboardFocus();
 }
@@ -446,16 +452,16 @@ void CtrlrLuaMethodCodeEditor::reportFoundMatch (CodeDocument &doc, const String
 {
 	CodeDocument::Position pos (doc, range.getStart());
 	AttributedString as;
-	as.append ("Method: ", Colours::black);
+    as.append ("Method: ", Colours::black);
 	as.append (methodName, Colours::blue);
-
-	as.append ("\tline: ", Colours::black);
+ 
+    as.append ("\tline: ", Colours::black);
 	as.append (String(pos.getLineNumber()+1), Colours::darkgreen);
 
-	as.append ("\tstart: ", Colours::black);
+    as.append ("\tstart: ", Colours::black);
 	as.append (String(range.getStart()), Colours::darkgreen);
 
-	as.append ("\tend: ", Colours::black);
+    as.append ("\tend: ", Colours::black);
 	as.append (String(range.getEnd()), Colours::darkgreen);
 
 	owner.getMethodEditArea()->insertOutput (as);

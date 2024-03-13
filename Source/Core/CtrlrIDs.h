@@ -107,6 +107,17 @@ namespace Ids
     DECLARE_ID (uiPanelColorScheme);
     DECLARE_ID (uiPanelColourScheme);
     
+    DECLARE_ID (uiPanelUIColourWindowBackground);
+    DECLARE_ID (uiPanelUIColourWidgetBackground);
+    DECLARE_ID (uiPanelUIColourMenuBackground);
+    DECLARE_ID (uiPanelUIColourOutline);
+    DECLARE_ID (uiPanelUIColourDefaultText);
+    DECLARE_ID (uiPanelUIColourDefaultFill);
+    DECLARE_ID (uiPanelUIColourHighlightedText);
+    DECLARE_ID (uiPanelUIColourHighlightedFill);
+    DECLARE_ID (uiPanelUIColourMenuText);
+    DECLARE_ID (uiPanelUIColourNumColours);
+    
     DECLARE_ID (uiPanelTooltipBackgroundColour);
     DECLARE_ID (uiPanelTooltipOutlineColour);
     DECLARE_ID (uiPanelTooltipCornerRound);

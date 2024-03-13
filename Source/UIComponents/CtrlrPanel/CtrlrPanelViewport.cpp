@@ -173,7 +173,7 @@ CtrlrPanelCanvas *CtrlrPanelViewport::getCurrentCanvas()
 
 void CtrlrPanelViewport::lookAndFeelChanged()
 {
-	resized();
+    resized();
 }
 
 void CtrlrPanelViewport::valueTreePropertyChanged (ValueTree &treeWhosePropertyHasChanged, const Identifier &property)

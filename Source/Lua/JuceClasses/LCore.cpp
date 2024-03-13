@@ -67,106 +67,116 @@ void LFile::wrapForLua (lua_State *L)
     [
 		class_<LFile>("LFile")
 		,
-		class_<File, bases<LFile> >("File")
-			.def(constructor<const String &>())
-			.def(constructor<const File &>())
-			.def("exists", &File::exists)
-			.def("existsAsFile", &File::existsAsFile)
-			.def("isDirectory", &File::isDirectory)
-			.def("getSize", &LFile::getSize)
-			.def("getFullPathName", &File::getFullPathName)
-			.def("getFileName", &File::getFileName)
-			.def("getRelativePathFrom", &File::getRelativePathFrom)
-			.def("getFileExtension", &File::getFileExtension)
-			.def("hasFileExtension", &File::hasFileExtension)
-			.def("withFileExtension", &File::withFileExtension)
-			.def("getFileNameWithoutExtension", &File::getFileNameWithoutExtension)
-			.def("hashCode", &File::hashCode)
-			.def("hashCode64", &File::hashCode64)
-			.def("getChildFile", &File::getChildFile)
-			.def("getSiblingFile", &File::getSiblingFile)
-			.def("getParentDirectory", &File::getParentDirectory)
-			.def("isAChildOf", &File::isAChildOf)
-			.def("getNonexistentChildFile", &File::getNonexistentChildFile)
-			.def("getNonexistentSibling", &File::getNonexistentSibling)
-			.def("hasWriteAccess", &File::hasWriteAccess)
-			.def("setReadOnly", &File::setReadOnly)
-			.def("isHidden", &File::isHidden)
-			.def("getLinkedTarget", &File::getLinkedTarget)
-			.def("isHidden", &File::isHidden)
-			.def("getLastModificationTime", &File::getLastModificationTime)
-			.def("getLastAccessTime", &File::getLastAccessTime)
-			.def("getCreationTime", &File::getCreationTime)
-			.def("setLastModificationTime", &File::setLastModificationTime)
-			.def("setLastAccessTime", &File::setLastAccessTime)
-			.def("setCreationTime", &File::setCreationTime)
-			.def("getVersion", &File::getVersion)
-			.def("create", &File::create)
-			.def("createDirectory", &File::createDirectory)
-			.def("deleteFile", &File::deleteFile)
-			.def("deleteRecursively", &File::deleteRecursively)
-			.def("moveToTrash", &File::moveToTrash)
-			.def("moveFileTo", &File::moveFileTo)
-			.def("copyFileTo", &File::copyFileTo)
-			.def("getNumberOfChildFiles", &File::getNumberOfChildFiles)
-			.def("containsSubDirectories", &File::containsSubDirectories)
-			.def("loadFileAsString", &File::loadFileAsString)
-			.def("appendData", &LFile::appendData)
-			.def("replaceWithData", &File::replaceWithData)
-			.def("replaceWithData", &LFile::replaceWithData)
-			.def("appendText", &File::appendText)
-			.def("replaceWithText", &File::replaceWithText)
-			.def("hasIdenticalContentTo", &File::hasIdenticalContentTo)
-			.def("getVolumeLabel", &File::getVolumeLabel)
-			.def("getVolumeSerialNumber", &File::getVolumeSerialNumber)
-			.def("getBytesFreeOnVolume", &File::getBytesFreeOnVolume)
-			.def("getVolumeTotalSize", &File::getVolumeTotalSize)
-			.def("isOnCDRomDrive", &File::isOnCDRomDrive)
-			.def("isOnHardDisk", &File::isOnHardDisk)
-			.def("isOnRemovableDrive", &File::isOnRemovableDrive)
-			.def("startAsProcess", &File::startAsProcess)
-			.def("revealToUser", &File::revealToUser)
-			.def("loadFileAsData", &File::loadFileAsData)
-			.def("findChildFiles", &LFile::findChildFiles)
-			.def("setAsCurrentWorkingDirectory", &File::setAsCurrentWorkingDirectory)
-			.def("isValid", &LFile::isValid)
-			.enum_("TypesOfFileToFind")
-			[
-				value("findDirectories", 1),
-				value("findFiles", 2),
-				value("findFilesAndDirectories", 3),
-				value("ignoreHiddenFiles", 4)
-			]
-			.enum_("SpecialLocationType")
-			[
-				value("userHomeDirectory", 0),
-				value("userDocumentsDirectory", 1),
-				value("userDesktopDirectory", 2),
-				value("userApplicationDataDirectory", 3),
-				value("commonApplicationDataDirectory", 4),
-				value("tempDirectory", 5),
-				value("currentExecutableFile", 6),
-				value("currentApplicationFile", 7),
-				value("invokedExecutableFile", 8),
-				value("globalApplicationsDirectory", 9),
-				value("userMusicDirectory", 10),
-				value("userMoviesDirectory", 11),
-				value("userPicturesDirectory", 12)
-			]
-			.scope
-			[
-				def("descriptionOfSizeInBytes", &LFile::descriptionOfSizeInBytes),
-				def("findFileSystemRoots", &File::findFileSystemRoots),
-				def("getSpecialLocation", &LFile::getSpecialLocation),
-				def("createTempFile", &File::createTempFile),
-				def("getCurrentWorkingDirectory", &File::getCurrentWorkingDirectory),
-				def("createLegalFileName", &File::createLegalFileName),
-				def("createLegalPathName", &File::createLegalPathName),
-				def("areFileNamesCaseSensitive", &File::areFileNamesCaseSensitive),
-				def("isAbsolutePath", &File::isAbsolutePath),
-				def("createFileWithoutCheckingPath", &File::createFileWithoutCheckingPath),
-				def("addTrailingSeparator", &File::addTrailingSeparator)
-			]
+        class_<File, bases<LFile> >("File")
+        .def(constructor<const String&>())
+        .def(constructor<const File&>())
+        .def("exists", &File::exists)
+        .def("existsAsFile", &File::existsAsFile)
+        .def("isDirectory", &File::isDirectory)
+        .def("isRoot", &File::isRoot) // Added in v5.6.30
+        .def("getSize", &LFile::getSize)
+        .def("getFullPathName", &File::getFullPathName)
+        .def("getFileName", &File::getFileName)
+        .def("getRelativePathFrom", &File::getRelativePathFrom)
+        .def("getFileExtension", &File::getFileExtension)
+        .def("hasFileExtension", &File::hasFileExtension)
+        .def("withFileExtension", &File::withFileExtension)
+        .def("getFileNameWithoutExtension", &File::getFileNameWithoutExtension)
+        .def("hashCode", &File::hashCode)
+        .def("hashCode64", &File::hashCode64)
+        .def("getChildFile", &File::getChildFile)
+        .def("getSiblingFile", &File::getSiblingFile)
+        .def("getParentDirectory", &File::getParentDirectory)
+        .def("isAChildOf", &File::isAChildOf)
+        .def("getNonexistentChildFile", &File::getNonexistentChildFile)
+        .def("getNonexistentSibling", &File::getNonexistentSibling)
+        .def("hasWriteAccess", &File::hasWriteAccess)
+        //.def("hasReadAccess", &File::hasReadAccess) // JUCE does not have hasReadAccess. Added in v5.6.30
+        .def("setReadOnly", &File::setReadOnly)
+        .def("isHidden", &File::isHidden)
+        .def("getFileIdentifier", &File::getFileIdentifier)  // Added in v5.6.30
+        .def("getLinkedTarget", &File::getLinkedTarget)
+        .def("isHidden", &File::isHidden)
+        .def("getLastModificationTime", &File::getLastModificationTime)
+        .def("getLastAccessTime", &File::getLastAccessTime)
+        .def("getCreationTime", &File::getCreationTime)
+        .def("setLastModificationTime", &File::setLastModificationTime)
+        .def("setLastAccessTime", &File::setLastAccessTime)
+        .def("setCreationTime", &File::setCreationTime)
+        .def("getVersion", &File::getVersion)
+        .def("create", &File::create)
+        .def("createDirectory", &File::createDirectory)
+        .def("deleteFile", &File::deleteFile)
+        .def("deleteRecursively", &File::deleteRecursively)
+        .def("moveToTrash", &File::moveToTrash)
+        .def("moveFileTo", &File::moveFileTo)
+        .def("copyFileTo", &File::copyFileTo)
+        .def("getNumberOfChildFiles", &File::getNumberOfChildFiles)
+        .def("containsSubDirectories", &File::containsSubDirectories)
+        .def("loadFileAsData", &File::loadFileAsData)  // Added in v5.6.30
+        .def("loadFileAsString", &File::loadFileAsString)
+        .def("appendData", &LFile::appendData)
+        .def("replaceWithData", &File::replaceWithData)
+        .def("replaceWithData", &LFile::replaceWithData)
+        .def("appendText", &File::appendText)
+        .def("replaceWithText", &File::replaceWithText)
+        .def("hasIdenticalContentTo", &File::hasIdenticalContentTo)
+        .def("getVolumeLabel", &File::getVolumeLabel)
+        .def("getVolumeSerialNumber", &File::getVolumeSerialNumber)
+        .def("getBytesFreeOnVolume", &File::getBytesFreeOnVolume)
+        .def("getVolumeTotalSize", &File::getVolumeTotalSize)
+        .def("isOnCDRomDrive", &File::isOnCDRomDrive)
+        .def("isOnHardDisk", &File::isOnHardDisk)
+        .def("isOnRemovableDrive", &File::isOnRemovableDrive)
+        .def("startAsProcess", &File::startAsProcess)
+        .def("revealToUser", &File::revealToUser) // Added in v5.6.30
+        .def("loadFileAsData", &File::loadFileAsData)
+        .def("findChildFiles", &LFile::findChildFiles)
+        .def("revealToUser", &File::revealToUser)
+        .def("setAsCurrentWorkingDirectory", &File::setAsCurrentWorkingDirectory)
+        .def("isValid", &LFile::isValid)
+        .enum_("TypesOfFileToFind")
+        [
+            value("findDirectories", 1),
+            value("findFiles", 2),
+            value("findFilesAndDirectories", 3),
+            value("ignoreHiddenFiles", 4)
+        ]
+        .enum_("SpecialLocationType")
+        [
+            value("userHomeDirectory", 0),
+            value("userDocumentsDirectory", 1),
+            value("userDesktopDirectory", 2),
+            value("userMusicDirectory", 3),
+            value("userMoviesDirectory", 4),
+            value("userPicturesDirectory", 5),
+            value("userApplicationDataDirectory", 6),
+            value("commonApplicationDataDirectory", 7),
+            value("commonDocumentsDirectory", 8),
+            value("tempDirectory", 9),
+            value("currentExecutableFile", 10),
+            value("currentApplicationFile", 11),
+            value("invokedExecutableFile", 12),
+            value("hostApplicationPath", 13),
+            value("windowsSystemDirectory", 14),
+            value("globalApplicationsDirectory", 15),
+            value("globalApplicationDirectoryX86", 16),
+            value("windowsLocalAppData", 17)
+        ]
+        .scope
+        [
+            def("descriptionOfSizeInBytes", &LFile::descriptionOfSizeInBytes),
+            def("findFileSystemRoots", &File::findFileSystemRoots),
+            def("getSpecialLocation", &LFile::getSpecialLocation),
+            def("createTempFile", &File::createTempFile),
+            def("getCurrentWorkingDirectory", &File::getCurrentWorkingDirectory),
+            def("createLegalFileName", &File::createLegalFileName),
+            def("createLegalPathName", &File::createLegalPathName),
+            def("areFileNamesCaseSensitive", &File::areFileNamesCaseSensitive),
+            def("isAbsolutePath", &File::isAbsolutePath),
+            def("createFileWithoutCheckingPath", &File::createFileWithoutCheckingPath),
+            def("addTrailingSeparator", &File::addTrailingSeparator)
+        ]
 	];
 }
 

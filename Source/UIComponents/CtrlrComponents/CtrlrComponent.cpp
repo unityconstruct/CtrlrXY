@@ -70,9 +70,6 @@ CtrlrComponent::CtrlrComponent(CtrlrModulator &_owner)
     componentNameLabel.setJustificationType (Justification::centred);
     componentNameLabel.addMouseListener(this, true);
     addChildComponent (&componentNameLabel);
-   
-//    setProperty (Ids::componentLookAndFeel, "Default");
-//    setProperty (Ids::componentLookAndFeelIsCustom, false);
     
     setProperty (Ids::componentVisibility, true);
     setProperty (Ids::componentSentBack, false);
@@ -95,9 +92,8 @@ CtrlrComponent::CtrlrComponent(CtrlrModulator &_owner)
     setProperty (Ids::componentLabelWidth, 0);
     setProperty (Ids::componentLabelHeight, "14");
     setProperty (Ids::componentLabelJustification, "centred");
-    
-    setProperty (Ids::componentLabelColour, (String)findColour(Slider::textBoxTextColourId).toString());
     setProperty (Ids::componentLabelFont, FONT2STR (Font(12)));
+    setProperty (Ids::componentLabelColour, (String)findColour(Slider::textBoxTextColourId).toString());
     
     setProperty (Ids::componentEffect, 0);
     setProperty (Ids::componentEffectRadius, 1);

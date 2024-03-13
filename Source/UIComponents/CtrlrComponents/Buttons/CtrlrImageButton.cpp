@@ -14,6 +14,10 @@ CtrlrImageButton::CtrlrImageButton (CtrlrModulator &owner)
     //[UserPreSize]
 	setBufferedToImage (true);
 	ctrlrButton->addListener (this);
+    
+    
+    setProperty (Ids::componentInternalFunction, COMBO_ITEM_NONE); // Added v5.6.30. Will show up at the bottom in the component generic section
+        
 	setProperty (Ids::uiImageButtonMode, 0);
 	setProperty (Ids::uiImageButtonResource, "");
 	setProperty (Ids::resourceImageWidth, 32);

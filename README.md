@@ -10,19 +10,31 @@ ToDo
 ----
 
 * VST Host must get the panel name while exported as VST3 plugin (currently always named as Ctrlr | Instigator)
-* APP/Plugin identifiers properly updated from panel infos in exported instances package.(info.plist, .exe, vst3, etc)
+* APP/Plugin identifiers properly updated from panel infos in exported instances package. (info.plist, .exe, vst3, etc)
 * Implementation of the entire JUCE ValueTree Class with LUA
 * File path needs to be updated on save while the panel ID is changed (Save vs. Save as...)
+* Re-generating UID must update resource path automatically
 * Modulators located within a tabs must have their properties updated while the tab properties are changed 
 * Allow earlier "Undo" after a modulator has been deleted
 * Export instance process must be improved (dialog alerts, overwriting existing file...)
-* VST Parameter Index must start at 0 not 1 in Hosts (now VST Index 0 in Ctrlr is Param 1 in Cubase)
-* Re-generating UID must update resource path automatically
+* Upgrade LUABIND to another LUA/C++ library
 * Update to the latest version of JUCE 7
 
 
 Changelog
 ---------
+
+#### Version 5.6.30
+* Missing JUCE File Class definitions bound to LUA
+* New LookAndFeel_V4 colourScheme added (V4 JetBlack, V4 YamDX, V4 AkAPC, V4 AkMPC, V4 LexiBlue, V4 KurzGreen, V4 KorGrey, V4 KorGold, V4 ArturOrange, V4 AiraGreen).
+* Colours fixed in the LUA Method Editor and LUA Console
+* File>Save As removes panelDirty asterisk suffix
+* uiButton & uiImageButton can show the MIDI Monitor window by selecting it from the componentInternalFunction property
+* Legacy mode for older panels protects their background colours
+* Close button added to LUA Method Editor Tabs (as in 5.1.198, 5.2 & 5.3 versions)
+* LUA Method Editor Tabs won't shrink and will show a + sign if the TabBar exceeds the window W
+* Close button added to Panel Editor Tabs (as in 5.1.198, 5.2 & 5.3 versions)
+* Panel Editor Tabs won't shrink and will show a + sign if the TabBar exceeds the window W
 
 #### Version 5.6.29
 

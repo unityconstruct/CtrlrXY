@@ -32,17 +32,17 @@ CtrlrEditor::CtrlrEditor (CtrlrProcessor *_ownerFilter, CtrlrManager &_owner)
 	owner.getCommandManager().registerAllCommandsForTarget (this);
 	owner.getCommandManager().registerAllCommandsForTarget (JUCEApplication::getInstance());
 	ScopedPointer <XmlElement> xml(XmlDocument::parse(owner.getProperty(Ids::ctrlrKeyboardMapping)).release());
-
-	if (xml)
-	{
-		owner.getCommandManager().getKeyMappings()->restoreFromXml (*xml);
-	}
-
-	owner.setEditor (this);
-
-	addAndMakeVisible (&owner.getCtrlrDocumentPanel());
-
-	if (!JUCEApplication::isStandaloneApp()) // If Ctrlr is !NOT run as a standalone app but as a plugin or shared lib
+    
+    if (xml)
+    {
+        owner.getCommandManager().getKeyMappings()->restoreFromXml (*xml);
+    }
+    
+    owner.setEditor (this);
+    
+    addAndMakeVisible (&owner.getCtrlrDocumentPanel());
+    
+    if (!JUCEApplication::isStandaloneApp()) // If Ctrlr is !NOT run as a standalone app but as a plugin or shared lib
     {
         if (owner.getInstanceMode() != InstanceSingleRestriced) // is !NOT restricted instance of the plugin
         {
@@ -53,48 +53,48 @@ CtrlrEditor::CtrlrEditor (CtrlrProcessor *_ownerFilter, CtrlrManager &_owner)
         }
     }
     
-	if (owner.getProperty (Ids::ctrlrEditorBounds).toString() != "") // ctrlrEditorBounds is Editor size. AAX Plugin crashes here, passes without it
-	{
+    if (owner.getProperty (Ids::ctrlrEditorBounds).toString() != "") // ctrlrEditorBounds is Editor size. AAX Plugin crashes here, passes without it
+    {
         if (owner.getInstanceMode() != InstanceSingle && owner.getInstanceMode() != InstanceSingleRestriced)
-		{
-			editorRect = VAR2RECT(owner.getProperty(Ids::ctrlrEditorBounds)); // Size of full Editor window including top tabs and 1px borders
-		}
-		else if (owner.getActivePanel())
-		{
+        {
+            editorRect = VAR2RECT(owner.getProperty(Ids::ctrlrEditorBounds)); // Size of full Editor window including top tabs and 1px borders
+        }
+        else if (owner.getActivePanel())
+        {
             ValueTree editorTree = owner.getActivePanel()->getEditor()->getPanelEditorTree();  // owner is CtrlrManager for the current class
             editorRect = VAR2RECT(owner.getProperty(Ids::ctrlrEditorBounds));
             vpMenuBarVisible = editorTree.getProperty(Ids::uiPanelMenuBarVisible);
             vpResizable = editorTree.getProperty(Ids::uiViewPortResizable);
             vpEnableFixedAspectRatio = editorTree.getProperty(Ids::uiViewPortEnableFixedAspectRatio);
             vpFixedAspectRatio = editorTree.getProperty(Ids::uiViewPortFixedAspectRatio);
-
+            
             vpEnableResizableLimits = editorTree.getProperty(Ids::uiViewPortEnableResizeLimits);
             vpMinWidth = editorTree.getProperty(Ids::uiViewPortMinWidth);
             vpMinHeight = editorTree.getProperty(Ids::uiViewPortMinHeight);
             vpMaxWidth = editorTree.getProperty(Ids::uiViewPortMaxWidth);
             vpMaxHeight = editorTree.getProperty(Ids::uiViewPortMaxHeight);
             
-			if ((bool)owner.getActivePanel()->getEditor()->getProperty(Ids::uiPanelMenuBarVisible)) // Exp. instances get an override from uiPanelMenuBarHideOnExport
+            if ((bool)owner.getActivePanel()->getEditor()->getProperty(Ids::uiPanelMenuBarVisible)) // Exp. instances get an override from uiPanelMenuBarHideOnExport
             {
                 setMenuBarVisible(true); // Enable visibility
                 editorRect.setHeight (editorRect.getHeight() + (int)owner.getProperty(Ids::ctrlrMenuBarHeight, 24));
-			}
+            }
             else
             {
                 editorRect.setWidth (editorRect.getWidth());
-				editorRect.setHeight (editorRect.getHeight());
+                editorRect.setHeight (editorRect.getHeight());
             }
-                        
+            
             if (!JUCEApplication::isStandaloneApp() && owner.getInstanceMode() == InstanceSingleRestriced)
             {
                 setResizable(vpResizable, true);
- 
+                
                 if (auto* constrainer = getConstrainer())
                 {
                     if (vpEnableFixedAspectRatio == true)
                     {
                         constrainer->setFixedAspectRatio(vpFixedAspectRatio);
-
+                        
                         if (vpEnableResizableLimits == true)
                         {
                             if (vpMinWidth != 0 && vpMaxWidth != 0)
@@ -118,28 +118,28 @@ CtrlrEditor::CtrlrEditor (CtrlrProcessor *_ownerFilter, CtrlrManager &_owner)
                 }
             }
         }
-		setBounds (editorRect);
-	}
-	else
-	{
-		if (JUCEApplication::isStandaloneApp())
-			centreWithSize(800, 600);
-		else
-			setSize(800, 600);
-	}
+        setBounds (editorRect);
+    }
+    else
+    {
+        if (JUCEApplication::isStandaloneApp())
+            centreWithSize(800, 600);
+        else
+            setSize(800, 600);
+    }
     
     setColourScheme(gui::colourSchemeFromProperty(owner.getProperty(Ids::ctrlrColourScheme))); // Sets the LookAndFeel_V4 colourScheme from the Ctrlr General Preferences, not from the loaded Panel
     getLookAndFeel().setUsingNativeAlertWindows((bool)owner.getProperty(Ids::ctrlrNativeAlerts)); // Sets OS Native alert windows or JUCE
-
+    
     activeCtrlrChanged(); // Refresh CtrlrEditor Template, wether panel mode or Editor with or WO menuBar from properties
-
-	if (isRestricted() && owner.getActivePanel())
-	{
-		hideProgramsMenu = owner.getActivePanel()->getEditor()->getProperty(Ids::uiPanelProgramsMenuHideOnExport);
-		hideMidiControllerMenu = owner.getActivePanel()->getEditor()->getProperty(Ids::uiPanelMidiControllerMenuHideOnExport);
-		hideMidiThruMenu = owner.getActivePanel()->getEditor()->getProperty(Ids::uiPanelMidiThruMenuHideOnExport);
-		hideMidiChannelMenu = owner.getActivePanel()->getEditor()->getProperty(Ids::uiPanelMidiChannelMenuHideOnExport);
-	}
+    
+    if (isRestricted() && owner.getActivePanel())
+    {
+        hideProgramsMenu = owner.getActivePanel()->getEditor()->getProperty(Ids::uiPanelProgramsMenuHideOnExport);
+        hideMidiControllerMenu = owner.getActivePanel()->getEditor()->getProperty(Ids::uiPanelMidiControllerMenuHideOnExport);
+        hideMidiThruMenu = owner.getActivePanel()->getEditor()->getProperty(Ids::uiPanelMidiThruMenuHideOnExport);
+        hideMidiChannelMenu = owner.getActivePanel()->getEditor()->getProperty(Ids::uiPanelMidiChannelMenuHideOnExport);
+    }
 }
 
 CtrlrEditor::~CtrlrEditor()
@@ -268,6 +268,26 @@ void CtrlrEditor::setMenuBarLookAndFeel(const String &lookAndFeelDesc)
         menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getDarkColourScheme()));
     else if (lookAndFeelDesc == "V4 Midnight")
         menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getMidnightColourScheme()));
+    else if (lookAndFeelDesc == "V4 JetBlack")
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getJetBlackColourScheme()));
+    else if (lookAndFeelDesc == "V4 YamDX")
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getYamDxColourScheme()));
+    else if (lookAndFeelDesc == "V4 AkAPC")
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getAkApcColourScheme()));
+    else if (lookAndFeelDesc == "V4 AkMPC")
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getAkMpcColourScheme()));
+    else if (lookAndFeelDesc == "V4 LexiBlue")
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getLexiBlueColourScheme()));
+    else if (lookAndFeelDesc == "V4 KurzGreen")
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getKurzGreenColourScheme()));
+    else if (lookAndFeelDesc == "V4 KorGrey")
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getKorGreyColourScheme()));
+    else if (lookAndFeelDesc == "V4 KorGold")
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getKorGoldColourScheme()));
+    else if (lookAndFeelDesc == "V4 ArturOrange")
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getArturOrangeColourScheme()));
+    else if (lookAndFeelDesc == "V4 AiraGreen")
+        menuBar->setLookAndFeel(new LookAndFeel_V4(LookAndFeel_V4::getAiraGreenColourScheme()));
     else if (lookAndFeelDesc == "V3")
         menuBar->setLookAndFeel(new LookAndFeel_V3());
     else if (lookAndFeelDesc == "V2")

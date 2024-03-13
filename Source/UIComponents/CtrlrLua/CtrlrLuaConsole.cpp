@@ -67,8 +67,16 @@ CtrlrLuaConsole::CtrlrLuaConsole (CtrlrPanel &_owner)
 
 	luaConsoleInput->setFont (Font(owner.getCtrlrManagerOwner().getFontManager().getDefaultMonoFontName(), 15, Font::plain));
 	luaConsoleOutput->setFont (Font(owner.getCtrlrManagerOwner().getFontManager().getDefaultMonoFontName(), 15, Font::plain));
-	luaConsoleInput->setColour (CodeEditorComponent::backgroundColourId, Colour(0xffffffff));
-	luaConsoleOutput->setColour (CodeEditorComponent::backgroundColourId, Colour(0xffffffff));
+    luaConsoleInput->setColour (CodeEditorComponent::backgroundColourId, Colour(0xffffffff)); // findColour(CodeEditorComponent::backgroundColourId)); // was Colour(0xffffffff));
+	luaConsoleOutput->setColour (CodeEditorComponent::backgroundColourId, Colour(0xffffffff)); // findColour(CodeEditorComponent::backgroundColourId)); // was Colour(0xffffffff));
+    luaConsoleInput->setColour (CodeEditorComponent::highlightColourId, findColour(CodeEditorComponent::highlightColourId));
+    luaConsoleOutput->setColour (CodeEditorComponent::highlightColourId, findColour(CodeEditorComponent::highlightColourId));
+    luaConsoleInput->setColour (CodeEditorComponent::defaultTextColourId, Colour(0xff000000)); // findColour(CodeEditorComponent::defaultTextColourId));
+    luaConsoleOutput->setColour (CodeEditorComponent::defaultTextColourId, Colour(0xff000000)); // findColour(CodeEditorComponent::defaultTextColourId));
+    luaConsoleInput->setColour (CodeEditorComponent::lineNumberBackgroundId, findColour(CodeEditorComponent::lineNumberBackgroundId));
+    luaConsoleOutput->setColour (CodeEditorComponent::lineNumberBackgroundId, findColour(CodeEditorComponent::lineNumberBackgroundId));
+    luaConsoleInput->setColour (CodeEditorComponent::lineNumberTextId, findColour(CodeEditorComponent::defaultTextColourId));
+    luaConsoleOutput->setColour (CodeEditorComponent::lineNumberTextId, findColour(CodeEditorComponent::defaultTextColourId));
 
 	luaConsoleInput->addKeyListener (this);
 	owner.getCtrlrManagerOwner().getCtrlrLog().addListener (this);

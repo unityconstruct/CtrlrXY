@@ -15,7 +15,8 @@ class CtrlrLuaRectangle;
 enum CtrlrComponentInternalFunctions
 {
     none,
-    MIDIDeviceSelection
+    MIDIDeviceSelection,
+    MIDIMonitor
 };
 
 class CtrlrGrouppingComponent
@@ -115,8 +116,6 @@ class CtrlrComponent : public Component,
         void setCustomLookAndFeel (const luabind::object &customLookAndFeel);
         void setCustomLookAndFeel (LookAndFeelBase *customLookAndFeel);
         virtual void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr) = 0;
-        //void resetLookAndFeelOverrides ();
-        //static LookAndFeel* getLookAndFeelFromComponentProperty(const String &lookAndFeelComponentProperty);
         bool isInternal();
         JUCE_LEAK_DETECTOR(CtrlrComponent)
 

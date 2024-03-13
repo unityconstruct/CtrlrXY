@@ -21,7 +21,8 @@ class CtrlrPanelEditor;
 
 class CtrlrPanelEditor  :	public Component,
 							public ValueTree::Listener,
-							public CtrlrLuaObject
+							public CtrlrLuaObject,
+                            public LookAndFeel_V4
 {
 	public:
 		CtrlrPanelEditor (CtrlrPanel &_owner, CtrlrManager &_ctrlrManager, const String &panelName);
@@ -98,4 +99,5 @@ class CtrlrPanelEditor  :	public Component,
 		Component* editorComponentsInEditMode[3];
 		Component* editorComponents[2];
 		std::unique_ptr<LookAndFeel> lookAndFeel;
+        ScopedPointer<LookAndFeel_V4> lfv4;
 };

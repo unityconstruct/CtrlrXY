@@ -42,9 +42,9 @@ Result CtrlrManager::initEmbeddedInstance()
 	{
 		MemoryBlock defaultPanelData;
 
-		if (ctrlrNativeObject->getDefaultPanel (defaultPanelData))
+		if (ctrlrNativeObject->getDefaultPanel(defaultPanelData))
 		{
-			ctrlrPlayerInstanceTree = ValueTree::readFromGZIPData (defaultPanelData.getData(), defaultPanelData.getSize());
+			ctrlrPlayerInstanceTree = ValueTree::readFromGZIPData(defaultPanelData.getData(), defaultPanelData.getSize());
 
 			if (ctrlrPlayerInstanceTree.isValid())
 			{
@@ -82,8 +82,7 @@ Result CtrlrManager::initEmbeddedInstance()
 
 const String CtrlrManager::getInstanceNameForHost() const
 {
-	if (getInstanceMode() == InstanceSingle
-        || getInstanceMode() == InstanceSingleRestriced)
+	if (getInstanceMode() == InstanceSingle || getInstanceMode() == InstanceSingleRestriced)
 	{
 		return (ctrlrPlayerInstanceTree.getProperty(Ids::name).toString() + "|" + ctrlrPlayerInstanceTree.getProperty(Ids::panelAuthorName).toString());
 	}

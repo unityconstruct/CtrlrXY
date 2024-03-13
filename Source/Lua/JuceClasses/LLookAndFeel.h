@@ -4,14 +4,13 @@
 #include "JuceHeader.h"
 #include "luabind/object_fwd.hpp"
 
-class LookAndFeelBase : public LookAndFeel_V2
+class LookAndFeelBase : public LookAndFeel_V4 // Was LookAndFeel_V2 before v5.6.30
 {
 	public:
 		LookAndFeelBase();
 		void setMethod (const String &methodName, const luabind::object &method);
 		void setImplementation (const luabind::object &implementationAsTable);
         static void wrapForLua (lua_State *L);
-
 		Colour findColour (int colourId);
 		void setColour (int colourId, Colour colour);
 		bool isColourSpecified (int colourId);

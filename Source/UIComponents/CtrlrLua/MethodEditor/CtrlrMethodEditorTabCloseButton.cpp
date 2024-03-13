@@ -39,7 +39,7 @@ CtrlrMethodEditorTabCloseButton::CtrlrMethodEditorTabCloseButton (CtrlrLuaMethod
     //[UserPreSize]
     //[/UserPreSize]
 
-    setSize (24, 24);
+    setSize (18, 18);
 
 
     //[Constructor] You can add your own custom stuff here..
@@ -60,6 +60,7 @@ CtrlrMethodEditorTabCloseButton::~CtrlrMethodEditorTabCloseButton()
 //==============================================================================
 void CtrlrMethodEditorTabCloseButton::resized()
 {
+    /* static position */
     internalPath1.clear();
     internalPath1.startNewSubPath ((float) (proportionOfWidth (0.7000f)), (float) (proportionOfHeight (0.2500f)));
     internalPath1.lineTo ((float) (proportionOfWidth (0.7500f)), (float) (proportionOfHeight (0.3000f)));
@@ -74,6 +75,7 @@ void CtrlrMethodEditorTabCloseButton::resized()
     internalPath2.lineTo ((float) (proportionOfWidth (0.2500f)), (float) (proportionOfHeight (0.3000f)));
     internalPath2.closeSubPath();
 
+    /* Mouse over Position */
     internalPath3.clear();
     internalPath3.startNewSubPath ((float) (proportionOfWidth (0.7000f)), (float) (proportionOfHeight (0.2500f)));
     internalPath3.lineTo ((float) (proportionOfWidth (0.7500f)), (float) (proportionOfHeight (0.3000f)));
@@ -87,7 +89,8 @@ void CtrlrMethodEditorTabCloseButton::resized()
     internalPath4.lineTo ((float) (proportionOfWidth (0.7000f)), (float) (proportionOfHeight (0.7500f)));
     internalPath4.lineTo ((float) (proportionOfWidth (0.2500f)), (float) (proportionOfHeight (0.3000f)));
     internalPath4.closeSubPath();
-
+    
+    /* Mouse down Position */
     internalPath5.clear();
     internalPath5.startNewSubPath ((float) (proportionOfWidth (0.7000f)), (float) (proportionOfHeight (0.2500f)));
     internalPath5.lineTo ((float) (proportionOfWidth (0.7500f)), (float) (proportionOfHeight (0.3000f)));
@@ -110,40 +113,46 @@ void CtrlrMethodEditorTabCloseButton::paintButton (Graphics& g, bool isMouseOver
 {
     if (isButtonDown)
     {
-        g.setGradientFill (ColourGradient (Colour (0xff9e9e9e),
-                                           (float) ((getWidth() / 2)), (float) ((getHeight() / 2)),
-                                           Colour (0xffe0e0e0),
-                                           (float) (getWidth()), 0.0f,
-                                           true));
-        g.fillEllipse ((float) (proportionOfWidth (0.0500f)), (float) (proportionOfHeight (0.0500f)), (float) (proportionOfWidth (0.9000f)), (float) (proportionOfHeight (0.9000f)));
+        //g.setColour (Colour(findColour(TextButton::buttonOnColourId)).brighter(0.6));
+        g.setColour (Colour (0xdfe7e7e8));
+        
+        g.fillRoundedRectangle((float) (proportionOfWidth (0.0500f)),
+                               (float) (proportionOfHeight (0.0500f)),
+                               (float) (proportionOfWidth (0.9000f)),
+                               (float) (proportionOfHeight (0.9000f)),
+                               (float) (proportionOfWidth(0.1f)));
 
-        g.setColour (Colour (0xcf000000));
+        g.setColour (Colour (0xdf3f3e45));
         g.fillPath (internalPath5);
 
-        g.setColour (Colour (0xcf000000));
+        g.setColour (Colour (0xdf3f3e45));
         g.fillPath (internalPath6);
     }
+    
     else if (isMouseOverButton)
     {
-        g.setGradientFill (ColourGradient (Colour (0xffdbdbdb),
-                                           (float) ((getWidth() / 2)), (float) ((getHeight() / 2)),
-                                           Colour (0xffcfcfcf),
-                                           (float) (getWidth()), 0.0f,
-                                           true));
-        g.fillEllipse ((float) (proportionOfWidth (0.0500f)), (float) (proportionOfHeight (0.0500f)), (float) (proportionOfWidth (0.9000f)), (float) (proportionOfHeight (0.9000f)));
+        //g.setColour (Colour(findColour(TextButton::buttonOnColourId)).brighter(0.4));
+        g.setColour (Colour (0xdfe7e7e8));
+        
+        g.fillRoundedRectangle((float) (proportionOfWidth (0.0500f)),
+                               (float) (proportionOfHeight (0.0500f)),
+                               (float) (proportionOfWidth (0.9000f)),
+                               (float) (proportionOfHeight (0.9000f)),
+                               (float) (proportionOfWidth(0.1f)));
 
-        g.setColour (Colour (0xcf000000));
+        g.setColour (Colour (0xdf3f3e45));
         g.fillPath (internalPath3);
 
-        g.setColour (Colour (0xcf000000));
+        g.setColour (Colour (0xdf3f3e45));
         g.fillPath (internalPath4);
     }
+    
     else
     {
-        g.setColour (Colour (0xcf000000));
+        g.setColour (Colour (0xdf2e2d32));
         g.fillPath (internalPath1);
 
-        g.setColour (Colour (0xcf000000));
+        g.setColour (Colour (0xdf2e2d32));
         g.fillPath (internalPath2);
     }
 }
@@ -161,11 +170,8 @@ void CtrlrMethodEditorTabCloseButton::mouseDown (const MouseEvent& e)
     //[/UserCode_mouseDown]
 }
 
-
-
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 //[/MiscUserCode]
-
 
 //==============================================================================
 #if 0

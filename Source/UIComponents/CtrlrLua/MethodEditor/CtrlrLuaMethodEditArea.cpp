@@ -48,6 +48,9 @@ CtrlrLuaMethodEditArea::CtrlrLuaMethodEditArea (CtrlrLuaMethodEditor &_owner)
 	output->setMultiLine(true, true);
 	output->setReadOnly (true);
 	output->addMouseListener (this, false);
+    output->setColour (TextEditor::backgroundColourId, Colours::white);
+    output->setColour (TextEditor::textColourId, Colours::black);
+    output->setColour (TextEditor::highlightColourId, findColour(TextEditor::highlightColourId));
 	output->setColour (TextEditor::outlineColourId, Colours::transparentBlack);
 	output->setColour (TextEditor::shadowColourId, Colours::transparentBlack);
 

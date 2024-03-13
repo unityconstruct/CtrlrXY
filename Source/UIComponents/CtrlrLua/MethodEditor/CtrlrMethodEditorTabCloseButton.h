@@ -78,5 +78,4 @@ private:
     const CtrlrMethodEditorTabCloseButton& operator= (const CtrlrMethodEditorTabCloseButton&);
 };
 
-
 #endif   // __JUCER_HEADER_CTRLRMETHODEDITORTABCLOSEBUTTON_CTRLRMETHODEDITORTABCLOSEBUTTON_E459BE3A__
