@@ -64,7 +64,7 @@ CtrlrMIDISettingsDevices::CtrlrMIDISettingsDevices (CtrlrPanel &_owner)
     label->setFont (Font (16.00f, Font::bold));
     label->setJustificationType (Justification::centredLeft);
     label->setEditable (false, false, false);
-    label->setColour (TextEditor::textColourId, Colours::black);
+    label->setColour (TextEditor::textColourId, findColour(TextEditor::textColourId)); // Colours::black);
     label->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (label2 = new Label ("new label",
@@ -72,7 +72,7 @@ CtrlrMIDISettingsDevices::CtrlrMIDISettingsDevices (CtrlrPanel &_owner)
     label2->setFont (Font (16.00f, Font::bold));
     label2->setJustificationType (Justification::centredLeft);
     label2->setEditable (false, false, false);
-    label2->setColour (TextEditor::textColourId, Colours::black);
+    label2->setColour (TextEditor::textColourId, findColour(TextEditor::textColourId)); // Colours::black);
     label2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (label3 = new Label ("new label",
@@ -80,7 +80,7 @@ CtrlrMIDISettingsDevices::CtrlrMIDISettingsDevices (CtrlrPanel &_owner)
     label3->setFont (Font (16.00f, Font::bold));
     label3->setJustificationType (Justification::centredLeft);
     label3->setEditable (false, false, false);
-    label3->setColour (TextEditor::textColourId, Colours::black);
+    label3->setColour (TextEditor::textColourId, findColour(TextEditor::textColourId)); // Colours::black);
     label3->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (oscProtocol = new ComboBox ("OSC Protocol"));
@@ -99,7 +99,7 @@ CtrlrMIDISettingsDevices::CtrlrMIDISettingsDevices (CtrlrPanel &_owner)
     label4->setFont (Font (16.00f, Font::bold));
     label4->setJustificationType (Justification::centredLeft);
     label4->setEditable (false, false, false);
-    label4->setColour (TextEditor::textColourId, Colours::black);
+    label4->setColour (TextEditor::textColourId, findColour(TextEditor::textColourId)); // Colours::black);
     label4->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (oscPort = new Label ("OSC Port",
@@ -108,10 +108,11 @@ CtrlrMIDISettingsDevices::CtrlrMIDISettingsDevices (CtrlrPanel &_owner)
     oscPort->setFont (Font (24.00f, Font::plain));
     oscPort->setJustificationType (Justification::centred);
     oscPort->setEditable (true, true, false);
-    oscPort->setColour (Label::backgroundColourId, Colours::white);
-    oscPort->setColour (Label::outlineColourId, Colour (0x84000000));
-    oscPort->setColour (TextEditor::textColourId, Colours::black);
-    oscPort->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    oscPort->setColour (Label::backgroundColourId, findColour(Label::backgroundColourId));
+    oscPort->setColour (Label::textColourId, findColour(Label::textColourId));
+    oscPort->setColour (Label::outlineColourId, findColour(Label::outlineColourId));
+    oscPort->setColour (Label::textWhenEditingColourId, findColour(Label::textWhenEditingColourId));
+    oscPort->setColour (Label::outlineWhenEditingColourId, findColour(Label:: outlineWhenEditingColourId));
     oscPort->addListener (this);
 
     addAndMakeVisible (label5 = new Label ("new label",
@@ -119,7 +120,7 @@ CtrlrMIDISettingsDevices::CtrlrMIDISettingsDevices (CtrlrPanel &_owner)
     label5->setFont (Font (14.00f, Font::plain));
     label5->setJustificationType (Justification::centredLeft);
     label5->setEditable (false, false, false);
-    label5->setColour (TextEditor::textColourId, Colours::black);
+    label5->setColour (TextEditor::textColourId, findColour(TextEditor::textColourId)); // Colours::black);
     label5->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (label6 = new Label ("new label",
@@ -127,7 +128,7 @@ CtrlrMIDISettingsDevices::CtrlrMIDISettingsDevices (CtrlrPanel &_owner)
     label6->setFont (Font (14.00f, Font::plain));
     label6->setJustificationType (Justification::centredLeft);
     label6->setEditable (false, false, false);
-    label6->setColour (TextEditor::textColourId, Colours::black);
+    label6->setColour (TextEditor::textColourId, findColour(TextEditor::textColourId)); // Colours::black);
     label6->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (oscEnabled = new ToggleButton ("OSC Enabled"));
@@ -139,7 +140,7 @@ CtrlrMIDISettingsDevices::CtrlrMIDISettingsDevices (CtrlrPanel &_owner)
     label7->setFont (Font (14.00f, Font::plain));
     label7->setJustificationType (Justification::centredLeft);
     label7->setEditable (false, false, false);
-    label7->setColour (TextEditor::textColourId, Colours::black);
+    label7->setColour (TextEditor::textColourId, findColour(TextEditor::textColourId)); // Colours::black);
     label7->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (inputChannel = new ComboBox (String()));
@@ -216,7 +217,7 @@ CtrlrMIDISettingsDevices::CtrlrMIDISettingsDevices (CtrlrPanel &_owner)
     label8->setFont (Font (16.00f, Font::bold));
     label8->setJustificationType (Justification::centredLeft);
     label8->setEditable (false, false, false);
-    label8->setColour (TextEditor::textColourId, Colours::black);
+    label8->setColour (TextEditor::textColourId, findColour(TextEditor::textColourId)); // Colours::black);
     label8->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (pluginOutputChannel = new ComboBox (String()));
@@ -251,7 +252,7 @@ CtrlrMIDISettingsDevices::CtrlrMIDISettingsDevices (CtrlrPanel &_owner)
     label9->setFont (Font (16.00f, Font::bold));
     label9->setJustificationType (Justification::centredLeft);
     label9->setEditable (false, false, false);
-    label9->setColour (TextEditor::textColourId, Colours::black);
+    label9->setColour (TextEditor::textColourId, findColour(TextEditor::textColourId)); // Colours::black);
     label9->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (pluginInput = new ToggleButton ("new toggle button"));

@@ -41,8 +41,8 @@ CtrlrMIDISettingsDialog::CtrlrMIDISettingsDialog (CtrlrPanel &_owner)
 
     addAndMakeVisible (midiTabs = new TabbedComponent (TabbedButtonBar::TabsAtTop));
     midiTabs->setTabBarDepth (30);
-    midiTabs->addTab (TRANS("Devices"), Colour (0xa2d2d2d2), new CtrlrMIDISettingsDevices (owner), true);
-    midiTabs->addTab (TRANS("Routing"), Colour (0xa1d2d2d2), new CtrlrMIDISettingsRouting (owner), true);
+    midiTabs->addTab (TRANS("Devices"), Colour (findColour(DocumentWindow::backgroundColourId)), new CtrlrMIDISettingsDevices (owner), true); // Colour (0xa2d2d2d2)
+    midiTabs->addTab (TRANS("Routing"), Colour (findColour(DocumentWindow::backgroundColourId)), new CtrlrMIDISettingsRouting (owner), true); // Colour (0xa2d2d2d2)
     midiTabs->setCurrentTabIndex (0);
 
 
@@ -88,7 +88,7 @@ void CtrlrMIDISettingsDialog::showDialog(CtrlrPanel &_owner)
     opts.content.setOwned(dialogContent);
     opts.dialogTitle = "MIDI Settings";
     opts.componentToCentreAround = dynamic_cast<Component*>(_owner.getEditor());
-    opts.dialogBackgroundColour = Colours::white;
+    opts.dialogBackgroundColour = dynamic_cast<Component*>(_owner.getEditor())->findColour(DocumentWindow::backgroundColourId); // Colours::white;
     opts.useNativeTitleBar = true;
     opts.useBottomRightCornerResizer = true;
     opts.resizable = true;

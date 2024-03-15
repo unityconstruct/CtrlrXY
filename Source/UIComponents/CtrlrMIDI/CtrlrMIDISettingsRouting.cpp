@@ -81,8 +81,8 @@ CtrlrMIDISettingsRouting::CtrlrMIDISettingsRouting (CtrlrPanel &_owner)
     label->setFont (Font (12.00f, Font::plain));
     label->setJustificationType (Justification::centred);
     label->setEditable (false, false, false);
-    label->setColour (TextEditor::textColourId, Colours::black);
-    label->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+    label->setColour (Label::textColourId, findColour(Label::textColourId)); // Colours::black
+    label->setColour (Label::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (inDev2Host = new ToggleButton (""));
     inDev2Host->setTooltip (TRANS("All messages that are received on the MIDI Input device will be copied to the plugin HOST"));
