@@ -45,6 +45,7 @@ void CtrlrLuaManager::wrapJuceClasses(lua_State *L)
 	LModifierKeys::wrapForLua(L);
 	LMouseEvent::wrapForLua(L);
 	LMouseCursor::wrapForLua(L);
+	LMouseInputSource::wrapForLua(L);
 	LPath::wrapForLua(L);
 	LPoint::wrapForLua(L);
 	LButton::wrapForLua(L);

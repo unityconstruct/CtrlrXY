@@ -28,6 +28,7 @@
 #include "LModifierKeys.h"
 #include "LMouseCursor.h"
 #include "LMouseEvent.h"
+#include "LMouseInputSource.h"
 #include "LPath.h"
 #include "LPoint.h"
 #include "LPopupMenu.h"
